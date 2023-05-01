@@ -5,9 +5,9 @@ const Button = ({
   onClick,
   disabled,
 }: {
-  children: any
-  onClick: any
-  disabled: boolean
+  children: React.ReactNode
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void
+  disabled?: boolean
 }) => {
   return (
     <button onClick={onClick} className={classes.btn} disabled={disabled}>
