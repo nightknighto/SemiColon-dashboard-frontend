@@ -1,4 +1,5 @@
 .btn {
+  margin-bottom: 1rem;
   padding: 0.5rem 1.25rem;
   font: inherit;
   font-weight: bold;
@@ -9,9 +10,9 @@
   transition: 300ms ease-out;
 }
 
-.btn:hover, 
+.btn:hover,
 .btn:active {
-    background-color: whitesmoke;
-    border-color: #24a8af;
-    scale: 1.05;
+  background-color: whitesmoke;
+  border-color: #24a8af;
+  scale: 1.05;
 }

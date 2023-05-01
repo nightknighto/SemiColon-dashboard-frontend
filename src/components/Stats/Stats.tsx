@@ -1,11 +1,22 @@
+import Button from '../UI/Button/Button'
 import Card from '../UI/Card/Card'
+import DropDown from '../UI/DropDown/DropDown'
 import classes from './Stats.module.css'
+import { Chart } from 'chart.js'
 
-const Stats = (props: { specs?: Array<string> }) => {
+const Stats = (props: { tracks?: Array<string> }) => {
+  const onChangeStatsHandler = (value: string) => {
+    fetch(`/api/${value}`).then((data) => console.log(data))
+  }
   return (
     <Card>
-      <h1>Hello</h1>
-      {props.specs && <h2>Hi</h2>}
+      <Card>
+        <h1>Hi</h1>
+      </Card>
+      {props.tracks && (
+        <DropDown onChange={onChangeStatsHandler} choices={props.tracks} />
+      )}
+      <Button>Submit</Button>
     </Card>
   )
 }

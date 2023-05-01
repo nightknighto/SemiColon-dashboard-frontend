@@ -1,12 +1,20 @@
 import { ChangeEvent, useState } from 'react'
 import classes from './DropDown.module.css'
 
-const DropDown = ({ choices }: { choices: Array<string> }) => {
-  const [track, setTrack] = useState('')
+const DropDown = ({
+  choices,
+  onChange,
+}: {
+  choices: Array<string>
+  onChange?: (event: string) => void
+}) => {
+  const [track, setTrack] = useState(choices[0])
 
   const onChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-    console.log(event.target.value)
     setTrack(event.target.value)
+    if (onChange) {
+      onChange(event.target.value)
+    }
   }
 
   let key = 0
