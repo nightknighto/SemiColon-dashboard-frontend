@@ -11,7 +11,7 @@ export const BarChart = ({
   chartData,
   id,
 }: {
-  chartData: Array<YearGain>
+  chartData: YearGain[]
   id?: string
 }) => {
   return (
