@@ -11,7 +11,7 @@ const PieChart = ({
   chartData,
   id,
 }: {
-  chartData: Array<YearGain>
+  chartData: YearGain[]
   id?: string
 }) => {
   return (
