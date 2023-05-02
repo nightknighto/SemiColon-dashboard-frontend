@@ -1,12 +1,12 @@
 import Header from './components/UI/Header/Header'
 import Stats from './components/Stats/Stats'
+import Charts from './components/Charts/Charts'
 
 function App() {
-  const choices = ['choice A', 'choice B', 'choice C']
   return (
     <>
       <Header />
-      <Stats tracks={choices} />
+      <Charts />
     </>
   )
 }

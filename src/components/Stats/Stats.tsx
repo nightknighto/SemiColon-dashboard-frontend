@@ -2,7 +2,6 @@ import Button from '../UI/Button/Button'
 import Card from '../UI/Card/Card'
 import DropDown from '../UI/DropDown/DropDown'
 import classes from './Stats.module.css'
-import { Chart } from 'chart.js'
 
 const Stats = (props: { tracks?: Array<string> }) => {
   const onChangeStatsHandler = (value: string) => {
