@@ -2,20 +2,21 @@ import Button from '../UI/Button/Button'
 import Card from '../UI/Card/Card'
 import DropDown from '../UI/DropDown/DropDown'
 import classes from './Stats.module.css'
+import Track from './Track'
 
-const Stats = (props: { tracks?: Array<string> }) => {
-  const onChangeStatsHandler = (value: string) => {
-    fetch(`/api/${value}`).then((data) => console.log(data))
-  }
+const Stats = (props: { tracks: Array<string> }) => {
+  const tracksStats = props.tracks.map((track) => {
+    return {
+      name: track,
+      numParticipants: Math.floor(Math.random() * 100),
+    }
+  })
   return (
     <Card>
-      <Card>
-        <h1>Hi</h1>
-      </Card>
-      {props.tracks && (
-        <DropDown onChange={onChangeStatsHandler} choices={props.tracks} />
-      )}
-      <Button>Submit</Button>
+      <h1>Tracks</h1>
+      {tracksStats.map((track) => (
+        <Track name={track.name} numParticipants={track.numParticipants} />
+      ))}
     </Card>
   )
 }

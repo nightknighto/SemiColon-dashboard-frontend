@@ -9,10 +9,15 @@ const Button = ({
   children: React.ReactNode
   onClick?: (event: React.MouseEvent<HTMLElement>) => void
   disabled?: boolean
-  type?: string
+  type?: 'submit' | 'reset' | 'button' | undefined;
 }) => {
   return (
-    <button onClick={onClick} className={classes.btn} disabled={disabled}>
+    <button
+      onClick={onClick}
+      className={classes.btn}
+      disabled={disabled}
+      type={type}
+    >
       {children}
     </button>
   )
