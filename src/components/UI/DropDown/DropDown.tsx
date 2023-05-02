@@ -5,7 +5,7 @@ const DropDown = ({
   choices,
   onChange,
 }: {
-  choices: Array<string>
+  choices: string[]
   onChange?: (event: string) => void
 }) => {
   const [track, setTrack] = useState(choices[0])
@@ -17,7 +17,6 @@ const DropDown = ({
     }
   }
 
-  let key = 0
   return (
     <div>
       <select
@@ -26,7 +25,7 @@ const DropDown = ({
         onChange={onChangeHandler}
       >
         {choices.map((choice) => (
-          <option key={key++}>{choice}</option>
+          <option key={choice}>{choice}</option>
         ))}
       </select>
     </div>

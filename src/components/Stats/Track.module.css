@@ -1,12 +1,12 @@
 .track {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
 }
 
 .number {
-    width: 15%;
-    max-width: 5rem;
-    margin: 0;
+  width: 15%;
+  max-width: 5rem;
+  margin: 0;
 }

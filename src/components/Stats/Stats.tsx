@@ -4,7 +4,7 @@ import DropDown from '../UI/DropDown/DropDown'
 import classes from './Stats.module.css'
 import Track from './Track'
 
-const Stats = (props: { tracks: Array<string> }) => {
+const Stats = (props: { tracks: string[] }) => {
   const tracksStats = props.tracks.map((track) => {
     return {
       name: track,
