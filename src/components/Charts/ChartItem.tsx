@@ -12,7 +12,7 @@ Chart.register(ArcElement)
 Chart.register(BarElement)
 Chart.register(LinearScale)
 
-const ChartItem = ({ id, type }: { id: string; type: string }) => {
+const ChartItem = ({ id, type }: { id: string; type: "PIE" | "BAR" }) => {
   const Data = [
     {
       id: 1,
