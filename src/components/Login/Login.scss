@@ -21,26 +21,54 @@ html, body {
     background-color: #F3F3ED;
     margin-right: 12px; /* Add margin to the right */
     position: relative; /* Set position to relative */
-z-index : 2;
-    h2 {
+    z-index : 2;
+    
+    // max-width: 0;
+    // z-index : -1;
+
+    &.disappear{
+      animation-name: closure;
+      animation-duration: 0.7s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+    .header{
+     position:relative;
+    
+      
       color: #15246e;
       font-size: 42px;
       font-weight: bold;
-      margin-bottom: 24px;
+      margin-bottom: 24px; 
+
+      &.headerAction{
+        animation-name: headerAction;
+        animation-duration: 3s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+      }
     }
+   
 
     .form-group {
       display: flex;
       flex-direction: column;
       margin-bottom: 15px;
-      min-width: 330px;
+    
       // index z 
-     
+      &.formClosure{
+        animation-name: formClosure;
+        animation-duration: 3s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+      }
       label {
         font-weight: 900;
         font-size: 20px;
         color: #343438;
         margin-bottom: 8px;
+        animation-name: formClosure;
+        
       }
 
       input {
@@ -62,7 +90,74 @@ z-index : 2;
         &:hover {
           background-color: #f3f3f3;
           cursor: pointer;
+          
         }
+      }
+      .phone-input {
+        display: flex;
+        align-items: center;
+      
+        select {
+          flex:1;
+          padding: 9px;
+          border-radius: 4px 0 0 4px;
+          border: 0.2px solid #cccccc;
+          background-color: #ffffff;
+          font-size: 17px;
+          color: #333333;
+          transition: all 0.3s ease;
+          font-family: 'Abel', sans-serif;
+          // font weight very bold
+          font-weight: bold;
+          z-index: 2;
+      
+          &:focus {
+            outline: none;
+            border-color: #0077ff;
+          }
+          &:hover {
+            background-color: #f3f3f3;
+            cursor: pointer;
+            
+          }
+           
+          
+        }
+      
+        input {
+          flex: 1;
+          padding: 10px;
+          border-radius: 0 4px 4px 0;
+          border: 0.2px solid #cccccc;
+          margin-bottom: 0px;
+          background-color: #ffffff;
+          font-size: 16px;
+          color: #333333;
+          transition: all 0.3s ease;
+          font-family: 'Abel', sans-serif;
+          z-index: 2;
+      
+          &:focus {
+            outline: none;
+            border-color: #0077ff;
+            flex:2;
+          }
+      
+          &:hover {
+            background-color: #f3f3f3;
+            cursor: pointer;
+            flex:2;
+          }
+          // clicked
+          &:active {
+            background-color: #f3f3f3;
+            cursor: pointer;
+            flex:1.6;
+          }
+          // when clicked remain flex:1.6
+         
+        }
+         
       }
 
       .or-divider {
@@ -73,14 +168,14 @@ z-index : 2;
 
       .or-divider-line {
         flex: 1;
-        height: 1px;
-        background-color: #cccccc;
+        height: 2px;
+        background-color: #8a8888;
       }
 
       .or-divider-text {
         margin: 0 16px;
-        font-size: 14px;
-        color: #999999;
+        font-size: 16px;
+        color: #7c7b7b;
         text-transform: uppercase;
       }
 
@@ -140,9 +235,17 @@ z-index : 2;
         background-size:14px;
         padding-left: 40px;
 
+        &.formClosure{
+        animation-name: formClosure;
+        animation-duration: 4s;
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: forwards;
+      }
+       
         &:hover {
           background-color: #005dff;
         }
+        
       }
 
       &.btn-google {
@@ -166,7 +269,7 @@ z-index : 2;
       }
     }
   }
- 
+  
   .login-left::after {
     content: '';
     position: absolute;
@@ -178,6 +281,11 @@ z-index : 2;
     transform: skewX(-4deg); /* Rotate the border using skewX */
     z-index: -1;
     background-color: #F3F3ED; /* Set the background color to match the .login-left element */
+    border-radius: 0 0 20px 10px;
+    animation-name: radChange;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
   }
   .login-right {
     flex: 0.3;
@@ -190,7 +298,7 @@ z-index : 2;
     margin-left: 12px;
     padding: 0;
     text-align: center;
-    
+    margin-left:100px;
 
     img {
       max-width: 60%;
@@ -205,17 +313,81 @@ z-index : 2;
       margin: auto;
       -webkit-user-drag: none;
       position: relative; /* Add position property */
-
-      
+      text-align: center;
+      top :50%;
+      left:10%;
+      margin: auto;
+     
     }
+    // zoom in 
     
-    animation-name: expand ;
+    animation-name: expand;
     animation-duration: 2s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
   }
   
+  // @keyframes zoomIn {
+  //   from {
+  //     transform: scale(3);
+  //   }
+  //   to {
+  //     transform: scale(5);
+  //   }
+  // }
   
+  @keyframes centerImg {
+    from {
+      position: relative;
+      top: 50%;
+      left: 45%;
+      transform: translateY(100%);
+
+    }
+    to {
+      position: absolute;
+      top: 50%;
+      left: 45%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  @keyframes headerAction {
+    0% {
+      visibility: visible;
+      opacity: 1;
+    }
+    10% {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+  @keyframes formClosure {
+    0% {
+      visibility: visible;
+      opacity: 1;
+    }
+    10% {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  @keyframes closure {
+    0% {
+      max-width: 500px;
+      z-index: 2;
+
+    }
+ 
+    100% {
+      max-width: 0px;
+      z-index: -1;
+      text-align: center;
+
+    }
+  }
+
+
   @keyframes slide-in {
     from { 
       opacity: 0;
@@ -226,7 +398,16 @@ z-index : 2;
       opacity: 1;
     }
   }
-  
+
+  @keyframes radChange {
+    from {
+      border-radius: 0 0 0 5px;
+    }
+    to {
+
+      border-radius: 0 0 80px 5px;
+    }
+  }
   @keyframes expand {
     from {
       flex: 0.3;
@@ -238,45 +419,6 @@ z-index : 2;
 }  
 
 
-// /* Media query for screens smaller than 768px */
-// @media (max-width: 767px) {
-//   .login {
-//     flex-direction: column;
-
-//     .login-left {
-//       width: 100%;
-//       margin-right: 0;
-     
-//     }
-
-//     .login-right {
-//       width: 100%;
-//       display: none; /* Add display: none; */
-//     }
-
-//   }
-
-//   .login .btn {
-//     margin-bottom: 16px;
-//   }
-
-//   .login .form-group {
-//     margin-bottom: 10px;
-//   }
-
-//   .login h2 {
-//     font-size: 36px;
-//   }
-
-//   .login .btn.btn-primary {
-//     margin-right: 0;
-//   }
-
-//   .login-right img {
-//     max-width: 100%;
-//     max-height: 100%;
-//   }
-// }
 
 /* Media query for screens between 768px and 1023px */
 @media  (max-width: 1023px) {
