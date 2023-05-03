@@ -1,7 +1,4 @@
-import Button from '../UI/Button/Button'
 import Card from '../UI/Card/Card'
-import DropDown from '../UI/DropDown/DropDown'
-import classes from './Stats.module.css'
 import Track from './Track'
 
 const Stats = ({ tracks, numbers }: { tracks: string[]; numbers: number[] }) => {
