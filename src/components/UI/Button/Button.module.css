@@ -1,0 +1,18 @@
+.btn {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.25rem;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #24a8af;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: 300ms ease-out;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: whitesmoke;
+  border-color: #24a8af;
+  scale: 1.05;
+}
