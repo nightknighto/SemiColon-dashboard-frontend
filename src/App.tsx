@@ -1,26 +1,30 @@
 import Header from './components/UI/Header/Header'
 import Stats from './components/Stats/Stats'
 import Charts from './components/Charts/Charts'
-import { useState } from 'react'
-import './App.css'
-import Dashboard from './components/Dashboard/Dashboard'
+import { useContext, useEffect, useState } from 'react'
 import Login from './components/Login/Login'
+import Participants from './components/Participants/Participants'
+import DataContextProvider from './context/DataContextProvider'
 
 function App() {
+
   const tracks = [
-    'Web Track-Basic',
+    'webDev1',
     'Web Track-Advanced',
     'Embedded Track-Basic',
     'Embedded Track-Advanced',
   ]
+
+  const numbers: number[] = []
+
   return (
-    <>
+    <DataContextProvider>
       <Header />
       <Charts />
-      <Stats tracks={tracks} />
-      <Login />
+      <Stats tracks={tracks} numbers={numbers} />
+      <Participants />
       {/* < Dashboard /> */}
-    </>
+    </DataContextProvider>
   )
 }
 

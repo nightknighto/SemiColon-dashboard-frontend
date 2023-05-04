@@ -1,15 +1,15 @@
 .charts {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 70rem;
-    padding: 2rem 0.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 70rem;
+  padding: 2rem 0.3rem;
 }
 
 @media (min-width: 60rem) {
-    .charts {
-        padding: 2rem;
-    }
+  .charts {
+    padding: 2rem;
+  }
 }
