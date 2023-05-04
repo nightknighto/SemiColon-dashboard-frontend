@@ -1,21 +1,25 @@
-import Button from '../UI/Button/Button'
 import Card from '../UI/Card/Card'
-import DropDown from '../UI/DropDown/DropDown'
-import classes from './Stats.module.css'
 import Track from './Track'
 
-const Stats = (props: { tracks: string[] }) => {
-  const tracksStats = props.tracks.map((track) => {
-    return {
-      name: track,
-      numParticipants: Math.floor(Math.random() * 100),
-    }
-  })
+const Stats = ({ tracks, numbers }: { tracks: string[]; numbers: number[] }) => {
+  const tracksStats = []
+
+  for (let i = 0; i < tracks.length; i++) {
+    tracksStats.push({
+      name: tracks[i],
+      numParticipants: numbers[i]
+    })
+  }
+
   return (
     <Card>
       <h1>Tracks</h1>
       {tracksStats.map((track) => (
-        <Track name={track.name} numParticipants={track.numParticipants} />
+        <Track
+          key={track.name}
+          name={track.name}
+          numParticipants={track.numParticipants}
+        />
       ))}
     </Card>
   )
