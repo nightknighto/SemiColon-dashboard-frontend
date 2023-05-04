@@ -1,29 +1,48 @@
 import Header from './components/UI/Header/Header'
 import Stats from './components/Stats/Stats'
 import Charts from './components/Charts/Charts'
-import { useContext, useEffect, useState } from 'react'
 import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
+const tracks = [
+  'webDev1',
+  'webDev2',
+  'Embedded Track-Basic',
+  'Embedded Track-Advanced',
+]
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Login />,
+  },
+  {
+    path: '/stats',
+    element: (
+      <DataContextProvider>
+        <Header />
+        <Charts />
+        <Stats tracks={tracks} />
+      </DataContextProvider>
+    ),
+  },
+  {
+    path: '/participants',
+    element: (
+      <DataContextProvider>
+        <Header />
+        <Participants />
+      </DataContextProvider>
+    ),
+  },
+])
 
 function App() {
-
-  const tracks = [
-    'webDev1',
-    'Web Track-Advanced',
-    'Embedded Track-Basic',
-    'Embedded Track-Advanced',
-  ]
-
-  const numbers: number[] = []
-
   return (
     <DataContextProvider>
-      <Header />
-      <Charts />
-      <Stats tracks={tracks} numbers={numbers} />
-      <Participants />
-      {/* < Dashboard /> */}
+      <RouterProvider router={router} />
     </DataContextProvider>
   )
 }

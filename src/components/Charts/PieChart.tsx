@@ -1,6 +1,4 @@
 import { Pie } from 'react-chartjs-2'
-import { parDataTypes } from '../../interfaces/parDataTypes'
-
 const PieChart = ({
   id,
   nums
@@ -8,7 +6,6 @@ const PieChart = ({
   id?: string
   nums: number[]
 }) => {
-
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: 'center' }}>Pie Chart</h2>

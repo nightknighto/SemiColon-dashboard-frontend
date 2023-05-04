@@ -12,4 +12,5 @@ export interface parDataTypes {
   updatedAt?: string
   __v?: number
   _id: string
+  status: string
 }

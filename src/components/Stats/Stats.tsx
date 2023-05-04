@@ -1,13 +1,17 @@
+import { useContext } from 'react'
 import Card from '../UI/Card/Card'
 import Track from './Track'
+import DataContext from '../../context/data-context'
 
-const Stats = ({ tracks, numbers }: { tracks: string[]; numbers: number[] }) => {
+const Stats = ({ tracks }: { tracks: string[] }) => {
+  const { data } = useContext(DataContext)
   const tracksStats = []
 
-  for (let i = 0; i < tracks.length; i++) {
+  for (const track of tracks) {
     tracksStats.push({
-      name: tracks[i],
-      numParticipants: numbers[i]
+      name: track,
+      numParticipants: data.filter((par) => par.firstPreference === track)
+        .length,
     })
   }
 

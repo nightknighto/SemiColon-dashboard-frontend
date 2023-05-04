@@ -13,7 +13,7 @@ const Charts = () => {
 
   const tracks = [
     'webDev1',
-    'Web Track-Advanced',
+    'webDev2',
     'Embedded Track-Basic',
     'Embedded Track-Advanced',
   ]
@@ -33,6 +33,8 @@ const Charts = () => {
 
   return (
     <Card className={classes.charts}>
+      <ChartItem id="first" type="PIE" numbers={numbers} />
+      <ChartItem id="second" type="BAR" numbers={numbers} />
       <ChartItem id="first" type="PIE" numbers={numbers} />
       <ChartItem id="second" type="BAR" numbers={numbers} />
     </Card>
