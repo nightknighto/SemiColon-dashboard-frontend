@@ -7,7 +7,7 @@ import ParDetails from './ParDetails'
 import { parDataTypes } from '../../interfaces/parDataTypes'
 
 const Participants = () => {
-  const { data } = useContext(DataContext)
+  const { data, fetchData } = useContext(DataContext)
   const [chosenPar, setChosenPar] = useState<parDataTypes>({
     _id: '',
     createdAt: '',
@@ -21,7 +21,12 @@ const Participants = () => {
     secondPreference: '',
     secondPrefReason: '',
     phone: '',
+    status: '',
   })
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   const onChoose = (id: string) => {
     for (const par of data) {

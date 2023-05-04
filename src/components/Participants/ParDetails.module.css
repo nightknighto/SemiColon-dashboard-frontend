@@ -1,12 +1,59 @@
 .details {
-    width: 70%;
+  width: 70%;
 }
 
 .bold {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .parData {
-    text-align: left;
-    margin-left: 1rem;
+  text-align: left;
+  margin-left: 1rem;
+  width: fit-content;
+  margin-right: auto;
+}
+
+.pending {
+  font-size: 1.2rem;
+  width: fit-content;
+  margin: 1rem auto;
+}
+
+.pending::after {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 0);
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  margin-left: 0.3rem;
+  position: relative;
+  top: 0.2rem;
+  animation: stateChange 1s ease-out;
+  animation-iteration-count: infinite;
+}
+
+.pending.approved::after {
+  background-color: greenyellow;
+}
+
+.pending.rejected::after {
+  background-color: red;
+}
+
+@keyframes stateChange {
+  0% {
+    scale: 1;
+  }
+  10% {
+    scale: 1.1;
+  }
+  90% {
+    scale: 0.9;
+  }
+  100% {
+    scale: 1;
+  }
 }

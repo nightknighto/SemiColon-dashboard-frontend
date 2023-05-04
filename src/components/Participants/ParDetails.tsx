@@ -7,6 +7,14 @@ const ParDetails = ({ par }: { par: parDataTypes }) => {
       <h2>{par.name}</h2>
       <div className={classes.parData}>
         <p>
+          <span className={classes.bold}>Email: </span>
+          {par.email}
+        </p>
+        <p>
+          <span className={classes.bold}>Phone: </span>
+          {par.phone}
+        </p>
+        <p>
           <span className={classes.bold}>First Preference: </span>
           {par.firstPreference}
         </p>
@@ -30,6 +38,13 @@ const ParDetails = ({ par }: { par: parDataTypes }) => {
           <span className={classes.bold}>Experience: </span>
           {par.pastExperience}
         </p>
+      </div>
+      <div className={classes.status}>
+        {par.status && (
+          <p className={`${classes.pending} ${classes[par.status]}`}>
+            {par.status}
+          </p>
+        )}
       </div>
     </div>
   )

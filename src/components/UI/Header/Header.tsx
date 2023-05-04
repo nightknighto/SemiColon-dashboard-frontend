@@ -6,10 +6,10 @@ const Header = () => {
       <nav className={classes['main-nav']}>
         <ul>
           <li>
-            <a href="/">Stats</a>
+            <a href="/stats">Stats</a>
           </li>
           <li>
-            <a href="/users">Participants</a>
+            <a href="/participants">Participants</a>
           </li>
         </ul>
       </nav>
