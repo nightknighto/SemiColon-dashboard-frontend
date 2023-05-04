@@ -1,3 +1,12 @@
 .details {
     width: 70%;
 }
+
+.bold {
+    font-weight: bold;
+}
+
+.parData {
+    text-align: left;
+    margin-left: 1rem;
+}

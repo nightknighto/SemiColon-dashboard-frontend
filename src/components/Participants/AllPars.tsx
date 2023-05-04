@@ -2,11 +2,13 @@ import { parDataTypes } from '../../interfaces/parDataTypes'
 import classes from './AllPars.module.css'
 import ParItem from './ParItem'
 
-const AllPars = ({ data }: { data: parDataTypes[] }) => {
-  const onChoose = (_id: string) => {
-    return
-  }
-
+const AllPars = ({
+  data,
+  onChoose,
+}: {
+  data: parDataTypes[]
+  onChoose: (id: string) => void
+}) => {
   let output
   if (data[0]) {
     output = data.map((item) => (

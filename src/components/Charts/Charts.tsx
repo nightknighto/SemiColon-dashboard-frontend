@@ -13,7 +13,7 @@ const Charts = () => {
 
   const tracks = [
     'webDev1',
-    'Web Track-Advanced',
+    'webDev2',
     'Embedded Track-Basic',
     'Embedded Track-Advanced',
   ]

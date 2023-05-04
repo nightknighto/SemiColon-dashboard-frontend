@@ -45,13 +45,13 @@ const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
       )}
       {type === 'BAR' && (
         <>
-          <BarChart id={id} chartData={filteredData} nums={numbers} />
+          {filteredData[0] && <BarChart id={id} chartData={filteredData} nums={numbers} />}
           <DropDown
             onChange={onChoiceChangeHandler}
             choices={[
               'All',
               'webDev1',
-              'Web Track-Advanced',
+              'webDev2',
               'Embedded Track-Basic',
               'Embedded Track-Advanced',
             ]}

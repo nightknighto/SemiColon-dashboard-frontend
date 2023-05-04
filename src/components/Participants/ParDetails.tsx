@@ -5,12 +5,32 @@ const ParDetails = ({ par }: { par: parDataTypes }) => {
   return (
     <div className={classes.details}>
       <h2>{par.name}</h2>
-      <p><span>First Preference: </span>{par.firstPreference}</p>
-      <p><span>Reason: </span>{par.firstPrefReason}</p>
-      <p><span>Knowlege: </span>{par.firstPrefKnowledge}</p>
-      <p><span>Second Preference: </span>{par.secondPreference}</p>
-      <p><span>Reason: </span>{par.secondPrefReason}</p>
-      <p><span>Experience: </span>{par.pastExperience}</p>
+      <div className={classes.parData}>
+        <p>
+          <span className={classes.bold}>First Preference: </span>
+          {par.firstPreference}
+        </p>
+        <p>
+          <span className={classes.bold}>Reason: </span>
+          {par.firstPrefReason}
+        </p>
+        <p>
+          <span className={classes.bold}>Knowlege: </span>
+          {par.firstPrefKnowledge}
+        </p>
+        <p>
+          <span className={classes.bold}>Second Preference: </span>
+          {par.secondPreference}
+        </p>
+        <p>
+          <span className={classes.bold}>Reason: </span>
+          {par.secondPrefReason}
+        </p>
+        <p>
+          <span className={classes.bold}>Experience: </span>
+          {par.pastExperience}
+        </p>
+      </div>
     </div>
   )
 }
