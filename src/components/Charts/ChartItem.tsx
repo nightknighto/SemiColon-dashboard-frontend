@@ -27,9 +27,13 @@ const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
   useEffect(() => {
     setFilteredData(data)
   }, [data])
+  useEffect(() => {
+    setFilteredData(data)
+  }, [data])
 
   const onChoiceChangeHandler = (chosenTrack: string) => {
     if (chosenTrack === 'All') {
+      setFilteredData(data)
       setFilteredData(data)
       return
     }
@@ -41,17 +45,21 @@ const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
   return (
     <Card className={classes['chart-item']}>
       {type === 'PIE' && (
-        <PieChart id={id} chartData={filteredData} nums={numbers} />
+        <PieChart id={id} nums={numbers} />
+      )}
+      {type === 'PIE' && (
+        <PieChart id={id} nums={numbers} />
       )}
       {type === 'BAR' && (
         <>
+          {filteredData[0] && <BarChart id={id} chartData={filteredData} nums={numbers} />}
           <BarChart id={id} chartData={filteredData} nums={numbers} />
           <DropDown
             onChange={onChoiceChangeHandler}
             choices={[
               'All',
               'webDev1',
-              'Web Track-Advanced',
+              'webDev2',
               'Embedded Track-Basic',
               'Embedded Track-Advanced',
             ]}

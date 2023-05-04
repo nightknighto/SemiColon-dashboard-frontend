@@ -13,7 +13,7 @@ export const BarChart = ({ chartData, id, nums }: BarChartProps) => {
       <h2 style={{ textAlign: 'center' }}>Bar Chart</h2>
       <Bar
         data={{
-          labels: chartData.map((data) => data.createdAt),
+          labels: chartData.map((data) => data.createdAt.split('T')[0]),
           datasets: [
             {
               label: 'Users Gained',
