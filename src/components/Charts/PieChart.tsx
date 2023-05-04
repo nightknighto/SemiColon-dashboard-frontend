@@ -1,13 +1,11 @@
 import { Pie } from 'react-chartjs-2'
 import { parDataTypes } from '../../interfaces/parDataTypes'
-<<<<<<< HEAD
 
 const PieChart = ({
   id,
   nums
 }: {
   id?: string
-  nums: number[]
   nums: number[]
 }) => {
 
@@ -19,7 +17,6 @@ const PieChart = ({
           datasets: [
             {
               label: 'Users Gained',
-              data: nums,
               data: nums,
               backgroundColor: [
                 '#4c4caa',
