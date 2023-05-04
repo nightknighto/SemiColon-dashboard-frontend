@@ -41,7 +41,7 @@ const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
   return (
     <Card className={classes['chart-item']}>
       {type === 'PIE' && (
-        <PieChart id={id} chartData={filteredData} nums={numbers} />
+        <PieChart id={id} nums={numbers} />
       )}
       {type === 'BAR' && (
         <>

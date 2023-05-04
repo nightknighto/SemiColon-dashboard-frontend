@@ -1,7 +1,6 @@
 import Header from './components/UI/Header/Header'
 import Stats from './components/Stats/Stats'
 import Charts from './components/Charts/Charts'
-import { useContext, useEffect, useState } from 'react'
 import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
@@ -21,7 +20,7 @@ function App() {
     <DataContextProvider>
       <Header />
       <Charts />
-      <Stats tracks={tracks} numbers={numbers} />
+      <Stats tracks={tracks} />
       <Participants />
       {/* < Dashboard /> */}
     </DataContextProvider>
