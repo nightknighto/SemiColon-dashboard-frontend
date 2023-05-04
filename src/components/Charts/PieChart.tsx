@@ -1,15 +1,16 @@
 import { Pie } from 'react-chartjs-2'
 import { parDataTypes } from '../../interfaces/parDataTypes'
+import { useState } from 'react'
 
 const PieChart = ({
   id,
-  nums
+  nums,
+  chartData,
 }: {
   chartData: parDataTypes[]
   id?: string
   nums: number[]
 }) => {
-
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: 'center' }}>Pie Chart</h2>

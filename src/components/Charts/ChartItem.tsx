@@ -2,11 +2,12 @@ import { CategoryScale, ArcElement, BarElement, LinearScale } from 'chart.js'
 import Card from '../UI/Card/Card'
 import classes from './ChartItem.module.css'
 import { Chart } from 'chart.js'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import PieChart from './PieChart'
 import DropDown from '../UI/DropDown/DropDown'
 import { BarChart } from './BarChart'
 import { parDataTypes } from '../../interfaces/parDataTypes'
+import DataContext from '../../context/data-context'
 
 Chart.register(CategoryScale)
 Chart.register(ArcElement)
@@ -16,11 +17,11 @@ Chart.register(LinearScale)
 interface ChartItemProps {
   id: string
   type: 'PIE' | 'BAR'
-  data: parDataTypes[]
   numbers: number[]
 }
 
-const ChartItem = ({ id, type, data, numbers }: ChartItemProps) => {
+const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
+  const {data} = useContext(DataContext)
   const [filteredData, setFilteredData] = useState<parDataTypes[]>([])
 
   useEffect(() => {
@@ -32,7 +33,9 @@ const ChartItem = ({ id, type, data, numbers }: ChartItemProps) => {
       setFilteredData(data)
       return
     }
-    setFilteredData(data.filter((user) => user.firstPreference === chosenTrack))
+    setFilteredData(
+      data.filter((user) => user.firstPreference === chosenTrack)
+    )
   }
 
   return (
