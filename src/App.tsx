@@ -5,7 +5,14 @@ import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
+const tracks = [
+  'webDev1',
+  'webDev2',
+  'Embedded Track-Basic',
+  'Embedded Track-Advanced',
+]
 const tracks = [
   'webDev1',
   'webDev2',
@@ -37,11 +44,15 @@ const router = createBrowserRouter([
       </DataContextProvider>
     ),
   },
-])
+], {
+  basename: '/SemiColon-dashboard-frontend',
+})
 
+function App() {
 function App() {
   return (
     <DataContextProvider>
+      <RouterProvider router={router} />
       <RouterProvider router={router} />
     </DataContextProvider>
   )
