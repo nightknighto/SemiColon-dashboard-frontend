@@ -7,10 +7,15 @@ import DataContextProvider from './context/DataContextProvider'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 const tracks = [
-  'webDev1',
-  'webDev2',
-  'Embedded Track-Basic',
-  'Embedded Track-Advanced',
+  'c-prog',
+  'avr',
+  'arm',
+  'fullstack',
+  'frontend',
+  'react',
+  'digital',
+  'python',
+  'flutter',
 ]
 
 const router = createBrowserRouter([

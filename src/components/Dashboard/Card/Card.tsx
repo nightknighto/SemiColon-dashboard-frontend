@@ -3,8 +3,8 @@ import React from 'react';
 interface CardProps {
   title: string;
   value: string;
-  size: 'small' | 'medium' | 'large';
-  shape: 'rectangle' | 'rounded' | 'circle';
+  sizes: 'small' | 'medium' | 'large';
+  shapes: 'rectangle' | 'rounded' | 'circle';
 }
 
 const Card: React.FC<CardProps> = ({ title, value, sizes, shapes }) => {
