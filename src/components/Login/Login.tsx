@@ -12,7 +12,7 @@ const Login = () => {
     setClicked(true)
     setTimeout(() => {
       setShowLoader(true)
-    }, 700) // set delay time in milliseconds
+    }, 700)
   }
 
   return (
@@ -52,6 +52,9 @@ const Login = () => {
           <button
             className={`btn btn-primary ${clicked ? 'formClosure' : ''}`}
             onClick={(e) => handleClick(e)}
+            style={{
+              marginTop: '10px',
+            }}
           >
             Sign In
           </button>
@@ -78,7 +81,7 @@ const Login = () => {
                 minWidth: '60%',
                 backgroundColor: '#0f0f14',
                 marginLeft: '12px',
-                padding: '0',
+
                 textAlign: 'center',
                 animation: 'centerImg 1s ease-in-out forwards',
               }
@@ -100,6 +103,7 @@ const Login = () => {
           <img src={ReactLogo} alt="Login" />
           {showLoader && (
             <div
+              className="showLoader"
               style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -108,7 +112,7 @@ const Login = () => {
                 marginLeft: '150px',
               }}
             >
-              <BarLoader color="#e4a539" height={3} width={500} />
+              <BarLoader color="#e4a539" height={3} width={300} />
             </div>
           )}
         </div>

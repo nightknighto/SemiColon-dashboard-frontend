@@ -2,7 +2,7 @@ import Header from './components/UI/Header/Header'
 import Stats from './components/Stats/Stats'
 import Charts from './components/Charts/Charts'
 import { useState } from 'react'
-import './App.css'
+
 import Dashboard from './components/Dashboard/Dashboard'
 import Login from './components/Login/Login'
 
@@ -15,9 +15,9 @@ function App() {
   ]
   return (
     <>
-      <Header />
+      {/* <Header />
       <Charts />
-      <Stats tracks={tracks} />
+      <Stats tracks={tracks} /> */}
       <Login />
       {/* < Dashboard /> */}
     </>
