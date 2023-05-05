@@ -7,26 +7,29 @@ const Stats = ({ tracks }: { tracks: string[] }) => {
   const { data } = useContext(DataContext)
   const tracksStats = []
 
-  for (const track of tracks) {
-    tracksStats.push({
-      name: track,
-      numParticipants: data.filter((par) => par.firstPreference === track)
-        .length,
-    })
-  }
-
-  return (
-    <Card>
-      <h1>Tracks</h1>
-      {tracksStats.map((track) => (
+  let output
+  if (data) {
+    for (const track of tracks) {
+      tracksStats.push({
+        name: track,
+        numParticipants: data.filter((par) => par.firstPreference === track)
+          .length,
+      })
+    }
+    output = tracksStats.map((track) => (
+      <>
+        <h1>Tracks</h1>
         <Track
           key={track.name}
           name={track.name}
           numParticipants={track.numParticipants}
         />
-      ))}
-    </Card>
-  )
+      </>
+    ))
+  } else {
+    output = <h2>No data found.</h2>
+  }
+  return <Card>{output}</Card>
 }
 
 export default Stats
