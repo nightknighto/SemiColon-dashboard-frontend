@@ -8,6 +8,7 @@ import DropDown from '../UI/DropDown/DropDown'
 import { BarChart } from './BarChart'
 import { parDataTypes } from '../../interfaces/parDataTypes'
 import DataContext from '../../context/data-context'
+import { tracks } from '../../interfaces/tracks'
 
 Chart.register(CategoryScale)
 Chart.register(ArcElement)
@@ -52,17 +53,7 @@ const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
           <BarChart id={id} chartData={filteredData} nums={numbers} />
           <DropDown
             onChange={onChoiceChangeHandler}
-            choices={[
-              'c-prog',
-              'avr',
-              'arm',
-              'fullstack',
-              'frontend',
-              'react',
-              'digital',
-              'python',
-              'flutter',
-            ]}
+            choices={tracks}
           />
         </>
       )}

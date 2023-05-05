@@ -3,6 +3,7 @@ import Card from '../UI/Card/Card'
 import ChartItem from './ChartItem'
 import classes from './Charts.module.css'
 import DataContext from '../../context/data-context'
+import { tracks } from '../../interfaces/tracks'
 
 const Charts = () => {
   const { data, fetchData } = useContext(DataContext)
@@ -10,18 +11,6 @@ const Charts = () => {
   useEffect(() => {
     fetchData()
   }, [])
-
-  const tracks = [
-    'c-prog',
-    'avr',
-    'arm',
-    'fullstack',
-    'frontend',
-    'react',
-    'digital',
-    'python',
-    'flutter',
-  ]
 
   const numbers: number[] = []
   let output

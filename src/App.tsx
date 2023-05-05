@@ -5,18 +5,7 @@ import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-
-const tracks = [
-  'c-prog',
-  'avr',
-  'arm',
-  'fullstack',
-  'frontend',
-  'react',
-  'digital',
-  'python',
-  'flutter',
-]
+import { tracks } from './interfaces/tracks'
 
 const router = createBrowserRouter([
   {
