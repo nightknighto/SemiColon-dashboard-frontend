@@ -21,7 +21,7 @@ interface ChartItemProps {
 }
 
 const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
-  const {data} = useContext(DataContext)
+  const { data } = useContext(DataContext)
   const [filteredData, setFilteredData] = useState<parDataTypes[]>([])
 
   useEffect(() => {
@@ -37,31 +37,31 @@ const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
       setFilteredData(data)
       return
     }
-    setFilteredData(
-      data.filter((user) => user.firstPreference === chosenTrack)
-    )
+    setFilteredData(data.filter((user) => user.firstPreference === chosenTrack))
   }
 
   return (
     <Card className={classes['chart-item']}>
-      {type === 'PIE' && (
-        <PieChart id={id} nums={numbers} />
-      )}
-      {type === 'PIE' && (
-        <PieChart id={id} nums={numbers} />
-      )}
+      {type === 'PIE' && <PieChart id={id} nums={numbers} />}
+      {type === 'PIE' && <PieChart id={id} nums={numbers} />}
       {type === 'BAR' && (
         <>
-          {filteredData[0] && <BarChart id={id} chartData={filteredData} nums={numbers} />}
+          {filteredData[0] && (
+            <BarChart id={id} chartData={filteredData} nums={numbers} />
+          )}
           <BarChart id={id} chartData={filteredData} nums={numbers} />
           <DropDown
             onChange={onChoiceChangeHandler}
             choices={[
-              'All',
-              'webDev1',
-              'webDev2',
-              'Embedded Track-Basic',
-              'Embedded Track-Advanced',
+              'c-prog',
+              'avr',
+              'arm',
+              'fullstack',
+              'frontend',
+              'react',
+              'digital',
+              'python',
+              'flutter',
             ]}
           />
         </>

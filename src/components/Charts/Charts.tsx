@@ -12,14 +12,20 @@ const Charts = () => {
   }, [])
 
   const tracks = [
-    'webDev1',
-    'webDev2',
-    'Embedded Track-Basic',
-    'Embedded Track-Advanced',
+    'c-prog',
+    'avr',
+    'arm',
+    'fullstack',
+    'frontend',
+    'react',
+    'digital',
+    'python',
+    'flutter',
   ]
 
   const numbers: number[] = []
-  if (tracks) {
+  let output
+  if (data) {
     for (const track of tracks) {
       let num = 0
       for (const part of data) {
@@ -29,16 +35,17 @@ const Charts = () => {
       }
       numbers.push(num)
     }
+    output = (
+      <>
+        <ChartItem id="first" type="PIE" numbers={numbers} />
+        <ChartItem id="second" type="BAR" numbers={numbers} />
+      </>
+    )
+  } else {
+    output = <h2>No data found.</h2>
   }
 
-  return (
-    <Card className={classes.charts}>
-      <ChartItem id="first" type="PIE" numbers={numbers} />
-      <ChartItem id="second" type="BAR" numbers={numbers} />
-      <ChartItem id="first" type="PIE" numbers={numbers} />
-      <ChartItem id="second" type="BAR" numbers={numbers} />
-    </Card>
-  )
+  return <Card className={classes.charts}>{output}</Card>
 }
 
 export default Charts

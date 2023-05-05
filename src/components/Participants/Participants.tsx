@@ -37,17 +37,19 @@ const Participants = () => {
     }
   }
 
-  return (
-    <Card className={classes['par-container']}>
-      {data[0] && (
-        <>
-          <AllPars onChoose={onChoose} data={data} />{' '}
-          <ParDetails par={chosenPar} />
-        </>
-      )}
-      {!data && <h2>No data found</h2>}
-    </Card>
-  )
+  let output
+  if (data) {
+    output = data[0] && (
+      <>
+        <AllPars onChoose={onChoose} data={data} />{' '}
+        <ParDetails par={chosenPar} />
+      </>
+    )
+  } else {
+    output = <h2>No data found</h2>
+  }
+
+  return <Card className={classes['par-container']}>{output}</Card>
 }
 
 export default Participants
