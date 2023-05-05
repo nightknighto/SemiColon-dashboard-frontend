@@ -5,14 +5,7 @@ import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-const tracks = [
-  'webDev1',
-  'webDev2',
-  'Embedded Track-Basic',
-  'Embedded Track-Advanced',
-]
 const tracks = [
   'webDev1',
   'webDev2',
