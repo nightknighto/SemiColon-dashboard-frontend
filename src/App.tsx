@@ -37,7 +37,9 @@ const router = createBrowserRouter([
       </DataContextProvider>
     ),
   },
-])
+], {
+  basename: '/SemiColon-dashboard-frontend',
+})
 
 function App() {
   return (
