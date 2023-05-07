@@ -5,8 +5,9 @@ export const tracks = [
   'fullstack',
   'frontend',
   'react',
-  'backend',
+  'nodejs',
   'digital',
   'python',
   'flutter',
+  'desktop',
 ]
