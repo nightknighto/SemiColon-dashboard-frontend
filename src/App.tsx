@@ -39,7 +39,6 @@ function App() {
   return (
     <DataContextProvider>
       <RouterProvider router={router} />
-      <RouterProvider router={router} />
     </DataContextProvider>
   )
 }
