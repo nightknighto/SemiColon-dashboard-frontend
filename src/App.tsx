@@ -9,18 +9,8 @@ import { tracks } from './interfaces/tracks'
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/login',
     element: <Login />,
-  },
-  {
-    path: '/stats',
-    element: (
-      <DataContextProvider>
-        <Header />
-        <Charts />
-        <Stats tracks={tracks} />
-      </DataContextProvider>
-    ),
   },
   {
     path: '/participants',
@@ -28,6 +18,16 @@ const router = createBrowserRouter([
       <DataContextProvider>
         <Header />
         <Participants />
+      </DataContextProvider>
+    ),
+  },
+  {
+    path: '*',
+    element: (
+      <DataContextProvider>
+        <Header />
+        <Charts />
+        <Stats tracks={tracks} />
       </DataContextProvider>
     ),
   },
