@@ -31,6 +31,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - run: npm i --force
     - run: npm run build # makes sure the code can be built
     - run: npm run test --if-present # in case tests were added in the future
