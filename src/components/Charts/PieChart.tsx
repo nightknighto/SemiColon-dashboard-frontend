@@ -1,31 +1,23 @@
 import { Pie } from 'react-chartjs-2'
-
-interface YearGain {
-  id: number
-  year: number
-  userGain: number
-  userLost: number
-}
-
 const PieChart = ({
-  chartData,
   id,
+  nums
 }: {
-  chartData: YearGain[]
   id?: string
+  nums: number[]
 }) => {
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: 'center' }}>Pie Chart</h2>
       <Pie
         data={{
-          labels: chartData.map((data) => data.year),
           datasets: [
             {
               label: 'Users Gained',
-              data: chartData.map((data) => data.userGain),
+              data: nums,
               backgroundColor: [
-                'red',
+                '#4c4caa',
+                '#4c4caa',
                 '#ecf0f1',
                 '#50AF95',
                 '#f3ba2f',

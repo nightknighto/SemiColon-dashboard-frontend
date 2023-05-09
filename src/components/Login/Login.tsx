@@ -1,11 +1,20 @@
+
 import React, { useState } from 'react'
 import './Login.scss'
 import ReactLogo from '../../assets/Landing_black.png'
 import BarLoader from 'react-spinners/BarLoader'
 
+import { useState } from 'react'
+import './Login.scss'
+import ReactLogo from '../../assets/Landing_black.png'
+import BarLoader from 'react-spinners/BarLoader'
+import * as React from 'react'
+
+
 const Login = () => {
   const [clicked, setClicked] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
+
 
   const post_Req = () => {
     // 404 , 202
@@ -35,14 +44,21 @@ const Login = () => {
   }
 
   const handleClick = (e) => {
+
+  const handleClick = (e: React.MouseEvent) => {
+
     e.preventDefault()
     setClicked(true)
     setTimeout(() => {
       setShowLoader(true)
+
     }, 700)
     setTimeout(() => {
       post_Req()
     }, 4500)
+
+    }, 700) // set delay time in milliseconds
+
   }
 
   return (
@@ -82,9 +98,11 @@ const Login = () => {
           <button
             className={`btn btn-primary ${clicked ? 'formClosure' : ''}`}
             onClick={(e) => handleClick(e)}
+
             style={{
               marginTop: '10px',
             }}
+
           >
             Sign In
           </button>
@@ -112,6 +130,9 @@ const Login = () => {
                 backgroundColor: '#0f0f14',
                 marginLeft: '12px',
 
+
+                padding: '0',
+
                 textAlign: 'center',
                 animation: 'centerImg 1s ease-in-out forwards',
               }
@@ -133,7 +154,9 @@ const Login = () => {
           <img src={ReactLogo} alt="Login" />
           {showLoader && (
             <div
+
               className="showLoader"
+
               style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -142,7 +165,11 @@ const Login = () => {
                 marginLeft: '150px',
               }}
             >
+
               <BarLoader color="#e4a539" height={3} width={300} />
+
+              <BarLoader color="#e4a539" height={3} width={500} />
+
             </div>
           )}
         </div>

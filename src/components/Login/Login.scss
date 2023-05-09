@@ -19,10 +19,16 @@ html, body {
     width: 50%;
     height: 100%;
     background-color: #F3F3ED;
+
     margin-right: 12px; 
     position: relative; 
     z-index : 2;
    
+
+    margin-right: 12px; /* Add margin to the right */
+    position: relative; /* Set position to relative */
+    z-index : 2;
+
     
     // max-width: 0;
     // z-index : -1;
@@ -221,9 +227,11 @@ html, body {
       cursor: pointer;
       transition: all 0.3s ease;
       width: 100%;
+
       text-align: center;
       justify-self: center;
       align-items: center;
+
       
 
       &.btn-primary {
@@ -234,10 +242,18 @@ html, body {
         margin-right: 16px;
         margin-bottom:10px;
 
+
         background-repeat: no-repeat;
         background-position: 12px center;
         background-size:14px;
   
+
+
+        background-image: url('../../assets/lock.png');
+        background-repeat: no-repeat;
+        background-position: 12px center;
+        background-size:14px;
+        padding-left: 40px;
 
 
         &.formClosure{
@@ -304,6 +320,7 @@ html, body {
     padding: 0;
     text-align: center;
     margin-left:100px;
+
     overflow:hidden;
 
     .test-shine {
@@ -312,6 +329,9 @@ html, body {
       justify-content: center;
       align-items: center;
     }
+
+
+
     img {
       max-width: 60%;
       max-height: 670%;
@@ -359,7 +379,11 @@ html, body {
     to {
       position: absolute;
       top: 50%;
+
       left: 44%;
+
+      left: 45%;
+
       transform: translate(-50%, -50%);
     }
   }
@@ -432,6 +456,7 @@ html, body {
 
 
 
+
 @media (max-width: 400px) {
   .login {
     flex-direction: column;
@@ -489,10 +514,38 @@ html, body {
 
   .login .form-group {
     margin-bottom: 16px;
+=======
+/* Media query for screens between 768px and 1023px */
+@media  (max-width: 1023px) {
+  html, body {
+    font-family: 'Abel', sans-serif;
+  }
+  .login {
+    flex-direction: column;
+
+    .login-left {
+      width: 100%;
+      margin-left: 50%;
+    }
+
+    .login-right {
+
+      display:none;
+    }
+  }
+
+  .login .btn {
+    margin-bottom: 16px;
+  }
+
+  .login .form-group {
+    margin-bottom: 10px;
+
   }
 
   .login h2 {
     font-size: 36px;
+
   }
 
   .login-right img {
@@ -534,8 +587,21 @@ html, body {
     transition: all 0.3s ease-in-out;
     max-width:auto;
 
+
+    margin-bottom: 10px;
+  }
+
+  .login .btn.btn-primary {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .login-right img {
+    display:none;
+
   }
 }
+
 
 
 
@@ -592,10 +658,25 @@ html, body {
       justify-content: center;
       align-items: center;
       margin-right:50px;
+
+/* Media query for screens between 1024px and 1279px */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .login {
+    flex-direction: row;
+
+    .login-left {
+      width: 60%;
+      margin-right: 16px;
+    }
+
+    .login-right {
+      width: 40%;
+      
     }
   }
 
   .login .btn {
+
     margin-bottom: 24px;
   }
 
@@ -651,5 +732,54 @@ html, body {
   }
 }
 
+    margin-bottom: 0;
+  }
 
+  .login .form-group {
+    margin-bottom: 24px;
+  }
+
+  .login h2 {
+    font-size: 48px;
+  }
+
+  .login-right img {
+    max-width: 70%;
+    max-height: 70%;
+  }
+}
+
+/* Media query for screens larger than 1280px */
+@media (min-width: 1280px) {
+  .login {
+    flex-direction: row;
+
+    .login-left {
+      width: 50%;
+      margin-right: 32px;
+    }
+
+    .login-right {
+      width: 50%;
+      
+    }
+  }
+
+  .login .btn {
+    margin-bottom: 0;
+  }
+
+  .login .form-group {
+    margin-bottom: 24px;
+  }
+
+  .login h2 {
+    font-size: 48px;
+  }
+
+  .login-right img {
+    max-width: 70%;
+    max-height: 70%;
+  }
+}
 

@@ -1,24 +1,35 @@
-import Button from '../UI/Button/Button'
+import { useContext } from 'react'
 import Card from '../UI/Card/Card'
-import DropDown from '../UI/DropDown/DropDown'
-import classes from './Stats.module.css'
 import Track from './Track'
+import DataContext from '../../context/data-context'
 
-const Stats = (props: { tracks: string[] }) => {
-  const tracksStats = props.tracks.map((track) => {
-    return {
-      name: track,
-      numParticipants: Math.floor(Math.random() * 100),
+const Stats = ({ tracks }: { tracks: string[] }) => {
+  const { data } = useContext(DataContext)
+  const tracksStats = []
+
+  let output
+  if (data) {
+    for (const track of tracks) {
+      tracksStats.push({
+        name: track,
+        numParticipants: data.filter((par) => par.firstPreference === track)
+          .length,
+      })
     }
-  })
-  return (
-    <Card>
-      <h1>Tracks</h1>
-      {tracksStats.map((track) => (
-        <Track name={track.name} numParticipants={track.numParticipants} />
-      ))}
-    </Card>
-  )
+    output = tracksStats.map((track) => (
+      <>
+        <h1>Tracks</h1>
+        <Track
+          key={track.name}
+          name={track.name}
+          numParticipants={track.numParticipants}
+        />
+      </>
+    ))
+  } else {
+    output = <h2>No data found.</h2>
+  }
+  return <Card>{output}</Card>
 }
 
 export default Stats

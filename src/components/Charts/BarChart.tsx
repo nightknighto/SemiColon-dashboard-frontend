@@ -1,31 +1,25 @@
 import { Bar } from 'react-chartjs-2'
+import { parDataTypes } from '../../interfaces/parDataTypes'
 
-interface YearGain {
-  id: number
-  year: number
-  userGain: number
-  userLost: number
+interface BarChartProps {
+  chartData: parDataTypes[]
+  id?: string
+  nums: number[]
 }
 
-export const BarChart = ({
-  chartData,
-  id,
-}: {
-  chartData: YearGain[]
-  id?: string
-}) => {
+export const BarChart = ({ chartData, id, nums }: BarChartProps) => {
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: 'center' }}>Bar Chart</h2>
       <Bar
         data={{
-          labels: chartData.map((data) => data.year),
+          labels: chartData.map((data) => data.createdAt.split('T')[0]),
           datasets: [
             {
               label: 'Users Gained',
-              data: chartData.map((data) => data.userGain),
+              data: nums,
               backgroundColor: [
-                'red',
+                '#4c4caa',
                 '#ecf0f1',
                 '#50AF95',
                 '#f3ba2f',
