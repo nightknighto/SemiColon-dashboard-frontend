@@ -7,12 +7,42 @@ const Login = () => {
   const [clicked, setClicked] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
 
+  const post_Req = () => {
+    // 404 , 202
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => {
+        if (response.status === 401) {
+          throw new Error('Page not found')
+        }
+        if (response.status === 202) {
+          throw new Error('Accepted')
+          // redirect to dashboard
+        }
+        return response.json()
+      })
+      .then((json) => console.log(json))
+      .catch((err) => console.log(err))
+  }
+
   const handleClick = (e) => {
     e.preventDefault()
     setClicked(true)
     setTimeout(() => {
       setShowLoader(true)
     }, 700)
+    setTimeout(() => {
+      post_Req()
+    }, 4500)
   }
 
   return (
