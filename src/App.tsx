@@ -1,6 +1,7 @@
 import Header from './components/UI/Header/Header'
 import Stats from './components/Stats/Stats'
 import Charts from './components/Charts/Charts'
+
 import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
@@ -35,11 +36,14 @@ const router = createBrowserRouter([
   basename: '/SemiColon-dashboard-frontend',
 })
 
+
 function App() {
   return (
+
     <DataContextProvider>
       <RouterProvider router={router} />
     </DataContextProvider>
+
   )
 }
 

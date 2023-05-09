@@ -1,19 +1,55 @@
+
 import { useState } from 'react'
 import './Login.scss'
 import ReactLogo from '../../assets/Landing_black.png'
 import BarLoader from 'react-spinners/BarLoader'
 import * as React from 'react'
 
+
 const Login = () => {
   const [clicked, setClicked] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
 
+
+  const post_Req = () => {
+    // 404 , 202
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: 'foo',
+        body: 'bar',
+        userId: 1,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => {
+        if (response.status === 401) {
+          throw new Error('Page not found')
+        }
+        if (response.status === 202) {
+          throw new Error('Accepted')
+          // redirect to dashboard
+        }
+        return response.json()
+      })
+      .then((json) => console.log(json))
+      .catch((err) => console.log(err))
+  }
+
   const handleClick = (e: React.MouseEvent) => {
+
     e.preventDefault()
     setClicked(true)
     setTimeout(() => {
       setShowLoader(true)
-    }, 700) // set delay time in milliseconds
+
+    }, 700)
+    setTimeout(() => {
+      post_Req()
+    }, 4500)
+
   }
 
   return (
@@ -53,6 +89,11 @@ const Login = () => {
           <button
             className={`btn btn-primary ${clicked ? 'formClosure' : ''}`}
             onClick={(e) => handleClick(e)}
+
+            style={{
+              marginTop: '10px',
+            }}
+
           >
             Sign In
           </button>
@@ -79,7 +120,10 @@ const Login = () => {
                 minWidth: '60%',
                 backgroundColor: '#0f0f14',
                 marginLeft: '12px',
+
+
                 padding: '0',
+
                 textAlign: 'center',
                 animation: 'centerImg 1s ease-in-out forwards',
               }
@@ -101,6 +145,9 @@ const Login = () => {
           <img src={ReactLogo} alt="Login" />
           {showLoader && (
             <div
+
+              className="showLoader"
+
               style={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -109,7 +156,11 @@ const Login = () => {
                 marginLeft: '150px',
               }}
             >
+
+              <BarLoader color="#e4a539" height={3} width={300} />
+
               <BarLoader color="#e4a539" height={3} width={500} />
+
             </div>
           )}
         </div>
