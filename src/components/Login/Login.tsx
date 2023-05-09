@@ -1,9 +1,4 @@
 
-import React, { useState } from 'react'
-import './Login.scss'
-import ReactLogo from '../../assets/Landing_black.png'
-import BarLoader from 'react-spinners/BarLoader'
-
 import { useState } from 'react'
 import './Login.scss'
 import ReactLogo from '../../assets/Landing_black.png'
@@ -43,8 +38,6 @@ const Login = () => {
       .catch((err) => console.log(err))
   }
 
-  const handleClick = (e) => {
-
   const handleClick = (e: React.MouseEvent) => {
 
     e.preventDefault()
@@ -56,8 +49,6 @@ const Login = () => {
     setTimeout(() => {
       post_Req()
     }, 4500)
-
-    }, 700) // set delay time in milliseconds
 
   }
 

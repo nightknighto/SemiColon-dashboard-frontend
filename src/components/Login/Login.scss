@@ -514,7 +514,8 @@ html, body {
 
   .login .form-group {
     margin-bottom: 16px;
-=======
+  }
+}
 /* Media query for screens between 768px and 1023px */
 @media  (max-width: 1023px) {
   html, body {
@@ -658,6 +659,9 @@ html, body {
       justify-content: center;
       align-items: center;
       margin-right:50px;
+    }
+  }
+}
 
 /* Media query for screens between 1024px and 1279px */
 @media (min-width: 1024px) and (max-width: 1279px) {
@@ -729,9 +733,8 @@ html, body {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     margin-left:50px;
-  }
-}
 
+    
     margin-bottom: 0;
   }
 

@@ -2,11 +2,6 @@ import Header from './components/UI/Header/Header'
 import Stats from './components/Stats/Stats'
 import Charts from './components/Charts/Charts'
 
-import { useState } from 'react'
-
-import Dashboard from './components/Dashboard/Dashboard'
-import Login from './components/Login/Login'
-
 import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
@@ -44,14 +39,6 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-
-    <>
-      {/* <Header />
-      <Charts />
-      <Stats tracks={tracks} /> */}
-      <Login />
-      {/* < Dashboard /> */}
-    </>
 
     <DataContextProvider>
       <RouterProvider router={router} />
