@@ -8,7 +8,7 @@ const Stats = ({ tracks }: { tracks: string[] }) => {
   const tracksStats = []
 
   let output
-  if (data) {
+  if (data.length > 0) {
     for (const track of tracks) {
       tracksStats.push({
         name: track,

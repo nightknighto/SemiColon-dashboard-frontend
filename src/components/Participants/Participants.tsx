@@ -38,7 +38,7 @@ const Participants = () => {
   }
 
   let output
-  if (data) {
+  if (data.length > 0) {
     output = data[0] && (
       <>
         <AllPars onChoose={onChoose} data={data} />{' '}
@@ -46,7 +46,9 @@ const Participants = () => {
       </>
     )
   } else {
-    output = <h2>No data found</h2>
+    output = (
+      <h2 style={{ marginLeft: 'auto', marginRight: 'auto' }}>No data found</h2>
+    )
   }
 
   return <Card className={classes['par-container']}>{output}</Card>
