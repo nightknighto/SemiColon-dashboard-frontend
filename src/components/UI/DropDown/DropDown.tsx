@@ -13,7 +13,7 @@ const DropDown = ({
   const onChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
     setTrack(event.target.value)
     if (onChange) {
-      onChange(event.target.value)
+      onChange(event.target.value.trim())
     }
   }
 

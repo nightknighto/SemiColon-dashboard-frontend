@@ -5,13 +5,20 @@ interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void
   disabled?: boolean
   type?: 'submit' | 'reset' | 'button' | undefined
+  className?: string
 }
 
-const Button = ({ children, onClick, disabled, type }: ButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  disabled,
+  type,
+  className,
+}: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      className={classes.btn}
+      className={`${classes.btn} ${className}`}
       disabled={disabled}
       type={type}
     >
