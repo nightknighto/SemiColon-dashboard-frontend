@@ -4,17 +4,22 @@ import { parDataTypes } from '../interfaces/parDataTypes'
 
 const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [data, setData] = useState<parDataTypes[]>([])
-
   const fetchParticipants = async () => {
     try {
-      const res = await fetch('http://localhost:9100/participants/getAll')
+      //'https://semicolon-registration-backend.onrender.com/participants/getAll',
+      const res = await fetch(
+        'https://semicolon-registration-backend.onrender.com/participants/getAll'
+      )
 
       const participants = await res.json()
-      console.log(participants)
+      if (participants.status === 'failure') {
+        throw new Error('You are not logged in')
+      }
       return participants.data
     } catch (err: unknown) {
       const { message } = err as { message: string }
       console.log(message)
+      return []
     }
   }
 

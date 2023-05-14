@@ -14,7 +14,7 @@ const Charts = () => {
 
   const numbers: number[] = []
   let output
-  if (data) {
+  if (data.length > 0) {
     for (const track of tracks) {
       let num = 0
       for (const part of data) {

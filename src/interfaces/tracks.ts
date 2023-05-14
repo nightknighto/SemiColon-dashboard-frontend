@@ -1,4 +1,5 @@
 export const tracks = [
+  'All',
   'c-prog',
   'avr',
   'arm',
