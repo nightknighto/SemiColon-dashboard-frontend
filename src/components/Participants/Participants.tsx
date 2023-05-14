@@ -41,10 +41,14 @@ const Participants = () => {
   }
 
   const onAcceptHandler = (phone: string) => {
+    const x = phone
+    console.log(x[0])
     return
   }
 
   const onRejectHandler = (phone: string) => {
+    const x = phone
+    console.log(x[0])
     return
   }
 
