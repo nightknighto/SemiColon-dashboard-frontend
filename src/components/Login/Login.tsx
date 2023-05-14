@@ -22,7 +22,13 @@ const Login = () => {
     phoneStyles = `phone-input ${classes['failed-input']}`
   }
 
-  const passIsValid = passwordInputRef.current?.value.trim().length > 0
+  let passIsValid: boolean
+  if (passwordInputRef.current?.value) {
+    passIsValid = passwordInputRef.current?.value.trim().length > 0
+  } else {
+    passIsValid = false
+  }
+
   let passStyles = `form-group ${clicked ? 'formClosure' : ''}`
   if (!passIsValid && passIsTouched) {
     passStyles = `form-group ${clicked ? 'formClosure' : ''} ${
