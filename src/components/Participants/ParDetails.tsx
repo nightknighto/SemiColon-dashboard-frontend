@@ -1,7 +1,16 @@
 import { parDataTypes } from '../../interfaces/parDataTypes'
+import Button from '../UI/Button/Button'
 import classes from './ParDetails.module.css'
 
-const ParDetails = ({ par }: { par: parDataTypes }) => {
+const ParDetails = ({
+  par,
+  onAcceptHandler,
+  onRejectHandler,
+}: {
+  par: parDataTypes
+  onAcceptHandler: (phone: string) => void
+  onRejectHandler: (phone: string) => void
+}) => {
   return (
     <div className={classes.details}>
       <h2>{par.name}</h2>
@@ -11,8 +20,16 @@ const ParDetails = ({ par }: { par: parDataTypes }) => {
           {par.email}
         </p>
         <p>
+          <span className={classes.bold}>College ID: </span>
+          {par.collegeId}
+        </p>
+        <p>
           <span className={classes.bold}>Phone: </span>
           {par.phone}
+        </p>
+        <p>
+          <span className={classes.bold}>Year: </span>
+          {par.year}
         </p>
         <p>
           <span className={classes.bold}>First Preference: </span>
@@ -45,6 +62,11 @@ const ParDetails = ({ par }: { par: parDataTypes }) => {
             {par.acceptanceStatus}
           </p>
         )}
+      </div>
+      <hr className={classes.line}></hr>
+      <div className={classes.buttons}>
+        <Button onClick={onAcceptHandler.bind(null, par.phone)} className={classes.acceptBtn}>Accept</Button>
+        <Button onClick={onRejectHandler.bind(null, par.phone)} className={classes.rejectBtn}>Reject</Button>
       </div>
     </div>
   )

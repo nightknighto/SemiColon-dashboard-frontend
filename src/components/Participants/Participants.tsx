@@ -40,12 +40,24 @@ const Participants = () => {
     }
   }
 
+  const onAcceptHandler = (phone: string) => {
+    return
+  }
+
+  const onRejectHandler = (phone: string) => {
+    return
+  }
+
   let output
   if (data.length > 0) {
     output = data[0] && (
       <>
         <AllPars onChoose={onChoose} data={data} />{' '}
-        <ParDetails par={chosenPar} />
+        <ParDetails
+          par={chosenPar}
+          onAcceptHandler={onAcceptHandler}
+          onRejectHandler={onRejectHandler}
+        />
       </>
     )
   } else {
