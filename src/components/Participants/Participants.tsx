@@ -21,7 +21,10 @@ const Participants = () => {
     secondPreference: '',
     secondPrefReason: '',
     phone: '',
-    status: '',
+    acceptanceStatus: '',
+    year: '',
+    collegeId: '',
+    emailedStatus: false,
   })
 
   useEffect(() => {

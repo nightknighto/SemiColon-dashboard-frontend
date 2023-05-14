@@ -40,9 +40,9 @@ const ParDetails = ({ par }: { par: parDataTypes }) => {
         </p>
       </div>
       <div className={classes.status}>
-        {par.status && (
-          <p className={`${classes.pending} ${classes[par.status]}`}>
-            {par.status}
+        {par.acceptanceStatus && (
+          <p className={`${classes.pending} ${classes[par.acceptanceStatus]}`}>
+            {par.acceptanceStatus}
           </p>
         )}
       </div>
