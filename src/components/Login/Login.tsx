@@ -60,8 +60,8 @@ const Login = () => {
       .catch((err) => console.log(err))
   }
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault()
+  const handleClick = (event: React.SyntheticEvent) => {
+    event.preventDefault()
     if (!phoneIsValid) {
       setPhoneIsTouched(true)
       return
@@ -72,7 +72,7 @@ const Login = () => {
     }, 700)
     setTimeout(() => {
       post_Req()
-    }, 1500)
+    }, 100)
   }
 
   const onPhoneChangeHandler = () => {
@@ -101,7 +101,7 @@ const Login = () => {
         <h2 className={`header ${clicked ? 'headerAction' : ''}`}>
           Hi, welcome back!
         </h2>
-        <form>
+        <form onSubmit={handleClick}>
           <div className={`form-group ${clicked ? 'formClosure' : ''}`}>
             <label htmlFor="phone">Phone Number</label>
             <div className={phoneStyles}>
@@ -145,7 +145,6 @@ const Login = () => {
 
           <button
             className={`btn btn-primary ${clicked ? 'formClosure' : ''}`}
-            onClick={(e) => handleClick(e)}
             style={{
               marginTop: '10px',
             }}
