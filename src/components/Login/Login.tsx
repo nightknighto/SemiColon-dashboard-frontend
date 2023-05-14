@@ -56,13 +56,11 @@ const Login = () => {
         }
         if (response.status === 200) {
           // throw new Error('Accepted')
-          console.log('accepted')
           navigate('/stats')
           // return redirect('/stats')
         }
         return response.json()
       })
-      .then((json) => console.log(json))
       .catch((err) => console.log(err))
   }
 

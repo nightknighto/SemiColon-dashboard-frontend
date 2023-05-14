@@ -28,13 +28,9 @@ const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
   useEffect(() => {
     setFilteredData(data)
   }, [data])
-  useEffect(() => {
-    setFilteredData(data)
-  }, [data])
 
   const onChoiceChangeHandler = (chosenTrack: string) => {
     if (chosenTrack === 'All') {
-      setFilteredData(data)
       setFilteredData(data)
       return
     }
@@ -49,7 +45,6 @@ const ChartItem = ({ id, type, numbers }: ChartItemProps) => {
           {filteredData[0] && (
             <BarChart id={id} chartData={filteredData} nums={numbers} />
           )}
-          <BarChart id={id} chartData={filteredData} nums={numbers} />
           <DropDown
             onChange={onChoiceChangeHandler}
             choices={tracks}
