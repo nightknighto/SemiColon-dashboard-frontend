@@ -14,11 +14,11 @@ const Stats = ({ tracks }: { tracks: string[] }) => {
       const numPars = data.filter((par) => par.firstPreference === track).length
       tracksStats.push({
         name: track,
-        numParticipants: data.filter((par) => par.firstPreference === track)
-          .length,
+        numParticipants: numPars,
       })
       total = total + numPars
     }
+    tracksStats[0].numParticipants = total
     output = (
       <>
         <h1>Tracks</h1>
@@ -29,7 +29,6 @@ const Stats = ({ tracks }: { tracks: string[] }) => {
             numParticipants={track.numParticipants}
           />
         ))}
-        <Track key="total" name="Total" numParticipants={total} />
       </>
     )
   } else {

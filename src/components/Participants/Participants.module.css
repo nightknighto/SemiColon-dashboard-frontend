@@ -1,4 +1,5 @@
 .par-container {
   display: flex;
   justify-content: space-between;
+  max-height: 80vh;
 }

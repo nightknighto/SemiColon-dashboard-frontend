@@ -21,7 +21,10 @@ const Participants = () => {
     secondPreference: '',
     secondPrefReason: '',
     phone: '',
-    status: '',
+    acceptanceStatus: '',
+    year: '',
+    collegeId: '',
+    emailedStatus: false,
   })
 
   useEffect(() => {
@@ -37,12 +40,28 @@ const Participants = () => {
     }
   }
 
+  const onAcceptHandler = (phone: string) => {
+    const x = phone
+    console.log(x[0])
+    return
+  }
+
+  const onRejectHandler = (phone: string) => {
+    const x = phone
+    console.log(x[0])
+    return
+  }
+
   let output
   if (data.length > 0) {
     output = data[0] && (
       <>
         <AllPars onChoose={onChoose} data={data} />{' '}
-        <ParDetails par={chosenPar} />
+        <ParDetails
+          par={chosenPar}
+          onAcceptHandler={onAcceptHandler}
+          onRejectHandler={onRejectHandler}
+        />
       </>
     )
   } else {

@@ -16,13 +16,14 @@ const Charts = () => {
   let output
   if (data.length > 0) {
     for (const track of tracks) {
-      let num = 0
-      for (const part of data) {
-        if (part.firstPreference === track) {
-          num++
-        }
-      }
-      numbers.push(num)
+      // let num = 0
+      // for (const part of data) {
+      //   if (part.firstPreference === track) {
+      //     num++
+      //   }
+      // }
+      const dummy = data.filter((par) => par.firstPreference === track)
+      numbers.push(dummy.length)
     }
     output = (
       <>
