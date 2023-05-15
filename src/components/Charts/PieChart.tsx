@@ -1,16 +1,12 @@
 import { Pie } from 'react-chartjs-2'
-const PieChart = ({
-  id,
-  nums
-}: {
-  id?: string
-  nums: number[]
-}) => {
+import { tracks } from '../../interfaces/tracks'
+const PieChart = ({ id, nums }: { id?: string; nums: number[] }) => {
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: 'center' }}>Pie Chart</h2>
       <Pie
         data={{
+          labels: tracks,
           datasets: [
             {
               label: 'Users Gained',

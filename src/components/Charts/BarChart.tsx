@@ -5,18 +5,21 @@ interface BarChartProps {
   chartData: parDataTypes[]
   id?: string
   nums: number[]
+  title: string
 }
 
-export const BarChart = ({ chartData, id, nums }: BarChartProps) => {
+export const BarChart = ({ chartData, id, nums, title }: BarChartProps) => {
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: 'center' }}>Bar Chart</h2>
       <Bar
         data={{
-          labels: chartData.map((data) => data.createdAt.split('T')[0]),
+          labels: chartData
+            .map((data) => data.createdAt.split('T')[0])
+            .filter((value, index, array) => array.indexOf(value) === index),
           datasets: [
             {
-              label: 'Users Gained',
+              label: 'Participants Applied',
               data: nums,
               backgroundColor: [
                 '#4c4caa',
@@ -31,13 +34,14 @@ export const BarChart = ({ chartData, id, nums }: BarChartProps) => {
           ],
         }}
         options={{
+          responsive: true,
           plugins: {
             title: {
               display: true,
-              text: 'Users Gained between 2016-2020',
+              text: title,
             },
             legend: {
-              display: false,
+              position: 'top' as const,
             },
           },
         }}

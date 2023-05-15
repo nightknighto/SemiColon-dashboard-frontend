@@ -22,13 +22,12 @@ const Charts = () => {
       //     num++
       //   }
       // }
-      const dummy = data.filter((par) => par.firstPreference === track)
-      numbers.push(dummy.length)
+      numbers.push(data.filter((par) => par.firstPreference === track).length)
     }
     output = (
       <>
-        <ChartItem id="first" type="PIE" numbers={numbers} />
-        <ChartItem id="second" type="BAR" numbers={numbers} />
+        <ChartItem id="first" type="PIE" pieNums={numbers} />
+        <ChartItem id="second" type="BAR" />
       </>
     )
   } else {
