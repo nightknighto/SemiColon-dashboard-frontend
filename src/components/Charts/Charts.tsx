@@ -13,10 +13,6 @@ const Charts = () => {
     fetchData()
   }, [])
 
-  const years = data
-    .map((val) => val.year)
-    .filter((val, index, arr) => arr.indexOf(val) === index)
-
   const datesMappingHandler = (val: parDataTypes) => val.createdAt.split('T')[0]
   const yearMappingHandler = (val: parDataTypes) => val.year
 

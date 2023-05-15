@@ -48,9 +48,7 @@ const ChartItem = ({
   pieLabels = [],
   pieTitle,
   barNumbersHandler,
-  labelMappingHandler = (data) => {
-    return ''
-  },
+  labelMappingHandler,
 }: ChartItemProps) => {
   const { data } = useContext(DataContext)
   const [filteredData, setFilteredData] = useState<parDataTypes[]>([])
@@ -87,6 +85,19 @@ const ChartItem = ({
     setBarTitle(chosenTrack)
   }
 
+  let bar = <></>
+  if (type === 'BAR' && labelMappingHandler) {
+    bar = filteredData[0] && (
+      <BarChart
+        id={id}
+        chartData={filteredData}
+        nums={barNumbers}
+        title={barTitle}
+        labelMappingHandler={labelMappingHandler}
+      />
+    )
+  }
+
   return (
     <Card className={classes['chart-item']}>
       {type === 'PIE' && (
@@ -94,15 +105,7 @@ const ChartItem = ({
       )}
       {type === 'BAR' && (
         <>
-          {filteredData[0] && (
-            <BarChart
-              id={id}
-              chartData={filteredData}
-              nums={barNumbers}
-              title={barTitle}
-              labelMappingHandler={labelMappingHandler}
-            />
-          )}
+          {bar}
           <DropDown onChange={onChoiceChangeHandler} choices={tracks} />
         </>
       )}
