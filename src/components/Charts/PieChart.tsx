@@ -1,15 +1,24 @@
 import { Pie } from 'react-chartjs-2'
-import { tracks } from '../../interfaces/tracks'
-const PieChart = ({ id, nums }: { id?: string; nums: number[] }) => {
+const PieChart = ({
+  id,
+  nums,
+  labels,
+  title,
+}: {
+  id?: string
+  nums: number[]
+  labels: string[]
+  title?: string
+}) => {
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: 'center' }}>Pie Chart</h2>
       <Pie
         data={{
-          labels: tracks,
+          labels: labels,
           datasets: [
             {
-              label: 'Users Gained',
+              label: 'Participants Applied',
               data: nums,
               backgroundColor: [
                 '#4c4caa',
@@ -23,6 +32,14 @@ const PieChart = ({ id, nums }: { id?: string; nums: number[] }) => {
               borderWidth: 2,
             },
           ],
+        }}
+        options={{
+          plugins: {
+            title: {
+              display: true,
+              text: title,
+            },
+          },
         }}
         id={id}
       />

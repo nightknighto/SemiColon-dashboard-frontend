@@ -15,6 +15,13 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
       if (participants.status === 'failure') {
         throw new Error('You are not logged in')
       }
+      let num = 0
+      for (const par of participants.data) {
+        if (par.year === 'Junior' && par.firstPreference === 'c-prog') {
+          num += 1
+        }
+      }
+      console.log(num)
       return participants.data
     } catch (err: unknown) {
       const { message } = err as { message: string }
