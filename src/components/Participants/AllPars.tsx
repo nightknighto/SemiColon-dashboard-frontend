@@ -30,7 +30,7 @@ const AllPars = ({
         <DropDown choices={tracks} onChange={onTrackChangeHandler} />
         {filteredData.map((item) => (
           <ParItem
-            key={item.name}
+            key={item.phone}
             name={item.name}
             onChoose={onChoose.bind(null, item._id)}
           />
