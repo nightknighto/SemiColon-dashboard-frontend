@@ -35,9 +35,23 @@ interface ChartItemProps {
   id: string
   type: 'PIE' | 'BAR'
   pieNums?: number[]
+  pieLabels?: string[]
+  pieTitle?: string
+  barNumbersHandler?: (filteredData: parDataTypes[]) => number[]
+  labelMappingHandler?: (data: parDataTypes) => string
 }
 
-const ChartItem = ({ id, type, pieNums = [] }: ChartItemProps) => {
+const ChartItem = ({
+  id,
+  type,
+  pieNums = [],
+  pieLabels = [],
+  pieTitle,
+  barNumbersHandler,
+  labelMappingHandler = (data) => {
+    return ''
+  },
+}: ChartItemProps) => {
   const { data } = useContext(DataContext)
   const [filteredData, setFilteredData] = useState<parDataTypes[]>([])
   const [barNumbers, setBarNumbers] = useState<number[]>([])
@@ -48,17 +62,20 @@ const ChartItem = ({ id, type, pieNums = [] }: ChartItemProps) => {
   }, [data])
 
   useEffect(() => {
-    const dateNums: { createdAt: string; num: number }[] = []
-    for (const par of filteredData) {
-      const createdAt = dateNums.map((val) => val.createdAt)
-      const parCreatedAt = par.createdAt.split('T')[0]
-      if (createdAt.indexOf(parCreatedAt) !== -1) {
-        dateNums[createdAt.indexOf(parCreatedAt)].num += 1
-      } else {
-        dateNums.push({ createdAt: parCreatedAt, num: 1 })
-      }
+    // const dateNums: { createdAt: string; num: number }[] = []
+    // for (const par of filteredData) {
+    //   const createdAt = dateNums.map((val) => val.createdAt)
+    //   const parCreatedAt = par.createdAt.split('T')[0]
+    //   if (createdAt.indexOf(parCreatedAt) !== -1) {
+    //     dateNums[createdAt.indexOf(parCreatedAt)].num += 1
+    //   } else {
+    //     dateNums.push({ createdAt: parCreatedAt, num: 1 })
+    //   }
+    // }
+    if (barNumbersHandler) {
+      const nums = barNumbersHandler(filteredData)
+      setBarNumbers(nums)
     }
-    setBarNumbers(dateNums.map((val) => val.num))
   }, [filteredData])
 
   const onChoiceChangeHandler = (chosenTrack: string) => {
@@ -70,15 +87,11 @@ const ChartItem = ({ id, type, pieNums = [] }: ChartItemProps) => {
     setBarTitle(chosenTrack)
   }
 
-  // const dateNums = filteredData.reduce((prev, curr, ind, arr) => {
-  //   if (ind === 0) {
-  //     arr.push({ date: curr.createdAt, num: 1 })
-  //   }
-  // }, [])
-
   return (
     <Card className={classes['chart-item']}>
-      {type === 'PIE' && <PieChart id={id} nums={pieNums} />}
+      {type === 'PIE' && (
+        <PieChart id={id} nums={pieNums} labels={pieLabels} title={pieTitle} />
+      )}
       {type === 'BAR' && (
         <>
           {filteredData[0] && (
@@ -87,6 +100,7 @@ const ChartItem = ({ id, type, pieNums = [] }: ChartItemProps) => {
               chartData={filteredData}
               nums={barNumbers}
               title={barTitle}
+              labelMappingHandler={labelMappingHandler}
             />
           )}
           <DropDown onChange={onChoiceChangeHandler} choices={tracks} />

@@ -6,16 +6,23 @@ interface BarChartProps {
   id?: string
   nums: number[]
   title: string
+  labelMappingHandler: (val: parDataTypes) => string
 }
 
-export const BarChart = ({ chartData, id, nums, title }: BarChartProps) => {
+export const BarChart = ({
+  chartData,
+  id,
+  nums,
+  title,
+  labelMappingHandler,
+}: BarChartProps) => {
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: 'center' }}>Bar Chart</h2>
       <Bar
         data={{
           labels: chartData
-            .map((data) => data.createdAt.split('T')[0])
+            .map(labelMappingHandler)
             .filter((value, index, array) => array.indexOf(value) === index),
           datasets: [
             {
