@@ -2,6 +2,7 @@ import Header from './components/UI/Header/Header'
 import Stats from './components/Stats/Stats'
 import Charts from './components/Charts/Charts'
 
+import Admin from './components/Admin/Admin'
 import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
@@ -14,6 +15,15 @@ function App() {
       <DataContextProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/admin"
+            element={
+              <>
+                <Header />
+                <Admin />
+              </>
+            }
+          />
           <Route
             path="/participants"
             element={

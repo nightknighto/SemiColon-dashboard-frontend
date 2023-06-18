@@ -40,6 +40,9 @@ const DesktopNav = () => {
       </Link>
       <ul>
         <li>
+          <Link to="/admin">Admin dashboard</Link>
+        </li>
+        <li>
           <Link to="/stats">Stats</Link>
         </li>
         <li>
