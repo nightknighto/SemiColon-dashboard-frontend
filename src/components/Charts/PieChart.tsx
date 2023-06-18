@@ -22,11 +22,16 @@ const PieChart = ({
               data: nums,
               backgroundColor: [
                 '#4c4caa',
-                '#4c4caa',
                 '#ecf0f1',
                 '#50AF95',
                 '#f3ba2f',
                 '#2a71d0',
+                '#e74c3c',
+                '#8e44ad',
+                '#27ae60',
+                '#f39c12',
+                '#d35400',
+                '#7f8c8d'
               ],
               borderColor: 'black',
               borderWidth: 2,
