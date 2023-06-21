@@ -19,10 +19,22 @@ html, body {
     width: 50%;
     height: 100%;
     background-color: #F3F3ED;
+
+    margin-right: 12px; 
+    position: relative; 
+    z-index : 2;
+
+
     margin-right: 12px; 
     position: relative; 
     z-index : 2;
    
+
+    margin-right: 12px; /* Add margin to the right */
+    position: relative; /* Set position to relative */
+    z-index : 2;
+
+
     
     // max-width: 0;
     // z-index : -1;
@@ -50,7 +62,9 @@ html, body {
       }
     }
    
-
+    p {
+      color: red;
+    }
     .form-group {
       display: flex;
       flex-direction: column;
@@ -221,9 +235,17 @@ html, body {
       cursor: pointer;
       transition: all 0.3s ease;
       width: 100%;
+
       text-align: center;
       justify-self: center;
       align-items: center;
+
+
+      text-align: center;
+      justify-self: center;
+      align-items: center;
+
+
       
 
       &.btn-primary {
@@ -234,10 +256,21 @@ html, body {
         margin-right: 16px;
         margin-bottom:10px;
 
+
+
         background-repeat: no-repeat;
         background-position: 12px center;
         background-size:14px;
   
+
+
+        background-image: url('../../assets/lock.png');
+
+        background-repeat: no-repeat;
+        background-position: 12px center;
+        background-size:14px;
+  
+
 
 
         &.formClosure{
@@ -306,12 +339,20 @@ html, body {
     margin-left:100px;
     overflow:hidden;
 
+
+    overflow:hidden;
+
+
     .test-shine {
       display:flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
     }
+
+
+
+
     img {
       max-width: 60%;
       max-height: 670%;
@@ -359,7 +400,15 @@ html, body {
     to {
       position: absolute;
       top: 50%;
+
       left: 44%;
+
+
+      left: 44%;
+
+      left: 45%;
+
+
       transform: translate(-50%, -50%);
     }
   }
@@ -434,7 +483,74 @@ html, body {
 
 
 
+
 @media (max-width:750px) {
+
+@media (max-width: 400px) {
+  .login {
+    flex-direction: column;
+    align-items: center;
+
+    .login-left {
+      width: 50%;
+      margin-right: 0;
+      margin-bottom: 32px;
+      border-bottom-left-radius: 100px;
+      border-bottom-right-radius: 100px;
+      flex:1.6;
+      flex-grow: 42; /* take up more vertical space */
+    }
+
+    .login-right {
+  
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-right img {
+      max-width: 100%;
+      width: auto;
+      height: auto;
+    }
+    .login-left::after{
+      display:none;
+    }
+
+    .test-shine {
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-right:50px;
+    }
+    img{
+      display:flex;
+      flex-direction: column;
+    }
+    .showLoader{
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-right:50px;
+    }
+  }
+
+  .login .btn {
+    margin-bottom: 24px;
+  }
+
+  .login .form-group {
+    margin-bottom: 16px;
+  }
+}
+/* Media query for screens between 768px and 1023px */
+@media  (max-width: 1023px) {
+  html, body {
+    font-family: 'Abel', sans-serif;
+  }
+
   .login {
     flex-direction: column;
     align-items: center;
@@ -501,16 +617,78 @@ html, body {
   }
 
   .login .form-group {
+
     margin-bottom: 16px;
+
+    margin-bottom: 10px;
+
+
   }
 
   .login h2 {
     font-size: 36px;
+
   }
 
   .login-right img {
     max-width: 100%;
     max-height: unset;
+
+
+  }
+
+  .login-right img {
+    max-width: 100%;
+    max-height: unset;
+  }
+
+  // header 
+  .login{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    max-width:auto;
+  }
+  .login .login-left {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .login .login-left .header {
+   font-size:30px;
+   text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left:0px;
+    max-width:auto;
+  }
+  // button primary 
+  .login .btn-primary {
+    background-color: #fff;
+    max-width: 320px;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    max-width:auto;
+
+
+    margin-bottom: 10px;
+  }
+
+  .login .btn.btn-primary {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .login-right img {
+    display:none;
+
+
   }
 }
 
@@ -525,8 +703,71 @@ html, body {
   }
 }
 
+
 @media (max-width: 1100px ) and (min-width: 750px) {
    
+
+
+
+
+@media (max-width: 1100px) {
+  .login {
+    flex-direction: column;
+    align-items: center;
+
+    .login-left {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 32px;
+      border-bottom-left-radius: 100px;
+      border-bottom-right-radius: 100px;
+      flex:1.6;
+      flex-grow: 4.1; /* take up more vertical space */
+    }
+
+    .login-right {
+  
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-right img {
+      max-width: 100%;
+      width: auto;
+      height: auto;
+    }
+    .login-left::after{
+      display:none;
+    }
+
+    .test-shine {
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-right:50px;
+      margin-bottom: 30px;
+    }
+    img{
+      display:flex;
+      flex-direction: column;
+      margin-bottom: 30px;
+      z-index: 2;
+    }
+    .showLoader{
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-right:50px;
+    }
+  }
+}
+
+/* Media query for screens between 1024px and 1279px */
+@media (min-width: 1024px) and (max-width: 1279px) {
+
   .login {
     flex-direction: column;
     align-items: center;
@@ -589,7 +830,66 @@ html, body {
   }
 
   .login .btn {
+
     margin-bottom: 24px;
+
+
+    margin-bottom: 24px;
+  }
+
+  .login .form-group {
+    margin-bottom: 16px;
+  }
+
+  .login h2 {
+    font-size: 36px;
+  }
+
+  .login-right img {
+    max-width: 100%;
+    max-height: unset;
+  }
+}
+
+@media only screen and (min-width: 1100px) and (max-width: 1250px) {
+  .login  .form-group {
+    margin-left:40px;
+  }
+  // header 
+  .login{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .login .login-left {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .login .login-left .header {
+   font-size:30px;
+   text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left:50px
+  }
+  // button primary 
+  .login .btn-primary {
+    background-color: #fff;
+    max-width: 310px;
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-left:50px;
+
+    
+    margin-bottom: 0;
+
   }
 
   .login .form-group {
@@ -648,3 +948,4 @@ html, body {
     max-height: unset;
   }
 }
+

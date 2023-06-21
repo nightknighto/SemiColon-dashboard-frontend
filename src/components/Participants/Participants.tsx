@@ -5,8 +5,18 @@ import DataContext from '../../context/data-context'
 import classes from './Participants.module.css'
 import ParDetails from './ParDetails'
 import { parDataTypes } from '../../interfaces/parDataTypes'
+import { authHeader } from '../../helpers/auth'
+import { useNavigate } from 'react-router-dom'
 
 const Participants = () => {
+  const nav = useNavigate()
+  useEffect(() => {
+    const r = authHeader()
+    if (!r) {
+      nav('/login')
+    }
+  }, [])
+
   const { data, fetchData } = useContext(DataContext)
   const [chosenPar, setChosenPar] = useState<parDataTypes>({
     _id: '',
@@ -21,7 +31,10 @@ const Participants = () => {
     secondPreference: '',
     secondPrefReason: '',
     phone: '',
-    status: '',
+    acceptanceStatus: '',
+    year: '',
+    collegeId: '',
+    emailedStatus: false,
   })
 
   useEffect(() => {
@@ -37,16 +50,34 @@ const Participants = () => {
     }
   }
 
+  const onAcceptHandler = (phone: string) => {
+    const x = phone
+    console.log(x[0])
+    return
+  }
+
+  const onRejectHandler = (phone: string) => {
+    const x = phone
+    console.log(x[0])
+    return
+  }
+
   let output
-  if (data) {
+  if (data.length > 0) {
     output = data[0] && (
       <>
         <AllPars onChoose={onChoose} data={data} />{' '}
-        <ParDetails par={chosenPar} />
+        <ParDetails
+          par={chosenPar}
+          onAcceptHandler={onAcceptHandler}
+          onRejectHandler={onRejectHandler}
+        />
       </>
     )
   } else {
-    output = <h2>No data found</h2>
+    output = (
+      <h2 style={{ marginLeft: 'auto', marginRight: 'auto' }}>No data found</h2>
+    )
   }
 
   return <Card className={classes['par-container']}>{output}</Card>

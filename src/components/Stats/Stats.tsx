@@ -1,31 +1,46 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import Card from '../UI/Card/Card'
 import Track from './Track'
 import DataContext from '../../context/data-context'
+import { useNavigate } from 'react-router-dom'
+import { authHeader } from '../../helpers/auth'
 
 const Stats = ({ tracks }: { tracks: string[] }) => {
+  const nav = useNavigate()
+  useEffect(() => {
+    const r = authHeader()
+    if (!r) {
+      nav('/login')
+    }
+  }, [])
+
   const { data } = useContext(DataContext)
   const tracksStats = []
 
   let output
-  if (data) {
+  let total = 0
+  if (data.length > 0) {
     for (const track of tracks) {
+      const numPars = data.filter((par) => par.firstPreference === track).length
       tracksStats.push({
         name: track,
-        numParticipants: data.filter((par) => par.firstPreference === track)
-          .length,
+        numParticipants: numPars,
       })
+      total = total + numPars
     }
-    output = tracksStats.map((track) => (
+    tracksStats[0].numParticipants = total
+    output = (
       <>
         <h1>Tracks</h1>
-        <Track
-          key={track.name}
-          name={track.name}
-          numParticipants={track.numParticipants}
-        />
+        {tracksStats.map((track) => (
+          <Track
+            key={track.name}
+            name={track.name}
+            numParticipants={track.numParticipants}
+          />
+        ))}
       </>
-    ))
+    )
   } else {
     output = <h2>No data found.</h2>
   }
