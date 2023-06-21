@@ -58,17 +58,17 @@ const Login = () => {
       .then((response) => authLogin(response, navigate))
       .catch((err) => {
         const res = err.response.data.data
-        setShowLoader(false)
+        setClicked(false)
+        setTimeout(() => setShowLoader(false), 200)
         setTimeout(() => {
-          setClicked(false)
-        }, 100)
-        if (res === 'Incorrect password') {
-          passReturned()
-        }
+          if (res === 'Incorrect password') {
+            passReturned()
+          }
 
-        if (res === 'Incorrect phone number') {
-          phoneReturned()
-        }
+          if (res === 'Incorrect phone number') {
+            phoneReturned()
+          }
+        }, 100)
       })
   }
 
@@ -114,6 +114,7 @@ const Login = () => {
               />
             </div>
           </div>
+          {phoneHasError && <p>Phone is incorrect</p>}
           <div className={passStyles}>
             <label htmlFor="password">Password</label>
             <input
@@ -125,6 +126,7 @@ const Login = () => {
               onBlur={passBlurHandler}
             />
           </div>
+          {passHasError && <p>Password is incorrect</p>}
           <div style={{ justifyContent: 'space-between' }}>
             <div className={`form-group ${clicked ? 'formClosure' : ''}`}>
               <div className="remember-me">
