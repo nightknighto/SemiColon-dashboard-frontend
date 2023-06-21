@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import './Login.scss'
 import ReactLogo from '../../assets/Landing_black.png'
 import BarLoader from 'react-spinners/BarLoader'
@@ -7,32 +7,38 @@ import { useNavigate } from 'react-router-dom'
 import classes from './Failed.module.css'
 import axios from 'axios'
 import { authLogin } from '../../helpers/auth'
+import useInput from '../../hooks/use-input'
 
 const Login = () => {
   const [clicked, setClicked] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
-  const [phoneIsTouched, setPhoneIsTouched] = useState(false)
-  const [passIsTouched, setPassIsTouched] = useState(false)
-
-  const phoneInputRef = useRef<HTMLInputElement>(null)
-  const passwordInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
 
-  const phoneIsValid = phoneInputRef.current?.value.trim().length === 11
+  const {
+    value: enteredPhone,
+    isValid: phoneIsValid,
+    hasError: phoneHasError,
+    valueChangeHandler: phoneChangeHandler,
+    inputBlurHandler: phoneBlurHandler,
+    returnWrong: phoneReturned,
+  } = useInput((value) => value.trim().length === 11)
+
+  const {
+    value: enteredPass,
+    isValid: passIsValid,
+    hasError: passHasError,
+    valueChangeHandler: passChangeHandler,
+    inputBlurHandler: passBlurHandler,
+    returnWrong: passReturned,
+  } = useInput((value) => value.trim().length > 0)
+
   let phoneStyles = `phone-input`
-  if (!phoneIsValid && phoneIsTouched) {
+  if (phoneHasError) {
     phoneStyles = `phone-input ${classes['failed-input']}`
   }
 
-  let passIsValid: boolean
-  if (passwordInputRef.current?.value) {
-    passIsValid = passwordInputRef.current?.value.trim().length > 0
-  } else {
-    passIsValid = false
-  }
-
   let passStyles = `form-group ${clicked ? 'formClosure' : ''}`
-  if (!passIsValid && passIsTouched) {
+  if (passHasError) {
     passStyles = `form-group ${clicked ? 'formClosure' : ''} ${
       classes['failed-input']
     }`
@@ -41,8 +47,8 @@ const Login = () => {
   const post_Req = () => {
     // 404 , 202
     const body = {
-      phone: phoneInputRef.current?.value.trim(),
-      password: passwordInputRef.current?.value.trim(),
+      phone: enteredPhone.trim(),
+      password: enteredPass.trim(),
     }
     axios
       .post(
@@ -50,15 +56,30 @@ const Login = () => {
         body
       )
       .then((response) => authLogin(response, navigate))
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        const res = err.response.data.data
+        setClicked(false)
+        setTimeout(() => setShowLoader(false), 200)
+        setTimeout(() => {
+          if (res === 'Incorrect password') {
+            passReturned()
+          }
+
+          if (res === 'Incorrect phone number') {
+            phoneReturned()
+          }
+        }, 100)
+      })
   }
+
+  const formIsValid = phoneIsValid && passIsValid
 
   const handleClick = (event: React.SyntheticEvent) => {
     event.preventDefault()
-    if (!phoneIsValid) {
-      setPhoneIsTouched(true)
+    if (!formIsValid) {
       return
     }
+
     setClicked(true)
     setTimeout(() => {
       setShowLoader(true)
@@ -66,26 +87,6 @@ const Login = () => {
     setTimeout(() => {
       post_Req()
     }, 100)
-  }
-
-  const onPhoneChangeHandler = () => {
-    setPhoneIsTouched(false)
-  }
-
-  const onPhoneLoseFocus = () => {
-    if (!phoneIsValid) {
-      setPhoneIsTouched(true)
-    }
-  }
-
-  const onPassChangeHandler = () => {
-    setPassIsTouched(false)
-  }
-
-  const onPassLoseFocus = () => {
-    if (!passIsValid) {
-      setPassIsTouched(true)
-    }
   }
 
   return (
@@ -107,23 +108,25 @@ const Login = () => {
                 type="tel"
                 id="phone"
                 name="phone"
-                ref={phoneInputRef}
-                onChange={onPhoneChangeHandler}
-                onBlur={onPhoneLoseFocus}
+                value={enteredPhone}
+                onChange={phoneChangeHandler}
+                onBlur={phoneBlurHandler}
               />
             </div>
           </div>
+          {phoneHasError && <p>Phone is incorrect</p>}
           <div className={passStyles}>
             <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
               name="password"
-              ref={passwordInputRef}
-              onChange={onPassChangeHandler}
-              onBlur={onPassLoseFocus}
+              value={enteredPass}
+              onChange={passChangeHandler}
+              onBlur={passBlurHandler}
             />
           </div>
+          {passHasError && <p>Password is incorrect</p>}
           <div style={{ justifyContent: 'space-between' }}>
             <div className={`form-group ${clicked ? 'formClosure' : ''}`}>
               <div className="remember-me">
@@ -201,8 +204,6 @@ const Login = () => {
               }}
             >
               <BarLoader color="#e4a539" height={3} width={300} />
-
-              <BarLoader color="#e4a539" height={3} width={500} />
             </div>
           )}
         </div>
