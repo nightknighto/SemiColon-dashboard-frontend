@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import DataContext from './data-context'
 import { parDataTypes } from '../interfaces/parDataTypes'
-import authHeader from '../helpers/authHeader'
+import { authHeader } from '../helpers/auth'
 import axios from 'axios'
 
 const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -19,12 +19,10 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
           { headers: hdrs }
         )
         const participants = res.data
-        if (participants.status === 'failure') {
-          throw new Error('You are not logged in')
+        if (res.status !== 200) {
+          throw new Error('Could not connect to database')
         }
         return participants.data
-      } else {
-        throw new Error('You are not logged in')
       }
     } catch (err: unknown) {
       const { message } = err as { message: string }
