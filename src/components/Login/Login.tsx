@@ -5,6 +5,7 @@ import BarLoader from 'react-spinners/BarLoader'
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import classes from './Failed.module.css'
+import axios from 'axios'
 
 const Login = () => {
   const [clicked, setClicked] = useState(false)
@@ -42,24 +43,37 @@ const Login = () => {
       phone: phoneInputRef.current?.value.trim(),
       password: passwordInputRef.current?.value.trim(),
     }
-    //https://semicolon-registration-backend.onrender.com/auth/login
-    fetch('https://semicolon-registration-backend.onrender.com/auth/login', {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    })
+    // //https://semicolon-registration-backend.onrender.com/auth/login
+    // fetch('https://semicolon-registration-backend.onrender.com/auth/login', {
+    //   method: 'post',
+    //   body: JSON.stringify(body),
+    //   headers: {
+    //     'Content-type': 'application/json; charset=UTF-8',
+    //   },
+    // })
+    //   .then((response) => {
+    //     if (response.status === 401) {
+    //       throw new Error('Page not found')
+    //     }
+    //     if (response.status === 200) {
+    //       // throw new Error('Accepted')
+    //       navigate('/stats')
+    //       // return redirect('/stats')
+    //     }
+    //     return response.json()
+    //   })
+    //   .catch((err) => console.log(err))
+    axios
+      .post(
+        'https://semicolon-registration-backend.onrender.com/auth/login',
+        body
+      )
       .then((response) => {
-        if (response.status === 401) {
-          throw new Error('Page not found')
+        if (response.data.status == 'success') {
+          localStorage.setItem('user', JSON.stringify(response.data.data))
+          navigate('stats')
         }
-        if (response.status === 200) {
-          // throw new Error('Accepted')
-          navigate('/stats')
-          // return redirect('/stats')
-        }
-        return response.json()
+        return response
       })
       .catch((err) => console.log(err))
   }
