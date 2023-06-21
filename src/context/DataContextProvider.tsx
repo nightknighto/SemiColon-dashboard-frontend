@@ -12,19 +12,20 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
       // const res = await fetch(
       //   'https://semicolon-registration-backend.onrender.com/participants/getAll'
       // )
-      if (!authHeader()) {
+      const hdrs = authHeader()
+      if (hdrs) {
+        const res = await axios.get(
+          'https://semicolon-registration-backend.onrender.com/participants/getAll',
+          { headers: hdrs }
+        )
+        const participants = res.data
+        if (participants.status === 'failure') {
+          throw new Error('You are not logged in')
+        }
+        return participants.data
+      } else {
         throw new Error('You are not logged in')
       }
-      const res = await axios.get(
-        'https://semicolon-registration-backend.onrender.com/participants/getAll',
-        { headers: authHeader() }
-      )
-
-      const participants = res.data
-      if (participants.status === 'failure') {
-        throw new Error('You are not logged in')
-      }
-      return participants.data
     } catch (err: unknown) {
       const { message } = err as { message: string }
       console.log(message)
