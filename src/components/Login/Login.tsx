@@ -50,7 +50,14 @@ const Login = () => {
         body
       )
       .then((response) => authLogin(response, navigate))
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        const res = err.response.data.data
+        if (res === 'Incorrect password') {
+          setShowLoader(false)
+          setClicked(false)
+          alert('Password is incorrect')
+        }
+      })
   }
 
   const handleClick = (event: React.SyntheticEvent) => {
@@ -201,8 +208,6 @@ const Login = () => {
               }}
             >
               <BarLoader color="#e4a539" height={3} width={300} />
-
-              <BarLoader color="#e4a539" height={3} width={500} />
             </div>
           )}
         </div>
