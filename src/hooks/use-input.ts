@@ -1,27 +1,37 @@
 import { useReducer, FormEvent } from 'react'
 
-const initialInputState = {
-  value: '',
-  isTouched: false,
-}
-
 interface stateType {
   value: string
   isTouched: boolean
+  returnedWrong?: boolean
 }
 
 interface actionType {
   value?: string
-  type: 'INPUT' | 'BLUR' | 'RESET'
+  type: 'INPUT' | 'BLUR' | 'RESET' | 'WRONG'
+}
+
+const initialInputState: stateType = {
+  value: '',
+  isTouched: false,
+  returnedWrong: false,
 }
 
 const inputStateReducer = (state: stateType, action: actionType) => {
   if (action.type === 'INPUT' && action.value) {
-    return { value: action.value, isTouched: state.isTouched }
+    return {
+      value: action.value,
+      isTouched: state.isTouched,
+      returnedWrong: false,
+    }
   }
 
   if (action.type === 'BLUR') {
     return { value: state.value, isTouched: true }
+  }
+
+  if (action.type === 'WRONG') {
+    return { value: state.value, isTouched: true, returnedWrong: true }
   }
 
   if (action.type === 'RESET') {
@@ -38,7 +48,8 @@ const useInput = (validateValue: (val: string) => boolean) => {
   )
 
   const valueIsValid = validateValue(inputState.value)
-  const hasError = !valueIsValid && inputState.isTouched
+  const hasError =
+    inputState.returnedWrong || (!valueIsValid && inputState.isTouched)
 
   const valueChangeHandler = (event: FormEvent<HTMLInputElement>) => {
     inputStateDispatch({ type: 'INPUT', value: event.currentTarget.value })
@@ -52,6 +63,10 @@ const useInput = (validateValue: (val: string) => boolean) => {
     inputStateDispatch({ type: 'RESET' })
   }
 
+  const returnWrong = () => {
+    inputStateDispatch({ type: 'WRONG' })
+  }
+
   return {
     value: inputState.value,
     isValid: valueIsValid,
@@ -59,6 +74,7 @@ const useInput = (validateValue: (val: string) => boolean) => {
     valueChangeHandler,
     inputBlurHandler,
     reset,
+    returnWrong,
   }
 }
 

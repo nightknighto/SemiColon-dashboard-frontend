@@ -20,6 +20,7 @@ const Login = () => {
     hasError: phoneHasError,
     valueChangeHandler: phoneChangeHandler,
     inputBlurHandler: phoneBlurHandler,
+    returnWrong: phoneReturned,
   } = useInput((value) => value.trim().length === 11)
 
   const {
@@ -28,6 +29,7 @@ const Login = () => {
     hasError: passHasError,
     valueChangeHandler: passChangeHandler,
     inputBlurHandler: passBlurHandler,
+    returnWrong: passReturned,
   } = useInput((value) => value.trim().length > 0)
 
   let phoneStyles = `phone-input`
@@ -56,10 +58,16 @@ const Login = () => {
       .then((response) => authLogin(response, navigate))
       .catch((err) => {
         const res = err.response.data.data
-        if (res === 'Incorrect password') {
-          setShowLoader(false)
+        setShowLoader(false)
+        setTimeout(() => {
           setClicked(false)
-          alert('Password is incorrect')
+        }, 100)
+        if (res === 'Incorrect password') {
+          passReturned()
+        }
+
+        if (res === 'Incorrect phone number') {
+          phoneReturned()
         }
       })
   }
