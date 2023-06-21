@@ -4,6 +4,7 @@ import { tracks } from '../../interfaces/tracks'
 import DropDown from '../UI/DropDown/DropDown'
 import classes from './AllPars.module.css'
 import ParItem from './ParItem'
+import InputBar from '../UI/InputBar/InputBar'
 
 const AllPars = ({
   data,
@@ -24,9 +25,20 @@ const AllPars = ({
     }
   }
 
+  const onSearchHandler = (phoneInput: string) => {
+    setFilteredData(
+      filteredData.filter((par) => par.phone.includes(phoneInput))
+    )
+  }
+
   if (data[0]) {
     output = (
       <div>
+        <InputBar
+          type="number"
+          placeholder="search by phone"
+          onChange={onSearchHandler}
+        />
         <DropDown choices={tracks} onChange={onTrackChangeHandler} />
         {filteredData.map((item) => (
           <ParItem
