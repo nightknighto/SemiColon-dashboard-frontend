@@ -1,21 +1,29 @@
 import { useState } from 'react'
 import DataContext from './data-context'
 import { parDataTypes } from '../interfaces/parDataTypes'
+import { authHeader } from '../helpers/auth'
+import axios from 'axios'
 
 const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [data, setData] = useState<parDataTypes[]>([])
   const fetchParticipants = async () => {
     try {
       //'https://semicolon-registration-backend.onrender.com/participants/getAll',
-      const res = await fetch(
-        'https://semicolon-registration-backend.onrender.com/participants/getAll'
-      )
-
-      const participants = await res.json()
-      if (participants.status === 'failure') {
-        throw new Error('You are not logged in')
+      // const res = await fetch(
+      //   'https://semicolon-registration-backend.onrender.com/participants/getAll'
+      // )
+      const hdrs = authHeader()
+      if (hdrs) {
+        const res = await axios.get(
+          'https://semicolon-registration-backend.onrender.com/participants/getAll',
+          { headers: hdrs }
+        )
+        const participants = res.data
+        if (res.status !== 200) {
+          throw new Error('Could not connect to database')
+        }
+        return participants.data
       }
-      return participants.data
     } catch (err: unknown) {
       const { message } = err as { message: string }
       console.log(message)

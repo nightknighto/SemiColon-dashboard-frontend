@@ -5,8 +5,18 @@ import DataContext from '../../context/data-context'
 import classes from './Participants.module.css'
 import ParDetails from './ParDetails'
 import { parDataTypes } from '../../interfaces/parDataTypes'
+import { authHeader } from '../../helpers/auth'
+import { useNavigate } from 'react-router-dom'
 
 const Participants = () => {
+  const nav = useNavigate()
+  useEffect(() => {
+    const r = authHeader()
+    if (!r) {
+      nav('/login')
+    }
+  }, [])
+
   const { data, fetchData } = useContext(DataContext)
   const [chosenPar, setChosenPar] = useState<parDataTypes>({
     _id: '',
