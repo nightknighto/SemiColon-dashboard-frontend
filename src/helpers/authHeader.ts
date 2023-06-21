@@ -5,7 +5,9 @@ export default function authHeader() {
     if (out.token) {
       return { 'x-access-token': out.token }
     }
+    // remove when actual jwt is implemented
+    return out
   }
 
-  return {}
+  return null
 }

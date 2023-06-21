@@ -12,7 +12,9 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
       // const res = await fetch(
       //   'https://semicolon-registration-backend.onrender.com/participants/getAll'
       // )
-
+      if (!authHeader()) {
+        throw new Error('You are not logged in')
+      }
       const res = await axios.get(
         'https://semicolon-registration-backend.onrender.com/participants/getAll',
         { headers: authHeader() }
