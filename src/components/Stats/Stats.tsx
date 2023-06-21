@@ -3,7 +3,7 @@ import Card from '../UI/Card/Card'
 import Track from './Track'
 import DataContext from '../../context/data-context'
 import { useNavigate } from 'react-router-dom'
-import authHeader from '../../helpers/authHeader'
+import { authHeader } from '../../helpers/auth'
 
 const Stats = ({ tracks }: { tracks: string[] }) => {
   const nav = useNavigate()

@@ -5,7 +5,7 @@ import DataContext from '../../context/data-context'
 import classes from './Participants.module.css'
 import ParDetails from './ParDetails'
 import { parDataTypes } from '../../interfaces/parDataTypes'
-import authHeader from '../../helpers/authHeader'
+import { authHeader } from '../../helpers/auth'
 import { useNavigate } from 'react-router-dom'
 
 const Participants = () => {
