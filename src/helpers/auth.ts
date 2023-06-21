@@ -6,7 +6,7 @@ export function authHeader() {
   if (user) {
     const out = JSON.parse(user)
     if (out.token) {
-      return { 'x-access-token': out.token }
+      return { 'authorization': "Bearer " + out.token }
     }
   }
   return null
