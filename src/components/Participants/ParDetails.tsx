@@ -70,10 +70,34 @@ const ParDetails = ({
       <hr className={classes.line}></hr>
       <div className={classes.buttons}>
         <Button
+          onClick={onRejectHandler.bind(null, par.phone)}
+          className={classes.rejectBtn}
+        >
+          Filter
+        </Button>
+        <Button
+          onClick={onRejectHandler.bind(null, par.phone)}
+          className={classes.passiveBtn}
+        >
+          Emailed
+        </Button>
+        <Button
+          onClick={onRejectHandler.bind(null, par.phone)}
+          className={classes.passiveBtn}
+        >
+          Scheduled
+        </Button>
+        <Button
           onClick={onAcceptHandler.bind(null, par.phone)}
           className={classes.acceptBtn}
         >
           Accept
+        </Button>
+        <Button
+          onClick={onRejectHandler.bind(null, par.phone)}
+          className={classes.secondPrefBtn}
+        >
+          2nd Pref
         </Button>
         <Button
           onClick={onRejectHandler.bind(null, par.phone)}
