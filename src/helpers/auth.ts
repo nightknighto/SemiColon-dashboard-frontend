@@ -19,3 +19,7 @@ export function authLogin(response: res, navigate: NavigateFunction) {
   }
   return response
 }
+
+export function onLogout() {
+  localStorage.removeItem('user')
+}
