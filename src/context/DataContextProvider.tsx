@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import DataContext from './data-context'
-import { parDataTypes } from '../interfaces/parDataTypes'
+import { Participant } from '../types/Participant'
 import { authHeader } from '../helpers/auth'
 import axios from 'axios'
 
 const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [data, setData] = useState<parDataTypes[]>([])
+  const [data, setData] = useState<Participant[]>([])
   const fetchParticipants = async () => {
     try {
       //'https://semicolon-registration-backend.onrender.com/participants/getAll',

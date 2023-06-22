@@ -14,9 +14,9 @@ import { useContext, useEffect, useState } from 'react'
 import PieChart from './PieChart'
 import DropDown from '../UI/DropDown/DropDown'
 import { BarChart } from './BarChart'
-import { parDataTypes } from '../../interfaces/parDataTypes'
+import { Participant } from '../../types/Participant'
 import DataContext from '../../context/data-context'
-import { tracks } from '../../interfaces/tracks'
+import { tracks } from '../../types/tracks'
 
 Chart.register([
   CategoryScale,
@@ -37,8 +37,8 @@ interface ChartItemProps {
   pieNums?: number[]
   pieLabels?: string[]
   pieTitle?: string
-  barNumbersHandler?: (filteredData: parDataTypes[]) => number[]
-  labelMappingHandler?: (data: parDataTypes) => string
+  barNumbersHandler?: (filteredData: Participant[]) => number[]
+  labelMappingHandler?: (data: Participant) => string
 }
 
 const ChartItem = ({
@@ -51,7 +51,7 @@ const ChartItem = ({
   labelMappingHandler,
 }: ChartItemProps) => {
   const { data } = useContext(DataContext)
-  const [filteredData, setFilteredData] = useState<parDataTypes[]>([])
+  const [filteredData, setFilteredData] = useState<Participant[]>([])
   const [barNumbers, setBarNumbers] = useState<number[]>([])
   const [barTitle, setBarTitle] = useState<string>('All')
 

@@ -4,9 +4,10 @@ import AllPars from './AllPars'
 import DataContext from '../../context/data-context'
 import classes from './Participants.module.css'
 import ParDetails from './ParDetails'
-import { parDataTypes } from '../../interfaces/parDataTypes'
+import { Participant, StatusEnum } from '../../types/Participant'
 import { authHeader } from '../../helpers/auth'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Participants = () => {
   const nav = useNavigate()
@@ -18,7 +19,7 @@ const Participants = () => {
   }, [])
 
   const { data, fetchData } = useContext(DataContext)
-  const [chosenPar, setChosenPar] = useState<parDataTypes>({
+  const [chosenPar, setChosenPar] = useState<Participant>({
     _id: '',
     createdAt: '',
     email: '',
@@ -50,16 +51,28 @@ const Participants = () => {
     }
   }
 
-  const onAcceptHandler = (phone: string) => {
-    const x = phone
-    console.log(x[0])
-    return
-  }
-
-  const onRejectHandler = (phone: string) => {
-    const x = phone
-    console.log(x[0])
-    return
+  const statusChangeHandler = async (phone: string, status: StatusEnum) => {
+    try {
+      const headers = authHeader()
+      if (headers) {
+        await axios.patch(
+          'https://semicolon-registration-backend.onrender.com/participants/status',
+          {
+            phone,
+            status,
+          },
+          {
+            headers,
+          }
+        )
+        fetchData()
+        setChosenPar({ ...chosenPar, acceptanceStatus: status })
+      } else {
+        nav('/login')
+      }
+    } catch (err) {
+      alert(`Error occured: ${err}`)
+    }
   }
 
   let output
@@ -67,11 +80,7 @@ const Participants = () => {
     output = data[0] && (
       <>
         <AllPars onChoose={onChoose} data={data} />{' '}
-        <ParDetails
-          par={chosenPar}
-          onAcceptHandler={onAcceptHandler}
-          onRejectHandler={onRejectHandler}
-        />
+        <ParDetails par={chosenPar} statusChangeHandler={statusChangeHandler} />
       </>
     )
   } else {

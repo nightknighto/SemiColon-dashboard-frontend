@@ -1,12 +1,12 @@
 import { NavigateFunction } from 'react-router-dom'
-import { res } from '../interfaces/res'
+import { res } from '../types/res'
 
 export function authHeader() {
   const user = localStorage.getItem('user')
   if (user) {
     const out = JSON.parse(user)
     if (out.token) {
-      return { 'authorization': "Bearer " + out.token }
+      return { authorization: 'Bearer ' + out.token }
     }
   }
   return null

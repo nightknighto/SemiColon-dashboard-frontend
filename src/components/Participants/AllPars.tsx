@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
-import { parDataTypes } from '../../interfaces/parDataTypes'
-import { tracks } from '../../interfaces/tracks'
+import { useEffect, useState } from 'react'
+import { Participant } from '../../types/Participant'
+import { tracks } from '../../types/tracks'
 import DropDown from '../UI/DropDown/DropDown'
 import classes from './AllPars.module.css'
 import ParItem from './ParItem'
@@ -10,10 +10,10 @@ const AllPars = ({
   data,
   onChoose,
 }: {
-  data: parDataTypes[]
+  data: Participant[]
   onChoose: (id: string) => void
 }) => {
-  const [filteredData, setFilteredData] = useState<parDataTypes[]>(data)
+  const [filteredData, setFilteredData] = useState<Participant[]>(data)
   const [chosenTrack, setChosenTrack] = useState<string>('All')
   const [searchPhone, setSearchPhone] = useState<string>('')
 
