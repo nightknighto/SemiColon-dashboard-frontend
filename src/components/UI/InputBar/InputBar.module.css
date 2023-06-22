@@ -1,0 +1,25 @@
+.in-bar {
+  margin: 1rem;
+  height: 2rem;
+  width: 80%;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+
+.in-bar:focus {
+  outline: none;
+  border-color: blue;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.in-bar::-webkit-outer-spin-button,
+.in-bar::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.in-bar[type='number'] {
+  -moz-appearance: textfield;
+}
