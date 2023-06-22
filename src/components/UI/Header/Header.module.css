@@ -3,6 +3,7 @@ header {
   top: -1rem;
   left: 0;
   width: 100%;
+  z-index: 100;
 }
 
 .main-nav {
@@ -54,4 +55,35 @@ header {
   border-radius: 8px;
   box-shadow: 1px 1px 1px 1px black;
   border: none;
+}
+
+.usrCircle {
+  scale: 2.3;
+}
+
+.user-d {
+  display: flex;
+  width: 3rem;
+  justify-content: space-between;
+  margin: 0 1rem;
+  cursor: pointer;
+  height: 100%;
+  align-items: center;
+}
+
+.logout-dropdown {
+  position: relative;
+  background-color: #0f0f14;
+  display: inline-block;
+}
+
+.logout-dropdown li {
+  position: absolute;
+  background-color: #0f0f14;
+  padding: 0.5rem;
+  top: 1rem;
+}
+
+.logout-dropdown a {
+  color: red;
 }
