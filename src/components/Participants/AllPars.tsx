@@ -15,7 +15,7 @@ const AllPars = ({
 }) => {
   const [filteredData, setFilteredData] = useState<Participant[]>(data)
   const [chosenTrack, setChosenTrack] = useState<string>('All')
-  const [searchPhone, setSearchPhone] = useState<string>('')
+  const [search, setSearch] = useState<string>('')
 
   let output
 
@@ -33,28 +33,38 @@ const AllPars = ({
     } else {
       setChosenTrack(track)
     }
-    setSearchPhone('')
+    setSearch('')
   }
 
-  const onSearchHandler = (phoneInput: string) => {
-    setSearchPhone(phoneInput)
-    setFilteredData(
-      data.filter(
-        (par) =>
-          par.phone.includes(phoneInput) &&
-          (chosenTrack === 'All' || par.firstPreference === chosenTrack)
+  const onSearchHandler = (Input: string) => {
+    setSearch(Input)
+    if (!isNaN(parseInt(Input))) {
+      setFilteredData(
+        data.filter(
+          (par) =>
+            par.phone.includes(Input) &&
+            (chosenTrack === 'All' || par.firstPreference === chosenTrack)
+        )
       )
-    )
+    } else {
+      setFilteredData(
+        data.filter(
+          (par) =>
+            par.name.toLowerCase().includes(Input.toLowerCase()) &&
+            (chosenTrack === 'All' || par.firstPreference === chosenTrack)
+        )
+      )
+    }
   }
 
   if (data[0]) {
     output = (
       <div>
         <InputBar
-          type="number"
-          placeholder="search by phone"
+          type="text"
+          placeholder="Phone or Name"
           onChange={onSearchHandler}
-          value={searchPhone}
+          value={search}
         />
         <DropDown choices={tracks} onChange={onTrackChangeHandler} />
         {filteredData.map((item) => (
