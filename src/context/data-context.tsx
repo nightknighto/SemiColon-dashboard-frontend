@@ -1,14 +1,16 @@
 import React from 'react'
-import { parDataTypes } from '../interfaces/parDataTypes'
+import { Participant } from '../types/Participant'
 
 interface DataCtxTypes {
-  data: parDataTypes[]
+  data: Participant[]
   fetchData: () => Promise<void>
 }
 
 const defaultData: DataCtxTypes = {
   data: [],
-  fetchData: async () => {return},
+  fetchData: async () => {
+    return
+  },
 }
 
 const DataContext = React.createContext<DataCtxTypes>(defaultData)

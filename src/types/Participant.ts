@@ -1,4 +1,4 @@
-export interface parDataTypes {
+export interface Participant {
   createdAt: string
   email: string
   firstPrefKnowledge: string
@@ -12,8 +12,18 @@ export interface parDataTypes {
   updatedAt?: string
   __v?: number
   _id: string
-  acceptanceStatus: string
+  acceptanceStatus: StatusEnum | ''
   year: string
   collegeId: string
   emailedStatus: boolean
+}
+
+export enum StatusEnum {
+  ACCEPTED = 'accepted',
+  REJECTED = 'rejected',
+  PENDING = 'pending',
+  EMAILED = 'emailed',
+  FILTERED = 'filtered',
+  SCHEDULED = 'scheduled',
+  SECONDPREF = 'secondpref',
 }

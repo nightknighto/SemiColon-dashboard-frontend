@@ -1,15 +1,13 @@
-import { parDataTypes } from '../../interfaces/parDataTypes'
+import { Participant, StatusEnum } from '../../types/Participant'
 import Button from '../UI/Button/Button'
 import classes from './ParDetails.module.css'
 
 const ParDetails = ({
   par,
-  onAcceptHandler,
-  onRejectHandler,
+  statusChangeHandler,
 }: {
-  par: parDataTypes
-  onAcceptHandler: (phone: string) => void
-  onRejectHandler: (phone: string) => void
+  par: Participant
+  statusChangeHandler: (phone: string, status: StatusEnum) => void
 }) => {
   return (
     <div className={classes.parContainer}>
@@ -70,37 +68,37 @@ const ParDetails = ({
       <hr className={classes.line}></hr>
       <div className={classes.buttons}>
         <Button
-          onClick={onRejectHandler.bind(null, par.phone)}
+          onClick={() => statusChangeHandler(par.phone, StatusEnum.FILTERED)}
           className={classes.rejectBtn}
         >
           Filter
         </Button>
         <Button
-          onClick={onRejectHandler.bind(null, par.phone)}
+          onClick={() => statusChangeHandler(par.phone, StatusEnum.EMAILED)}
           className={classes.passiveBtn}
         >
           Emailed
         </Button>
         <Button
-          onClick={onRejectHandler.bind(null, par.phone)}
+          onClick={() => statusChangeHandler(par.phone, StatusEnum.SCHEDULED)}
           className={classes.passiveBtn}
         >
           Scheduled
         </Button>
         <Button
-          onClick={onAcceptHandler.bind(null, par.phone)}
+          onClick={() => statusChangeHandler(par.phone, StatusEnum.ACCEPTED)}
           className={classes.acceptBtn}
         >
           Accept
         </Button>
         <Button
-          onClick={onRejectHandler.bind(null, par.phone)}
+          onClick={() => statusChangeHandler(par.phone, StatusEnum.SECONDPREF)}
           className={classes.secondPrefBtn}
         >
           2nd Pref
         </Button>
         <Button
-          onClick={onRejectHandler.bind(null, par.phone)}
+          onClick={() => statusChangeHandler(par.phone, StatusEnum.REJECTED)}
           className={classes.rejectBtn}
         >
           Reject

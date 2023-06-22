@@ -3,8 +3,8 @@ import Card from '../UI/Card/Card'
 import ChartItem from './ChartItem'
 import classes from './Charts.module.css'
 import DataContext from '../../context/data-context'
-import { tracks } from '../../interfaces/tracks'
-import { parDataTypes } from '../../interfaces/parDataTypes'
+import { tracks } from '../../types/tracks'
+import { Participant } from '../../types/Participant'
 
 const Charts = () => {
   const { data, fetchData } = useContext(DataContext)
@@ -13,10 +13,10 @@ const Charts = () => {
     fetchData()
   }, [])
 
-  const datesMappingHandler = (val: parDataTypes) => val.createdAt.split('T')[0]
-  const yearMappingHandler = (val: parDataTypes) => val.year
+  const datesMappingHandler = (val: Participant) => val.createdAt.split('T')[0]
+  const yearMappingHandler = (val: Participant) => val.year
 
-  const datesNumbersHandler = (filteredData: parDataTypes[]) => {
+  const datesNumbersHandler = (filteredData: Participant[]) => {
     const dateNums: { createdAt: string; num: number }[] = []
     for (const par of filteredData) {
       const createdAt = dateNums.map((val) => val.createdAt)
@@ -30,7 +30,7 @@ const Charts = () => {
     return dateNums.map((val) => val.num)
   }
 
-  const yearNumbersHandler = (filteredData: parDataTypes[]) => {
+  const yearNumbersHandler = (filteredData: Participant[]) => {
     const parYears: { year: string; num: number }[] = []
     for (const par of filteredData) {
       const years = parYears.map((val) => val.year)

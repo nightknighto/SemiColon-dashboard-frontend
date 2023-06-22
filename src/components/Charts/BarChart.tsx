@@ -1,12 +1,12 @@
 import { Bar } from 'react-chartjs-2'
-import { parDataTypes } from '../../interfaces/parDataTypes'
+import { Participant } from '../../types/Participant'
 
 interface BarChartProps {
-  chartData: parDataTypes[]
+  chartData: Participant[]
   id?: string
   nums: number[]
   title: string
-  labelMappingHandler: (val: parDataTypes) => string
+  labelMappingHandler: (val: Participant) => string
 }
 
 export const BarChart = ({

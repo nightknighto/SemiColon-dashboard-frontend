@@ -6,7 +6,7 @@ import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { tracks } from './interfaces/tracks'
+import { tracks } from './types/tracks'
 
 const router = createBrowserRouter(
   [
