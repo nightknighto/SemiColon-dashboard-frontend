@@ -24,10 +24,7 @@ const Admin = () => {
         if (hdrs) {
             fetch("https://semicolon-registration-backend.onrender.com/user/getAll", {headers: hdrs})
             .then(data => data.json())
-            .then(data => {
-                setUserData(data);
-                console.log(data);
-            });
+            .then(data => setUserData(data.data));
         } else {
             nav("/login")
         }
@@ -45,7 +42,7 @@ const Admin = () => {
     return (
         <Card className={classes['admin-container']}>
             <AllUsers data={userData} onChoose={onChoose}/>
-            <UserDetails />
+            <UserDetails user={chosenUser}/>
         </Card>
     );
 }

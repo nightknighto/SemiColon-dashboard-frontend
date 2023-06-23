@@ -6,7 +6,6 @@ const AllUsers = ({ data, onChoose } : {data: User[], onChoose: (id: string) => 
 
     let output;
     if (data[0]) {
-        console.log("here");
         output = (
           <div>
             {data.map((item) => (
