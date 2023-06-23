@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Participant } from '../../types/Participant'
+import { Participant, StatusEnum } from '../../types/Participant'
 import { tracks } from '../../types/tracks'
-import { states } from '../../types/participants-states'
 import DropDown from '../UI/DropDown/DropDown'
 import classes from './AllPars.module.css'
 import ParItem from './ParItem'
@@ -88,7 +87,7 @@ const AllPars = ({
             value={search}
           />
           <DropDown choices={tracks} onChange={onTrackChangeHandler} />
-          <DropDown choices={states} onChange={onStateChangeHandler} />
+          <DropDown choices={["All", ...Object.values(StatusEnum)]} onChange={onStateChangeHandler} />
           <p className={classes['total']}>Total: {filteredData.length} Participant</p>
         </div>
         {filteredData.map((item) => (
