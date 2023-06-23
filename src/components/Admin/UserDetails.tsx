@@ -25,41 +25,26 @@ const UserDetails = ({user}: {user: User}) => {
           <hr className={classes.line}></hr>
           <div className={classes.buttons}>
             <Button
-            //   onClick={() => statusChangeHandler(user.phone, StatusEnum.FILTERED)}
-              className={classes.rejectBtn}
-            >
-              Filter
-            </Button>
-            <Button
-            //   onClick={() => statusChangeHandler(user.phone, StatusEnum.EMAILED)}
-              className={classes.passiveBtn}
-            >
-              Emailed
-            </Button>
-            <Button
             //   onClick={() => statusChangeHandler(user.phone, StatusEnum.SCHEDULED)}
-              className={classes.passiveBtn}
-            >
-              Scheduled
-            </Button>
-            <Button
-            //   onClick={() => statusChangeHandler(user.phone, StatusEnum.ACCEPTED)}
               className={classes.acceptBtn}
             >
-              Accept
+              Update
             </Button>
-            <Button
-            //   onClick={() => statusChangeHandler(user.phone, StatusEnum.SECONDPREF)}
-              className={classes.secondPrefBtn}
-            >
-              2nd Pref
-            </Button>
-            <Button
+            {user.active 
+            ? <Button
             //   onClick={() => statusChangeHandler(user.phone, StatusEnum.REJECTED)}
               className={classes.rejectBtn}
             >
-              Reject
+              Deactivate
             </Button>
+            : 
+            <Button
+            //   onClick={() => statusChangeHandler(user.phone, StatusEnum.ACCEPTED)}
+            className={classes.acceptBtn}
+            >
+              Activate
+            </Button>
+            }
           </div>
         </div>
       )
