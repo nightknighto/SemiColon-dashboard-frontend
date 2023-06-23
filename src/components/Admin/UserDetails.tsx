@@ -2,7 +2,7 @@ import { User } from '../../types/User';
 import Button from '../UI/Button/Button';
 import classes from './UserDetails.module.css'
 
-const UserDetails = ({user}: {user: User}) => {
+const UserDetails = ({user, activateUser, deactivateUser}: {user: User, activateUser: (id: string) => void, deactivateUser: (id: string) => void}) => {
     return (
         <div className={classes.parContainer}>
           <div className={classes.details}>
@@ -25,21 +25,21 @@ const UserDetails = ({user}: {user: User}) => {
           <hr className={classes.line}></hr>
           <div className={classes.buttons}>
             <Button
-            //   onClick={() => statusChangeHandler(user.phone, StatusEnum.SCHEDULED)}
+              // onClick={() => statusChangeHandler({...user})}
               className={classes.acceptBtn}
             >
               Update
             </Button>
             {user.active 
             ? <Button
-            //   onClick={() => statusChangeHandler(user.phone, StatusEnum.REJECTED)}
+              onClick={() => deactivateUser(user._id)}
               className={classes.rejectBtn}
             >
               Deactivate
             </Button>
             : 
             <Button
-            //   onClick={() => statusChangeHandler(user.phone, StatusEnum.ACCEPTED)}
+              onClick={() => activateUser(user._id)}
             className={classes.acceptBtn}
             >
               Activate
