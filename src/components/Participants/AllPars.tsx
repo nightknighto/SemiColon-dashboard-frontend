@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Participant } from '../../types/Participant'
 import { tracks } from '../../types/tracks'
+import { states } from '../../types/participants-states'
 import DropDown from '../UI/DropDown/DropDown'
 import classes from './AllPars.module.css'
 import ParItem from './ParItem'
@@ -16,16 +17,27 @@ const AllPars = ({
   const [filteredData, setFilteredData] = useState<Participant[]>(data)
   const [chosenTrack, setChosenTrack] = useState<string>('All')
   const [search, setSearch] = useState<string>('')
+  const [parState, setParState] = useState<string>('All')
 
   let output
 
   useEffect(() => {
-    if (chosenTrack === 'All') {
+    if (chosenTrack === 'All' && parState === 'All') {
       setFilteredData(data)
-    } else {
+    } else if (chosenTrack === 'All' && parState !== 'All') {
+      setFilteredData(data.filter((par) => par.acceptanceStatus === parState))
+    } else if (chosenTrack !== 'All' && parState === 'All') {
       setFilteredData(data.filter((par) => par.firstPreference === chosenTrack))
+    } else if (chosenTrack !== 'All' && parState !== 'All') {
+      setFilteredData(
+        data.filter(
+          (par) =>
+            par.firstPreference === chosenTrack &&
+            par.acceptanceStatus === parState
+        )
+      )
     }
-  }, [chosenTrack, data])
+  }, [chosenTrack, parState, data])
 
   const onTrackChangeHandler = (track: string) => {
     if (track === 'All') {
@@ -57,16 +69,28 @@ const AllPars = ({
     }
   }
 
+  const onStateChangeHandler = (state: string) => {
+    if (state === 'All') {
+      setParState('All')
+    } else {
+      setParState(state)
+    }
+  }
+
   if (data[0]) {
     output = (
       <div>
-        <InputBar
-          type="text"
-          placeholder="Phone or Name"
-          onChange={onSearchHandler}
-          value={search}
-        />
-        <DropDown choices={tracks} onChange={onTrackChangeHandler} />
+        <div className={classes['sidebar-header']}>
+          <InputBar
+            type="text"
+            placeholder="Phone or Name"
+            onChange={onSearchHandler}
+            value={search}
+          />
+          <DropDown choices={tracks} onChange={onTrackChangeHandler} />
+          <DropDown choices={states} onChange={onStateChangeHandler} />
+          <p className={classes['total']}>Total: {filteredData.length} Participant</p>
+        </div>
         {filteredData.map((item) => (
           <ParItem
             key={item.phone}
