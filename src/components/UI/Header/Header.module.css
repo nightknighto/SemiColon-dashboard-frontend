@@ -46,17 +46,6 @@ header {
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
-.logout {
-  background-color: red;
-  margin: 0 1rem;
-  padding: 0.5rem;
-  width: 6rem;
-  text-align: center;
-  border-radius: 8px;
-  box-shadow: 1px 1px 1px 1px black;
-  border: none;
-}
-
 .usrCircle {
   scale: 2.3;
 }
@@ -71,19 +60,47 @@ header {
   align-items: center;
 }
 
-.logout-dropdown {
+.r-arrow {
+  rotate: 270deg;
+  transition: rotate 500ms ease-out;
+}
+
+.r-arrow-clicked {
+  rotate: 450deg;
+}
+
+.logout {
+  display: none;
   position: relative;
-  background-color: #0f0f14;
-  display: inline-block;
+  right: 5rem;
+  animation: lout 500ms ease-in;
+  overflow: hidden;
 }
 
-.logout-dropdown li {
-  position: absolute;
-  background-color: #0f0f14;
-  padding: 0.5rem;
-  top: 1rem;
+.logout-clicked {
+  display: flex;
+  width: 5rem;
+  justify-content: space-between;
+  right: 0;
 }
 
-.logout-dropdown a {
-  color: red;
+@keyframes lout {
+  0% {
+    right: 5rem;
+  }
+  20% {
+    right: 4rem;
+  }
+  40% {
+    right: 3rem;
+  }
+  60% {
+    right: 2rem;
+  }
+  80% {
+    right: 1rem;
+  }
+  100% {
+    right: 0;
+  }
 }

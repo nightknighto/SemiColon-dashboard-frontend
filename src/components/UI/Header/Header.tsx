@@ -2,7 +2,11 @@ import { Link } from 'react-router-dom'
 import classes from './Header.module.css'
 import { onLogout } from '../../../helpers/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCaretDown,
+  faRightFromBracket,
+  faUserCircle,
+} from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 
 const Header = () => {
@@ -14,23 +18,29 @@ const Header = () => {
 
   return (
     <header>
-      <nav className={classes['main-nav']} onClick={onBarToggle}>
-        <div className={classes['user-d']}>
+      <nav className={classes['main-nav']}>
+        <div className={classes['user-d']} onClick={onBarToggle}>
           <FontAwesomeIcon
             icon={faUserCircle}
             className={classes['usrCircle']}
           />
-          <FontAwesomeIcon icon={faCaretDown} rotation={270} />
+          <FontAwesomeIcon
+            icon={faCaretDown}
+            className={`${classes['r-arrow']} ${
+              dropBarShow ? classes['r-arrow-clicked'] : ''
+            }`}
+          />
         </div>
-        {dropBarShow && (
-          <ul className={classes['logout-dropdown']}>
-            <li>
-              <Link to="/login" onClick={onLogout}>
-                Logout
-              </Link>
-            </li>
-          </ul>
-        )}
+        <Link
+          to="/login"
+          onClick={onLogout}
+          className={`${classes['logout']} ${
+            dropBarShow ? classes['logout-clicked'] : ''
+          }`}
+        >
+          Logout
+          <FontAwesomeIcon icon={faRightFromBracket} color="red" />
+        </Link>
         <ul>
           <li>
             <Link to="/stats">Stats</Link>
