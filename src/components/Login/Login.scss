@@ -7,7 +7,9 @@ html, body {
   display: flex;
   height: 100vh;
 
-
+p{
+  color:red;
+}
   .login-left {
     flex: 0.7;
     display: flex;
