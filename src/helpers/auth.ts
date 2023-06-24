@@ -19,3 +19,17 @@ export function authLogin(response: res, navigate: NavigateFunction) {
   }
   return response
 }
+
+export function onLogout() {
+  localStorage.removeItem('user')
+}
+
+export function getUserName() {
+  const user = localStorage.getItem('user')
+  if (user) {
+    const out = JSON.parse(user)
+    return out.username
+  }
+
+  return null
+}

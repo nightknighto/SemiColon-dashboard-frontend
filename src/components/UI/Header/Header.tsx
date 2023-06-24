@@ -1,19 +1,12 @@
-import { Link } from 'react-router-dom'
+import DesktopNav from './DesktopNav'
 import classes from './Header.module.css'
+import MobileNav from './MobileNav'
 
 const Header = () => {
   return (
-    <header>
-      <nav className={classes['main-nav']}>
-        <ul>
-          <li>
-            <Link to="/stats">Stats</Link>
-          </li>
-          <li>
-            <Link to="/participants">Participants</Link>
-          </li>
-        </ul>
-      </nav>
+    <header className={classes.header}>
+      <DesktopNav />
+      <MobileNav />
     </header>
   )
 }

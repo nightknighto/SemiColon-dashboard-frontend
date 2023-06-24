@@ -9,9 +9,11 @@ import InputBar from '../UI/InputBar/InputBar'
 const AllPars = ({
   data,
   onChoose,
+  chosenPar,
 }: {
   data: Participant[]
   onChoose: (id: string) => void
+  chosenPar?: Participant
 }) => {
   const [filteredData, setFilteredData] = useState<Participant[]>(data)
   const [chosenTrack, setChosenTrack] = useState<string>('All')
@@ -38,6 +40,24 @@ const AllPars = ({
     }
   }, [chosenTrack, parState, data])
 
+  const filt = (par: Participant, entry: 'phone' | 'name', input: string) => {
+    if (entry === 'name') {
+      return (
+        par.name.toLowerCase().includes(input.toLowerCase()) &&
+        (chosenTrack === 'All' || par.firstPreference === chosenTrack) &&
+        (parState === 'All' || par.acceptanceStatus === parState)
+      )
+    }
+
+    if (entry === 'phone') {
+      return (
+        par.phone.includes(input) &&
+        (chosenTrack === 'All' || par.firstPreference === chosenTrack) &&
+        (parState === 'All' || par.acceptanceStatus === parState)
+      )
+    }
+  }
+
   const onTrackChangeHandler = (track: string) => {
     if (track === 'All') {
       setChosenTrack('All')
@@ -47,24 +67,12 @@ const AllPars = ({
     setSearch('')
   }
 
-  const onSearchHandler = (Input: string) => {
-    setSearch(Input)
-    if (!isNaN(parseInt(Input))) {
-      setFilteredData(
-        data.filter(
-          (par) =>
-            par.phone.includes(Input) &&
-            (chosenTrack === 'All' || par.firstPreference === chosenTrack)
-        )
-      )
+  const onSearchHandler = (input: string) => {
+    setSearch(input)
+    if (!isNaN(parseInt(input))) {
+      setFilteredData(data.filter((par) => filt(par, 'phone', input)))
     } else {
-      setFilteredData(
-        data.filter(
-          (par) =>
-            par.name.toLowerCase().includes(Input.toLowerCase()) &&
-            (chosenTrack === 'All' || par.firstPreference === chosenTrack)
-        )
-      )
+      setFilteredData(data.filter((par) => filt(par, 'name', input)))
     }
   }
 
@@ -74,6 +82,7 @@ const AllPars = ({
     } else {
       setParState(state)
     }
+    setSearch('')
   }
 
   if (data[0]) {
@@ -87,14 +96,20 @@ const AllPars = ({
             value={search}
           />
           <DropDown choices={tracks} onChange={onTrackChangeHandler} />
-          <DropDown choices={["All", ...Object.values(StatusEnum)]} onChange={onStateChangeHandler} />
-          <p className={classes['total']}>Total: {filteredData.length} Participant</p>
+          <DropDown
+            choices={['All', ...Object.values(StatusEnum)]}
+            onChange={onStateChangeHandler}
+          />
+          <p className={classes['total']}>
+            Total: {filteredData.length} Participant
+          </p>
         </div>
         {filteredData.map((item) => (
           <ParItem
             key={item.phone}
             name={item.name}
             onChoose={onChoose.bind(null, item._id)}
+            chosen={chosenPar?._id === item._id}
           />
         ))}
       </div>
