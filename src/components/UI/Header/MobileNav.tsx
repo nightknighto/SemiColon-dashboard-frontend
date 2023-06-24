@@ -3,7 +3,8 @@ import StackedBtn from '../StackedBtn/StackedBtn'
 import { Link } from 'react-router-dom'
 import { MouseEventHandler, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { faRightFromBracket, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { getUserName } from '../../../helpers/auth'
 
 const MobileNav = () => {
   const dialogRef = useRef<HTMLDialogElement>(null)
@@ -34,6 +35,10 @@ const MobileNav = () => {
 
   return (
     <nav className={classes['mobile-nav']}>
+      <div className={classes['user-d']}>
+        <FontAwesomeIcon icon={faUserCircle} className={classes['usrCircle']} />
+        {getUserName()}
+      </div>
       <StackedBtn onClick={onModalShow} />
       <dialog
         ref={dialogRef}
