@@ -1,8 +1,8 @@
 import classes from './StackedBtn.module.css'
 
-const StackedBtn = () => {
+const StackedBtn = ({ onClick }: { onClick?: () => void }) => {
   return (
-    <button className={classes['stacked-btn']}>
+    <button className={classes['stacked-btn']} onClick={onClick}>
       <span className={classes.stack}></span>
       <span className={classes.stack}></span>
       <span className={classes.stack}></span>
