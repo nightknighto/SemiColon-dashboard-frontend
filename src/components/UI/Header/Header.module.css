@@ -52,7 +52,7 @@ header {
 
 .user-d {
   display: flex;
-  width: 3rem;
+  width: 9rem;
   justify-content: space-between;
   margin: 0 1rem;
   cursor: pointer;

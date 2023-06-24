@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import classes from './Header.module.css'
-import { onLogout } from '../../../helpers/auth'
+import { getUserName, onLogout } from '../../../helpers/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCaretDown,
@@ -24,6 +24,7 @@ const Header = () => {
             icon={faUserCircle}
             className={classes['usrCircle']}
           />
+          {getUserName()}
           <FontAwesomeIcon
             icon={faCaretDown}
             className={`${classes['r-arrow']} ${
