@@ -9,9 +9,11 @@ import InputBar from '../UI/InputBar/InputBar'
 const AllPars = ({
   data,
   onChoose,
+  chosenPar,
 }: {
   data: Participant[]
   onChoose: (id: string) => void
+  chosenPar?: Participant
 }) => {
   const [filteredData, setFilteredData] = useState<Participant[]>(data)
   const [chosenTrack, setChosenTrack] = useState<string>('All')
@@ -107,6 +109,7 @@ const AllPars = ({
             key={item.phone}
             name={item.name}
             onChoose={onChoose.bind(null, item._id)}
+            chosen={chosenPar?._id === item._id}
           />
         ))}
       </div>

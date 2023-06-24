@@ -79,7 +79,7 @@ const Participants = () => {
   if (data.length > 0) {
     output = data[0] && (
       <>
-        <AllPars onChoose={onChoose} data={data} />{' '}
+        <AllPars onChoose={onChoose} data={data} chosenPar={chosenPar} />{' '}
         <ParDetails par={chosenPar} statusChangeHandler={statusChangeHandler} />
       </>
     )
