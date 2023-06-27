@@ -76,11 +76,31 @@ const Admin = () => {
           alert(`Error occured: ${err}`)
         }
       }
+      const updateUser = async (newUser: User) => {
+        try {
+          const headers = authHeader()
+          if (headers) {
+            await axios.patch(
+              'https://semicolon-registration-backend.onrender.com/user/update/'+newUser._id,
+              {
+                ...newUser
+              },
+              {
+                headers,
+              }
+            )
+          } else {
+            nav('/login')
+          }
+        } catch (err) {
+          alert(`Error occured: ${err}`)
+        }
+      }
 
     return (
         <Card className={classes['admin-container']}>
             <AllUsers data={userData} onChoose={onChoose}/>
-            <UserDetails user={chosenUser} activateUser={activateUser} deactivateUser={deactivateUser}/>
+            <UserDetails user={chosenUser} activateUser={activateUser} deactivateUser={deactivateUser} updateUser={updateUser}/>
         </Card>
     );
 }
