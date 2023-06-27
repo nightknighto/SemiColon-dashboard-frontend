@@ -1,16 +1,31 @@
+import { useEffect, useState } from 'react';
 import { User } from '../../types/User';
 import Button from '../UI/Button/Button';
 import classes from './UserDetails.module.css'
 
-const UserDetails = ({user, activateUser, deactivateUser}: {user: User, activateUser: (id: string) => void, deactivateUser: (id: string) => void}) => {
+const UserDetails = ({user, activateUser, deactivateUser, updateUser}: {user: User, activateUser: (id: string) => void, deactivateUser: (id: string) => void, updateUser: (user: User)=> void}) => {
+  const [phone, setPhone] = useState(user.phone);
+  const [username, setUsername] = useState(user.username);
+  const [role, setRole] = useState(user.role);
+    useEffect(() => {
+      setPhone(user.phone);
+      setUsername(user.username);
+      setRole(user.role);
+    }, [user])
+
     return (
         <div className={classes.parContainer}>
           <div className={classes.details}>
-            <h2>{user.username}</h2>
             <div className={classes.userData}>
+              <span className={classes.bold}>
+                Name:
+                <input value={username} onChange={(e) => {setUsername(e.target.value)}}></input>
+              </span>
               <p>
-                <span className={classes.bold}>Phone: </span>
-                {user.phone}
+                <span className={classes.bold}>
+                    Phone: 
+                    <input value={phone} onChange={(e) => {setPhone(e.target.value)}}></input>
+                </span>
               </p>
               <p>
                 <span className={classes.bold}>Status: </span>
@@ -18,14 +33,18 @@ const UserDetails = ({user, activateUser, deactivateUser}: {user: User, activate
               </p>
               <p>
                 <span className={classes.bold}>Role: </span>
-                {user.role}
+                <select value={role} onChange={(e)=>{setRole(e.target.value)}}>
+                  <option value="hr">hr</option>
+                  <option value="member">member</option>
+                  <option value="admin">admin</option>
+                </select>
               </p>
             </div>
           </div>
           <hr className={classes.line}></hr>
           <div className={classes.buttons}>
             <Button
-              // onClick={() => statusChangeHandler({...user})}
+              onClick={() => updateUser({...user, phone: phone, role: role, username: username})}
               className={classes.acceptBtn}
             >
               Update
