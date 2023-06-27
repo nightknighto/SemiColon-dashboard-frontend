@@ -19,6 +19,7 @@ const Admin = () => {
         username: ''
     });
     const [userData, setUserData] = useState<User[]>([]);
+    const [updated, setUpdated] = useState<boolean>(false);
 
     useEffect(() => {
         const hdrs = authHeader()
@@ -44,13 +45,22 @@ const Admin = () => {
         try {
           const headers = authHeader()
           if (headers) {
-            await axios.patch(
+            const res = await axios.patch(
               'https://semicolon-registration-backend.onrender.com/user/deactivate/'+id,
               {},
               {
                 headers,
               }
             )
+            if (res.data.status === "success") {
+              setChosenUser({...chosenUser, active: res.data.data.active});
+              setUserData((data) => {
+                return data.map((user) => {
+                  if (user._id === chosenUser._id) {return chosenUser}
+                  return user;
+                })
+              })
+            }
           } else {
             nav('/login')
           }
@@ -62,13 +72,22 @@ const Admin = () => {
         try {
           const headers = authHeader()
           if (headers) {
-            await axios.patch(
+            const res = await axios.patch(
               'https://semicolon-registration-backend.onrender.com/user/activate/'+id,
               {},
               {
                 headers,
               }
             )
+            if (res.data.status === "success") {
+              setChosenUser({...chosenUser, active: res.data.data.active});
+              setUserData((data) => {
+                return data.map((user) => {
+                  if (user._id === chosenUser._id) {return chosenUser}
+                  return user;
+                })
+              })
+            }
           } else {
             nav('/login')
           }
@@ -80,7 +99,7 @@ const Admin = () => {
         try {
           const headers = authHeader()
           if (headers) {
-            await axios.patch(
+            const res = await axios.patch(
               'https://semicolon-registration-backend.onrender.com/user/update/'+newUser._id,
               {
                 ...newUser
@@ -89,6 +108,12 @@ const Admin = () => {
                 headers,
               }
             )
+            if (res.data.status === "success") {
+              setUpdated(true);
+              setTimeout(() => {
+                setUpdated(false);
+              }, 1500);
+            }
           } else {
             nav('/login')
           }
@@ -100,7 +125,7 @@ const Admin = () => {
     return (
         <Card className={classes['admin-container']}>
             <AllUsers data={userData} onChoose={onChoose}/>
-            <UserDetails user={chosenUser} activateUser={activateUser} deactivateUser={deactivateUser} updateUser={updateUser}/>
+            <UserDetails user={chosenUser} updated={updated} activateUser={activateUser} deactivateUser={deactivateUser} updateUser={updateUser}/>
         </Card>
     );
 }
