@@ -7,6 +7,8 @@ A pie chart to show the number of participants applied for each track.
 Bar charts for showing number of participants applied each day and their year in school.
 ![image](https://github.com/Deadreyo/SemiColon-dashboard-frontend/assets/71796506/6790ffab-a679-4332-acc9-22f350675eb6)
 
+All Charts were generated using ChartJS.
+
 A section that shows number of participants applied for each track and their total number.
 ![image](https://github.com/Deadreyo/SemiColon-dashboard-frontend/assets/71796506/8bd195e0-9cb9-48fe-b568-3e61e8f5922c)
 
@@ -21,3 +23,18 @@ Button component, a DropDown menu component, an InputBar component, a StackedBtn
 
 ![image](https://github.com/Deadreyo/SemiColon-dashboard-frontend/assets/71796506/87c69b23-08f9-4759-bf88-96fe8d8104ef)
 
+### Chosen UI
+![image](https://github.com/Deadreyo/SemiColon-dashboard-frontend/assets/71796506/d76db1ad-3020-4581-804b-aa180b7efaa1)
+
+![image](https://github.com/Deadreyo/SemiColon-dashboard-frontend/assets/71796506/87b4c691-5fbb-4aac-82d4-c9ccbff74579)
+
+### Data Handling
+We are using React-Context and axios to handle fetching data from the backend on the ```/getAll``` API to fetch all participants data and handle them only once in the frontend to prevent backend abuse. We are also authenticating user before sending a fetch request to the backend to prevent trying to fetch without having the required token.
+
+The context provides the following type
+```ts
+interface DataCtxTypes {
+  data: Participant[]
+  fetchData: () => Promise<void>
+}
+```
