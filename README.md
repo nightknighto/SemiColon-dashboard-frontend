@@ -1,3 +1,4 @@
+![Logo](https://github.com/Deadreyo/SemiColon-dashboard-frontend/blob/main/src/assets/Landing_black.png)
 # SemiColon-dashboard-frontend
 A dashboard frontend for Semicolon - a student activity in Ain Shams University.
 ## Features
@@ -38,3 +39,13 @@ interface DataCtxTypes {
   fetchData: () => Promise<void>
 }
 ```
+
+### Color Reference
+
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Background | ![#0f0f14](https://via.placeholder.com/10/0f0f14?text=+) #0f0f14 |
+| Card | ![#f5f5f5](https://via.placeholder.com/10/f5f5f5?text=+) #f5f5f5 |
+| Accept button | ![#008000](https://via.placeholder.com/10/008000?text=+) #008000 |
+| Reject button | ![#ac0f0f](https://via.placeholder.com/10/ac0f0f?text=+) #ac0f0f |
+
