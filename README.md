@@ -49,3 +49,36 @@ interface DataCtxTypes {
 | Accept button | ![#008000](https://via.placeholder.com/10/008000?text=+) #008000 |
 | Reject button | ![#ac0f0f](https://via.placeholder.com/10/ac0f0f?text=+) #ac0f0f |
 
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Deadreyo/SemiColon-dashboard-frontend.git
+```
+
+Go to the project directory
+
+```bash
+  cd SemiColon-dashboard-frontend
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+## Authors
+
+- [@bobo122b](https://github.com/bobo122b)
+- [@Deadreyo](https://github.com/Deadreyo)
+- [@Chady00](https://github.com/Chady00)
+- [@Ahmed-Khaled24](https://github.com/Ahmed-Khaled24)
+- [@Ofahmy143](https://github.com/Ofahmy143)
