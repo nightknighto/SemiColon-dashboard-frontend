@@ -15,11 +15,12 @@ const Admin = () => {
         active: false,
         password: '',
         phone: '',
-        role: '',
+        role: 'hr',
         username: ''
     });
     const [userData, setUserData] = useState<User[]>([]);
     const [updated, setUpdated] = useState<boolean>(false);
+    const [mode, setMode] = useState("view");
 
     useEffect(() => {
         const hdrs = authHeader()
@@ -41,40 +42,16 @@ const Admin = () => {
         }
       }
 
-      const deactivateUser = async (id: string) => {
+      const addUser = async (newUser: {username: string, phone: string, active: boolean, role: string, password: string}) => {
+        console.log(newUser);
         try {
           const headers = authHeader()
           if (headers) {
-            const res = await axios.patch(
-              'https://semicolon-registration-backend.onrender.com/user/deactivate/'+id,
-              {},
+            const res = await axios.post(
+              'https://semicolon-registration-backend.onrender.com/user/',
               {
-                headers,
-              }
-            )
-            if (res.data.status === "success") {
-              setChosenUser({...chosenUser, active: res.data.data.active});
-              setUserData((data) => {
-                return data.map((user) => {
-                  if (user._id === chosenUser._id) {return chosenUser}
-                  return user;
-                })
-              })
-            }
-          } else {
-            nav('/login')
-          }
-        } catch (err) {
-          alert(`Error occured: ${err}`)
-        }
-      }
-      const activateUser = async (id: string) => {
-        try {
-          const headers = authHeader()
-          if (headers) {
-            const res = await axios.patch(
-              'https://semicolon-registration-backend.onrender.com/user/activate/'+id,
-              {},
+                ...newUser
+              },
               {
                 headers,
               }
@@ -110,6 +87,7 @@ const Admin = () => {
             )
             if (res.data.status === "success") {
               setUpdated(true);
+              setMode("view");
               setTimeout(() => {
                 setUpdated(false);
               }, 1500);
@@ -125,7 +103,7 @@ const Admin = () => {
     return (
         <Card className={classes['admin-container']}>
             <AllUsers data={userData} onChoose={onChoose}/>
-            <UserDetails user={chosenUser} updated={updated} activateUser={activateUser} deactivateUser={deactivateUser} updateUser={updateUser}/>
+            <UserDetails user={chosenUser} updated={updated} addUser={addUser} updateUser={updateUser} mode={mode} setMode={setMode}/>
         </Card>
     );
 }
