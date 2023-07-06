@@ -98,9 +98,6 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode}: {user:
             <Button onClick={() => {setMode("view")}} className={classes.rejectBtn}>
                 Cancel
             </Button>
-            <Button onClick={() => {console.log(role)}} className={classes.rejectBtn}>
-                role
-            </Button>
             </>
             }
           </div>
