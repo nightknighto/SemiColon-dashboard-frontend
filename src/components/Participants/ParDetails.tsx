@@ -1,5 +1,6 @@
 import { Participant, StatusEnum } from '../../types/Participant'
 import Button from '../UI/Button/Button'
+import InterviewNotesUI from './InterviewNotesUI'
 import classes from './ParDetails.module.css'
 
 const ParDetails = ({
@@ -65,6 +66,8 @@ const ParDetails = ({
           )}
         </div>
       </div>
+      <hr className={classes.line}></hr>
+      <InterviewNotesUI />
       <hr className={classes.line}></hr>
       <div className={classes.buttons}>
         <Button
