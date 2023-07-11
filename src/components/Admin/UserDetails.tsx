@@ -3,7 +3,7 @@ import { User } from '../../types/User';
 import Button from '../UI/Button/Button';
 import classes from './UserDetails.module.css'
 
-const UserDetails = ({user, updated, addUser, updateUser, mode, setMode}: {user: User, updated: boolean, addUser: (newUser: {username: string, phone: string, active: boolean, role: string, password: string}) => void, updateUser: (user: User)=> void, mode: string, setMode: (mode: string)=>void}) => {
+const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading}: {user: User, updated: boolean, addUser: (newUser: {username: string, phone: string, active: boolean, role: string, password: string}) => void, updateUser: (user: User)=> void, mode: string, setMode: (mode: string)=>void, loading: boolean}) => {
   const [phone, setPhone] = useState(user.phone);
   const [username, setUsername] = useState(user.username);
   const [role, setRole] = useState(user.role);
@@ -101,6 +101,7 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode}: {user:
             }
           </div>
           {updated && <div>Updated!</div>}
+          {loading && <div>Loading...</div>}
         </div>
       )
 }
