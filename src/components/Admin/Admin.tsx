@@ -10,6 +10,12 @@ import axios from "axios";
 
 const Admin = () => {
     const nav = useNavigate()
+
+    const isAdmin = JSON.parse(localStorage.getItem('user') || "").role === "admin";
+    if (!isAdmin) {
+      nav("/stats");
+    }
+
     const [chosenUser, setChosenUser] = useState<User>({
         _id: '',
         active: false,
