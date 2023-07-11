@@ -20,6 +20,7 @@ const Admin = () => {
     });
     const [userData, setUserData] = useState<User[]>([]);
     const [updated, setUpdated] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const [mode, setMode] = useState("view");
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const Admin = () => {
       }
 
       const addUser = async (newUser: {username: string, phone: string, active: boolean, role: string, password: string}) => {
-        console.log(newUser);
+        setLoading(true);
         try {
           const headers = authHeader()
           if (headers) {
@@ -57,10 +58,14 @@ const Admin = () => {
               }
             )
             if (res.data.status === "success") {
-              setChosenUser({...chosenUser, active: res.data.data.active});
+              const result = res.data.data;
+              delete result.__v; delete result.createdAt; delete result.updatedAt;
+              setLoading(false);
+              setChosenUser(result);
+              setMode("view");
               setUserData((data) => {
                 return data.map((user) => {
-                  if (user._id === chosenUser._id) {return chosenUser}
+                  if (user._id === result._id) {return result}
                   return user;
                 })
               })
@@ -73,6 +78,7 @@ const Admin = () => {
         }
       }
       const updateUser = async (newUser: User) => {
+        setLoading(true);
         try {
           const headers = authHeader()
           if (headers) {
@@ -86,11 +92,19 @@ const Admin = () => {
               }
             )
             if (res.data.status === "success") {
+              setLoading(false);
               setUpdated(true);
               setMode("view");
               setTimeout(() => {
                 setUpdated(false);
               }, 1500);
+              setUserData(data => {
+                return data.map(user => {
+                  if (user._id === newUser._id) {return newUser}
+                  return user;
+                })
+              });
+              setChosenUser(newUser);
             }
           } else {
             nav('/login')
@@ -103,7 +117,7 @@ const Admin = () => {
     return (
         <Card className={classes['admin-container']}>
             <AllUsers data={userData} onChoose={onChoose}/>
-            <UserDetails user={chosenUser} updated={updated} addUser={addUser} updateUser={updateUser} mode={mode} setMode={setMode}/>
+            <UserDetails user={chosenUser} updated={updated} addUser={addUser} updateUser={updateUser} mode={mode} setMode={setMode} loading={loading}/>
         </Card>
     );
 }
