@@ -80,14 +80,14 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode}: {user:
             </Button> 
             </>
             }
-            {mode==="view" && <>
+            {mode==="view" &&
             <Button onClick={() => {setMode("add")}} className={classes.acceptBtn}>
                 Add user
-            </Button>
+            </Button>}
+            {mode==="view" && role !== "admin" &&
             <Button onClick={() => {setMode("edit")}} className={classes.passiveBtn} disabled={user._id===""}>
                 Edit
             </Button>
-            </>
             }
             {mode==="add" && 
             <>
