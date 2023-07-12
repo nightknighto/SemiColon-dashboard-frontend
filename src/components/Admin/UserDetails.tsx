@@ -23,14 +23,14 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
           <div className={classes.details}>
             <div className={classes.userData}>
               <span className={classes.bold}>
-                Name:
+                Name:{" "}
                 {mode==="view" && username}
                 {mode==="edit" && <input value={username} onChange={(e) => {setUsername(e.target.value)}}></input>}
                 {mode==="add" && <input value={newUsername} onChange={(e) => {setNewUsername(e.target.value)}}></input>}
               </span>
               <p>
                 <span className={classes.bold}>
-                    Phone: 
+                    Phone:{" "}
                     {mode==="view" && phone}
                     {mode==="edit" && <input value={phone} onChange={(e) => {setPhone(e.target.value)}}></input>}
                     {mode==="add" && <input value={newPhone} onChange={(e) => {setNewPhone(e.target.value)}}></input>}
