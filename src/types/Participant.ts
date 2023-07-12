@@ -7,8 +7,6 @@ export interface Participant {
   name: string
   pastExperience: string
   phone: string
-  secondPrefReason: string
-  secondPreference: string
   updatedAt?: string
   __v?: number
   _id: string
@@ -24,6 +22,5 @@ export enum StatusEnum {
   PENDING = 'pending',
   EMAILED = 'emailed',
   FILTERED = 'filtered',
-  SCHEDULED = 'scheduled',
-  SECONDPREF = 'secondpref',
+  SCHEDULED = 'scheduled'
 }
