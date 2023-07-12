@@ -15,6 +15,7 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
       setPhone(user.phone);
       setUsername(user.username);
       setRole(user.role);
+      setActive(user.active)
     }, [user])
 
     return (
