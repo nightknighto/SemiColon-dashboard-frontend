@@ -22,5 +22,5 @@ export enum StatusEnum {
   PENDING = 'pending',
   EMAILED = 'emailed',
   FILTERED = 'filtered',
-  SCHEDULED = 'scheduled'
+  SCHEDULED = 'scheduled',
 }
