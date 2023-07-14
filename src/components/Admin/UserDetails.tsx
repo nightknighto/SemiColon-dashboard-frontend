@@ -116,7 +116,7 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
           </div>
           {updated && <div>Updated!</div>}
           {loading && <div>Loading...</div>}
-          {error && <div>{error}</div>}
+          {error && <p className={classes.error}><h3>Error Occured:</h3>{error}</p>}
         </div>
       )
 }

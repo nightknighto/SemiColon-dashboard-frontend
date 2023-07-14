@@ -104,6 +104,10 @@
   border-color: turquoise;
 }
 
+.error {
+  color: red
+}
+
 
 
 @keyframes stateChange {

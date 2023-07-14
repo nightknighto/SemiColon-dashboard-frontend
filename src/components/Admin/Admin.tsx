@@ -82,11 +82,11 @@ const Admin = () => {
           } else {
             nav('/login')
           }
-        } catch (err) {
-          setError((err as Error).message);
+        } catch (err: any) {
+          setError(err.response?.data.data);
           setTimeout(() => {
             setError(null);
-          }, 3000);
+          }, 12000);
           setLoading(false);
         }
       }
@@ -122,11 +122,11 @@ const Admin = () => {
           } else {
             nav('/login')
           }
-        } catch (err) {
-          setError((err as Error).message);
+        } catch (err: any) {
+          setError(err.response?.data.data);
           setTimeout(() => {
             setError(null);
-          }, 3000);
+          }, 12000);
           setLoading(false);
         }
       }
