@@ -1,0 +1,1 @@
+export type mode = "view" | "edit" | "add" 

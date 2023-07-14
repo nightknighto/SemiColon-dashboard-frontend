@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { User } from '../../types/User';
 import Button from '../UI/Button/Button';
 import classes from './UserDetails.module.css'
+import { mode } from '../../types/mode';
 
-const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading, error}: {user: User, updated: boolean, addUser: (newUser: {username: string, phone: string, active: boolean, role: string, password: string}) => void, updateUser: (user: User)=> void, mode: string, setMode: (mode: "view"|"edit"|"add")=>void, loading: boolean, error: string | null}) => {
+const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading, error}: {user: User, updated: boolean, addUser: (newUser: {username: string, phone: string, active: boolean, role: string, password: string}) => void, updateUser: (user: User)=> void, mode: string, setMode: (mode: mode)=>void, loading: boolean, error: string | null}) => {
   const [phone, setPhone] = useState(user.phone);
   const [username, setUsername] = useState(user.username);
   const [role, setRole] = useState(user.role);
