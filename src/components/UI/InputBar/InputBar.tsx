@@ -7,17 +7,20 @@ import {
 } from 'react'
 
 const InputBar = forwardRef(
-  ({
-    type,
-    placeholder,
-    onChange,
-    value,
-  }: {
-    type: HTMLInputTypeAttribute
-    placeholder?: string
-    onChange?: (value: string) => void
-    value?: string
-  }, ref: LegacyRef<HTMLInputElement>) => {
+  (
+    {
+      type,
+      placeholder,
+      onChange,
+      value,
+    }: {
+      type: HTMLInputTypeAttribute
+      placeholder?: string
+      onChange?: (value: string) => void
+      value?: string
+    },
+    ref: LegacyRef<HTMLInputElement>
+  ) => {
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
       if (onChange) {
         onChange(event.target.value)
