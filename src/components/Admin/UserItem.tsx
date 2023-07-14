@@ -1,6 +1,11 @@
 import classes from './UserItem.module.css'
 
-const UserItem = ({ name, onChoose } : { name: string, onChoose: () => void }) => {
+interface UserItemProps {
+  name: string, 
+  onChoose: () => void
+}
+
+const UserItem = ({ name, onChoose } : UserItemProps) => {
 
     return (
         <div className={classes.item} onClick={onChoose}>
