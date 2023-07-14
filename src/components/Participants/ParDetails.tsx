@@ -10,6 +10,7 @@ const ParDetails = ({
   par: Participant
   statusChangeHandler: (phone: string, status: StatusEnum) => void
 }) => {
+  if (!par) return <div></div>
   return (
     <div className={classes.parContainer}>
       <div className={classes.details}>
@@ -59,7 +60,7 @@ const ParDetails = ({
         </div>
       </div>
       <hr className={classes.line}></hr>
-      <InterviewNotesUI />
+      <InterviewNotesUI data={par.InterviewerNote} phone={par.phone} />
       <hr className={classes.line}></hr>
       <div className={classes.buttons}>
         <Button

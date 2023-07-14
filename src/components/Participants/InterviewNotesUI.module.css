@@ -62,6 +62,11 @@
     border: 1px solid red;
 }
 
+.submitBtn {
+    width: 90%;
+    margin-top: 8px;
+}
+
 @media (max-width: 700px) {
     .table td {
         display: block;
