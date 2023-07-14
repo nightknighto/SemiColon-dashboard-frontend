@@ -30,6 +30,10 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
       setActive(user.active)
     }, [user])
 
+    useEffect(() => {
+      setRole("hr");
+    }, [mode])
+
     return (
         <div className={classes.userContainer}>
           <div className={classes.details}>
