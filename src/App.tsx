@@ -14,7 +14,15 @@ function App() {
       <DataContextProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/participants" element={<Participants />} />
+          <Route
+            path="/participants"
+            element={
+              <>
+                <Header />
+                <Participants />
+              </>
+            }
+          />
           <Route
             path="*"
             element={
