@@ -7,6 +7,7 @@ import classes from './Admin.module.css'
 import UserDetails from "./UserDetails";
 import { User } from "../../types/User";
 import axios from "axios";
+import { mode } from "../../types/mode";
 
 const Admin = () => {
     const nav = useNavigate()
@@ -28,7 +29,7 @@ const Admin = () => {
     const [updated, setUpdated] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const [mode, setMode] = useState<"view"|"edit"|"add">("view");
+    const [mode, setMode] = useState<mode>("view");
 
     useEffect(() => {
         const hdrs = authHeader()
@@ -40,6 +41,10 @@ const Admin = () => {
             nav("/login")
         }
     }, []);
+
+    const changeMode = (mode: mode) => {
+      setMode(mode);
+    }
 
     const onChoose = (id: string) => {
         for (const user of userData) {
@@ -128,7 +133,7 @@ const Admin = () => {
     return (
         <Card className={classes['admin-container']}>
             <AllUsers data={userData} onChoose={onChoose}/>
-            <UserDetails user={chosenUser} updated={updated} addUser={addUser} updateUser={updateUser} mode={mode} setMode={setMode} loading={loading} error={error}/>
+            <UserDetails user={chosenUser} updated={updated} addUser={addUser} updateUser={updateUser} mode={mode} setMode={changeMode} loading={loading} error={error}/>
         </Card>
     );
 }
