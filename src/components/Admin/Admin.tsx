@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../UI/Card/Card";
-import { authHeader } from "../../helpers/auth";
+import { authHeader, getRole } from "../../helpers/auth";
 import { useNavigate } from "react-router-dom";
 import AllUsers from "./AllUsers";
 import classes from './Admin.module.css'
@@ -11,7 +11,7 @@ import axios from "axios";
 const Admin = () => {
     const nav = useNavigate()
 
-    const isAdmin = JSON.parse(localStorage.getItem('user') || "").role === "admin";
+    const isAdmin = getRole() === "admin";
     if (!isAdmin) {
       nav("/stats");
     }
@@ -71,12 +71,7 @@ const Admin = () => {
               setLoading(false);
               setChosenUser(result);
               setMode("view");
-              setUserData((data) => {
-                return data.map((user) => {
-                  if (user._id === result._id) {return result}
-                  return user;
-                })
-              })
+              setUserData(data => [...data, result]);
             }
           } else {
             nav('/login')
