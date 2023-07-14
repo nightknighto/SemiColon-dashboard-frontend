@@ -2,16 +2,15 @@ import { useState } from 'react'
 import DataContext from './data-context'
 import { Participant } from '../types/Participant'
 import { authHeader } from '../helpers/auth'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
+import { onLogout } from '../helpers/auth'
+import { useNavigate } from 'react-router-dom'
 
 const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [data, setData] = useState<Participant[]>([])
+  const nav = useNavigate()
   const fetchParticipants = async () => {
     try {
-      //'https://semicolon-registration-backend.onrender.com/participants/getAll',
-      // const res = await fetch(
-      //   'https://semicolon-registration-backend.onrender.com/participants/getAll'
-      // )
       const hdrs = authHeader()
       if (hdrs) {
         const res = await axios.get(
@@ -24,9 +23,15 @@ const DataContextProvider = ({ children }: { children: React.ReactNode }) => {
         }
         return participants.data
       }
-    } catch (err: unknown) {
-      const { message } = err as { message: string }
-      console.log(message)
+    } catch (_err) {
+      const err = _err as AxiosError<{ data: string }>
+      console.log(err.response)
+      if (err.response?.status === 401) {
+        onLogout()
+        nav('/login')
+      } else {
+        alert(err.response?.data?.data ?? err.message)
+      }
       return []
     }
   }

@@ -29,8 +29,6 @@ const Participants = () => {
     firstPrefReason: '',
     name: '',
     pastExperience: '',
-    secondPreference: '',
-    secondPrefReason: '',
     phone: '',
     acceptanceStatus: '',
     year: '',

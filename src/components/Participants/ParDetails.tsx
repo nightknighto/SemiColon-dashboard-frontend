@@ -32,7 +32,7 @@ const ParDetails = ({
             {par.year}
           </p>
           <p>
-            <span className={classes.bold}>First Preference: </span>
+            <span className={classes.bold}>Track: </span>
             {par.firstPreference}
           </p>
           <p>
@@ -44,15 +44,7 @@ const ParDetails = ({
             {par.firstPrefKnowledge}
           </p>
           <p>
-            <span className={classes.bold}>Second Preference: </span>
-            {par.secondPreference}
-          </p>
-          <p>
-            <span className={classes.bold}>Reason: </span>
-            {par.secondPrefReason}
-          </p>
-          <p>
-            <span className={classes.bold}>Experience: </span>
+            <span className={classes.bold}>Past Experiences: </span>
             {par.pastExperience}
           </p>
         </div>
@@ -93,12 +85,6 @@ const ParDetails = ({
           className={classes.acceptBtn}
         >
           Accept
-        </Button>
-        <Button
-          onClick={() => statusChangeHandler(par.phone, StatusEnum.SECONDPREF)}
-          className={classes.secondPrefBtn}
-        >
-          2nd Pref
         </Button>
         <Button
           onClick={() => statusChangeHandler(par.phone, StatusEnum.REJECTED)}

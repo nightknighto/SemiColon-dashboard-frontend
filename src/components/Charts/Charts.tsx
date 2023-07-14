@@ -45,21 +45,11 @@ const Charts = () => {
   }
 
   const tracksNumbers: number[] = []
-  const secondPrefNumbers: number[] = []
   let output
   if (data.length > 0) {
     for (const track of tracks) {
-      // let num = 0
-      // for (const part of data) {
-      //   if (part.firstPreference === track) {
-      //     num++
-      //   }
-      // }
       tracksNumbers.push(
         data.filter((par) => par.firstPreference === track).length
-      )
-      secondPrefNumbers.push(
-        data.filter((par) => par.secondPreference === track).length
       )
     }
 
@@ -77,13 +67,6 @@ const Charts = () => {
           type="BAR"
           labelMappingHandler={datesMappingHandler}
           barNumbersHandler={datesNumbersHandler}
-        />
-        <ChartItem
-          id="first"
-          type="PIE"
-          pieNums={secondPrefNumbers}
-          pieLabels={tracks}
-          pieTitle="Second Preference"
         />
         <ChartItem
           id="second"

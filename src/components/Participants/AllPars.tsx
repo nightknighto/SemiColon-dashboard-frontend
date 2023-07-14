@@ -106,7 +106,7 @@ const AllPars = ({
         </div>
         {filteredData.map((item) => (
           <ParItem
-            key={item.phone}
+            key={item._id}
             name={item.name}
             onChoose={onChoose.bind(null, item._id)}
             chosen={chosenPar?._id === item._id}

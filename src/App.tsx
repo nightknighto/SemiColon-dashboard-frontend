@@ -5,45 +5,29 @@ import Charts from './components/Charts/Charts'
 import Login from './components/Login/Login'
 import Participants from './components/Participants/Participants'
 import DataContextProvider from './context/DataContextProvider'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { tracks } from './types/tracks'
-
-const router = createBrowserRouter(
-  [
-    {
-      path: '/login',
-      element: <Login />,
-    },
-    {
-      path: '/participants',
-      element: (
-        <DataContextProvider>
-          <Header />
-          <Participants />
-        </DataContextProvider>
-      ),
-    },
-    {
-      path: '*',
-      element: (
-        <DataContextProvider>
-          <Header />
-          <Charts />
-          <Stats tracks={tracks} />
-        </DataContextProvider>
-      ),
-    },
-  ],
-  {
-    basename: '/SemiColon-dashboard-frontend',
-  }
-)
 
 function App() {
   return (
-    <DataContextProvider>
-      <RouterProvider router={router} />
-    </DataContextProvider>
+    <BrowserRouter>
+      <DataContextProvider>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/participants" element={<Participants />} />
+          <Route
+            path="*"
+            element={
+              <>
+                <Header />
+                <Charts />
+                <Stats tracks={tracks} />
+              </>
+            }
+          />
+        </Routes>
+      </DataContextProvider>
+    </BrowserRouter>
   )
 }
 
