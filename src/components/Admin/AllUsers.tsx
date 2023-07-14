@@ -2,7 +2,12 @@ import { User } from '../../types/User';
 import classes from './AllUsers.module.css'
 import UserItem from './UserItem';
 
-const AllUsers = ({ data, onChoose } : {data: User[], onChoose: (id: string) => void}) => {
+interface AllUsersProps {
+  data: User[],
+  onChoose: (id: string) => void
+}
+
+const AllUsers = ({ data, onChoose } : AllUsersProps) => {
 
     let output;
     if (data[0]) {
