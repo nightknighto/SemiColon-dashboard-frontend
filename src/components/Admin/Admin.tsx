@@ -52,6 +52,7 @@ const Admin = () => {
 
       const addUser = async (newUser: {username: string, phone: string, active: boolean, role: string, password: string}) => {
         setLoading(true);
+        setError(null);
         try {
           const headers = authHeader()
           if (headers) {
@@ -67,7 +68,6 @@ const Admin = () => {
             if (res.data.status === "success") {
               const result = res.data.data;
               delete result.__v; delete result.createdAt; delete result.updatedAt;
-              setLoading(false);
               setChosenUser(result);
               setMode("view");
               setUserData(data => [...data, result]);
@@ -77,14 +77,13 @@ const Admin = () => {
           }
         } catch (err: any) {
           setError(err.response?.data.data);
-          setTimeout(() => {
-            setError(null);
-          }, 12000);
+        } finally {
           setLoading(false);
         }
       }
       const updateUser = async (newUser: User) => {
         setLoading(true);
+        setError(null);
         try {
           const headers = authHeader()
           if (headers) {
@@ -98,7 +97,6 @@ const Admin = () => {
               }
             )
             if (res.data.status === "success") {
-              setLoading(false);
               setUpdated(true);
               setMode("view");
               setTimeout(() => {
@@ -117,9 +115,7 @@ const Admin = () => {
           }
         } catch (err: any) {
           setError(err.response?.data.data);
-          setTimeout(() => {
-            setError(null);
-          }, 12000);
+        } finally {
           setLoading(false);
         }
       }
