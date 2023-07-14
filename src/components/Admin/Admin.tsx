@@ -40,6 +40,7 @@ const Admin = () => {
         } else {
             nav("/login")
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const changeMode = (mode: mode) => {
