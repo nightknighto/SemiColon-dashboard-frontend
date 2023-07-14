@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { User } from '../../types/User';
 import Button from '../UI/Button/Button';
 import classes from './UserDetails.module.css'
-import { mode } from '../../types/mode';
+import { AdminPageMode } from './Admin';
 
 interface UserDetailsProps {
   user: User,
@@ -10,7 +10,7 @@ interface UserDetailsProps {
   addUser: (newUser: {username: string, phone: string, active: boolean, role: string, password: string}) => void, 
   updateUser: (user: User)=> void, 
   mode: string, 
-  setMode: (mode: mode)=>void, 
+  setMode: (mode: AdminPageMode)=>void, 
   loading: boolean, 
   error: string | null
 }

@@ -7,7 +7,8 @@ import classes from './Admin.module.css'
 import UserDetails from "./UserDetails";
 import { User } from "../../types/User";
 import axios from "axios";
-import { mode } from "../../types/mode";
+
+export type AdminPageMode = "view" | "edit" | "add" 
 
 const Admin = () => {
     const nav = useNavigate()
@@ -22,7 +23,7 @@ const Admin = () => {
     const [updated, setUpdated] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const [mode, setMode] = useState<mode>("view");
+    const [mode, setMode] = useState<AdminPageMode>("view");
 
     useEffect(() => {
         const hdrs = authHeader()
@@ -36,7 +37,7 @@ const Admin = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const changeMode = (mode: mode) => {
+    const changeMode = (mode: AdminPageMode) => {
       setMode(mode);
     }
 
