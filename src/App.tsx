@@ -10,11 +10,19 @@ import { tracks } from './types/tracks'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='SemiColon-dashboard-frontend'>
       <DataContextProvider>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/participants" element={<Participants />} />
+          <Route
+            path="/participants"
+            element={
+              <>
+                <Header />
+                <Participants />
+              </>
+            }
+          />
           <Route
             path="*"
             element={
