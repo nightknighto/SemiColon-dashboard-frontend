@@ -27,6 +27,7 @@ const Admin = () => {
     const [userData, setUserData] = useState<User[]>([]);
     const [updated, setUpdated] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
     const [mode, setMode] = useState("view");
 
     useEffect(() => {
@@ -81,7 +82,11 @@ const Admin = () => {
             nav('/login')
           }
         } catch (err) {
-          alert(`Error occured: ${err}`)
+          setError((err as Error).message);
+          setTimeout(() => {
+            setError(null);
+          }, 3000);
+          setLoading(false);
         }
       }
       const updateUser = async (newUser: User) => {
@@ -117,14 +122,18 @@ const Admin = () => {
             nav('/login')
           }
         } catch (err) {
-          alert(`Error occured: ${err}`)
+          setError((err as Error).message);
+          setTimeout(() => {
+            setError(null);
+          }, 3000);
+          setLoading(false);
         }
       }
 
     return (
         <Card className={classes['admin-container']}>
             <AllUsers data={userData} onChoose={onChoose}/>
-            <UserDetails user={chosenUser} updated={updated} addUser={addUser} updateUser={updateUser} mode={mode} setMode={setMode} loading={loading}/>
+            <UserDetails user={chosenUser} updated={updated} addUser={addUser} updateUser={updateUser} mode={mode} setMode={setMode} loading={loading} error={error}/>
         </Card>
     );
 }
