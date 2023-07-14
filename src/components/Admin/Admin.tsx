@@ -17,14 +17,7 @@ const Admin = () => {
       nav("/stats");
     }
 
-    const [chosenUser, setChosenUser] = useState<User>({
-        _id: '',
-        active: false,
-        password: '',
-        phone: '',
-        role: 'hr',
-        username: ''
-    });
+    const [chosenUser, setChosenUser] = useState<User>();
     const [userData, setUserData] = useState<User[]>([]);
     const [updated, setUpdated] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
@@ -134,7 +127,7 @@ const Admin = () => {
     return (
         <Card className={classes['admin-container']}>
             <AllUsers data={userData} onChoose={onChoose}/>
-            <UserDetails user={chosenUser} updated={updated} addUser={addUser} updateUser={updateUser} mode={mode} setMode={changeMode} loading={loading} error={error}/>
+            { chosenUser && <UserDetails user={chosenUser} updated={updated} addUser={addUser} updateUser={updateUser} mode={mode} setMode={changeMode} loading={loading} error={error}/> }
         </Card>
     );
 }
