@@ -28,7 +28,7 @@ const Admin = () => {
     const [updated, setUpdated] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
-    const [mode, setMode] = useState("view");
+    const [mode, setMode] = useState<"view"|"edit"|"add">("view");
 
     useEffect(() => {
         const hdrs = authHeader()
