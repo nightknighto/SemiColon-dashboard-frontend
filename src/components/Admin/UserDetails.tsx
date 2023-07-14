@@ -70,6 +70,7 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
               <Button
               onClick={() => updateUser({...user, phone: phone, role: role, username: username, active: active})}
               className={classes.acceptBtn}
+              disabled={loading}
               >
               Update
             </Button>
@@ -92,7 +93,7 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
             }
             {mode==="add" && 
             <>
-            <Button onClick={() => {addUser({username: newUsername, phone: newPhone, active: active, role: role, password: password})}} className={classes.acceptBtn}>
+            <Button onClick={() => {addUser({username: newUsername, phone: newPhone, active: active, role: role, password: password})}} className={classes.acceptBtn} disabled={loading}>
                 Add
             </Button>
             <Button onClick={() => {setMode("view")}} className={classes.rejectBtn}>
