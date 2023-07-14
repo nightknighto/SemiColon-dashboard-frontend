@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import classes from './DesktopNav.module.css'
-import { getUserName, onLogout } from '../../../helpers/auth'
+import { getRole, getUserName, onLogout } from '../../../helpers/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCaretDown,
@@ -15,7 +15,7 @@ const DesktopNav = () => {
   const onBarToggle = () => {
     setDropBarShow(!dropBarShow)
   }
-  const isAdmin = JSON.parse(localStorage.getItem('user') || "").role === "admin";
+  const isAdmin = getRole() === "admin";
 
   return (
     <nav className={classes['main-nav']}>
