@@ -60,8 +60,8 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
               </p>
               <p>
                 <span className={classes.bold}>Role: </span>
-                {(mode ==="view" || role === "admin") && role}
-                {mode!=="view" && role !== "admin" && <select value={role} onChange={(e)=>{setRole(e.target.value)}}>
+                {(mode ==="view") && role}
+                {mode!=="view" && <select value={role} onChange={(e)=>{setRole(e.target.value)}}>
                   <option value="hr">hr</option>
                   <option value="member">member</option>
                 </select>}
