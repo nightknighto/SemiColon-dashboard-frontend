@@ -44,6 +44,7 @@ const Admin = () => {
         for (const user of userData) {
           if (user._id === id) {
             setChosenUser(user)
+            setMode("view");
             return
           }
         }
