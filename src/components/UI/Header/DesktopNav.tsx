@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import classes from './DesktopNav.module.css'
-import { getUserName, onLogout } from '../../../helpers/auth'
+import { getRole, getUserName, onLogout } from '../../../helpers/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCaretDown,
@@ -15,6 +15,7 @@ const DesktopNav = () => {
   const onBarToggle = () => {
     setDropBarShow(!dropBarShow)
   }
+  const isAdmin = getRole() === "admin";
 
   return (
     <nav className={classes['main-nav']}>
@@ -39,6 +40,9 @@ const DesktopNav = () => {
         <FontAwesomeIcon icon={faRightFromBracket} color="red" />
       </Link>
       <ul>
+        {isAdmin && <li>
+          <Link to="/admin">Admin dashboard</Link>
+        </li>}
         <li>
           <Link to="/stats">Stats</Link>
         </li>

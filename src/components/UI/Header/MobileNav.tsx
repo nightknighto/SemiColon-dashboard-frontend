@@ -50,6 +50,9 @@ const MobileNav = () => {
       >
         <ul className={classes['dia-elements']}>
           <li>
+            <Link to="/admin">Admin dashboard</Link>
+          </li>
+          <li>
             <Link to="/stats" onClick={onModalClose}>
               Stats
             </Link>

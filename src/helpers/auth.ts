@@ -33,3 +33,13 @@ export function getUserName() {
 
   return null
 }
+
+export function getRole() {
+  const user = localStorage.getItem('user')
+  if (user) {
+    const out = JSON.parse(user)
+    return out.role
+  }
+
+  return null
+}
