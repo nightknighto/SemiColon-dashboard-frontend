@@ -19,26 +19,16 @@ const Participants = () => {
   }, [])
 
   const { data, fetchData } = useContext(DataContext)
-  const [chosenPar, setChosenPar] = useState<Participant>({
-    _id: '',
-    createdAt: '',
-    email: '',
-    __v: 0,
-    firstPreference: '',
-    firstPrefKnowledge: '',
-    firstPrefReason: '',
-    name: '',
-    pastExperience: '',
-    phone: '',
-    acceptanceStatus: '',
-    year: '',
-    collegeId: '',
-    emailedStatus: false,
-  })
+  const [chosenPar, setChosenPar] = useState<Participant>()
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    // refresh chosen participant when data changes
+    setChosenPar(data.find((par) => par._id === chosenPar?._id))
+  }, [data])
 
   const onChoose = (id: string) => {
     for (const par of data) {
@@ -50,6 +40,7 @@ const Participants = () => {
   }
 
   const statusChangeHandler = async (phone: string, status: StatusEnum) => {
+    if (!chosenPar) return
     try {
       const headers = authHeader()
       if (headers) {
@@ -78,7 +69,12 @@ const Participants = () => {
     output = data[0] && (
       <>
         <AllPars onChoose={onChoose} data={data} chosenPar={chosenPar} />{' '}
-        <ParDetails par={chosenPar} statusChangeHandler={statusChangeHandler} />
+        {chosenPar && (
+          <ParDetails
+            par={chosenPar}
+            statusChangeHandler={statusChangeHandler}
+          />
+        )}
       </>
     )
   } else {

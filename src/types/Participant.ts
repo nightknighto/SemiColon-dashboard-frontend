@@ -1,3 +1,5 @@
+import { InterviewObject } from './InterviewNotes'
+
 export interface Participant {
   createdAt: string
   email: string
@@ -14,6 +16,7 @@ export interface Participant {
   year: string
   collegeId: string
   emailedStatus: boolean
+  InterviewerNote?: InterviewObject
 }
 
 export enum StatusEnum {
