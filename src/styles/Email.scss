@@ -1,0 +1,79 @@
+@keyframes expand {
+  0% {
+    height: 50px; // Initial height
+
+  }
+  100% {
+    height: 400px; // Expanded height
+
+
+  }
+}
+
+
+.intro{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    // make it centered in page 
+    height: 50vh;
+    width: 100vw;
+
+}
+
+.heart{
+    color: #e25555;
+    font-size: 3rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 40vh;
+    width: 100vw;
+    margin-top:-50px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    textarea.large-input {
+      height: 70px; // Initial height
+      animation-name: expand;
+      animation-duration: 2s;
+      animation-fill-mode: forwards; // Maintain the final state after animation ends
+    }
+}
+
+.large-input {
+    min-height: 100px;
+    max-height: 1500px;
+    min-width: 900px;
+    max-width: 900px;
+    border-radius: 10px;
+    border: 1px solid #e25555;
+    margin: 20px 10px 20px 1;
+    padding: 20px;
+    font-size: 1rem;
+    resize: both;
+    border: 5px solid #ffffff;
+    scroll-behavior: smooth;
+    margin-left:200px;
+    margin-bottom: 50px;
+  }
+  .large-input:focus,
+  .large-input:active {
+    outline: none; /* Remove the focus/active border */
+  }
+
+  .large-input::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .large-input::-webkit-scrollbar-track {
+    background-color: #e7e0e0;
+  }
+  
+  .large-input::-webkit-scrollbar-thumb {
+    background-color: #69a6a6;
+  }
+
