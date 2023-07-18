@@ -15,7 +15,7 @@ export function authHeader() {
 export function authLogin(response: res, navigate: NavigateFunction) {
   if (response.status === 200) {
     localStorage.setItem('user', JSON.stringify(response.data.data))
-    navigate('stats')
+    navigate('/stats')
   }
   return response
 }
