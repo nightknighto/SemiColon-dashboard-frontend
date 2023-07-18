@@ -60,7 +60,7 @@ const ParDetails = ({
         </div>
       </div>
       <hr className={classes.line}></hr>
-      <InterviewNotesUI data={par.InterviewerNote} phone={par.phone} />
+      <InterviewNotesUI data={par.InterviewerNote} _id={par._id} />
       <hr className={classes.line}></hr>
       <div className={classes.buttons}>
         <Button

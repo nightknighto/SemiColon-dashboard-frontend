@@ -11,12 +11,12 @@ import { useContext } from 'react'
 
 interface InterviewNotesUIProps {
   data?: InterviewObject
-  phone: string
+  _id: string
 }
 
 export default function InterviewNotesUI({
   data,
-  phone,
+  _id,
 }: InterviewNotesUIProps) {
   const { fetchData } = useContext(DataContext)
 
@@ -56,7 +56,7 @@ export default function InterviewNotesUI({
         await axios.patch(
           'https://semicolon-registration-backend.onrender.com/participants/interview/note',
           {
-            phone,
+            _id,
             note: interviewData,
           },
           {
