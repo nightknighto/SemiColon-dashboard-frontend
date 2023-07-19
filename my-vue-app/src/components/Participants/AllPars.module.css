@@ -1,0 +1,25 @@
+.all-pars {
+  min-width: 30%;
+  height: 100%;
+  max-height: 75vh;
+  border-right: 2px solid black;
+  overflow-y: scroll;
+}
+
+.all-pars h3 {
+  margin: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.total {
+  font-size: 18px;
+  font-weight: bold;
+  color: green;
+  margin: 0;
+}

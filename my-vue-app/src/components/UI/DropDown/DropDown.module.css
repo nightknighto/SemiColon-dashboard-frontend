@@ -1,0 +1,19 @@
+.select {
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #ccc;
+  background-color: whitesmoke;
+  border-radius: 8px;
+}
+
+.select:focus {
+  outline: none;
+  border-color: blue;
+}
+
+.select option {
+  background-color: whitesmoke;
+  font: inherit;
+  padding: 0.5rem;
+}

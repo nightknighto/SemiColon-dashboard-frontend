@@ -1,0 +1,25 @@
+.chart-item {
+    width: 49%;
+    padding: 1rem;
+    margin: 0 0 1rem 0;
+    min-width: 10rem;
+}
+
+.chart-item:first-of-type{
+    margin: 0 0 1rem 0;
+}
+
+canvas {
+    max-width: 40rem;
+    height: 20rem;
+}
+
+@media (max-width: 30rem) {
+    .chart-item{
+        width: 90%;
+        margin: 0 auto 1rem auto;
+    }
+    .chart-item:first-of-type{
+        margin: 0 auto 1rem auto;
+    }
+}
