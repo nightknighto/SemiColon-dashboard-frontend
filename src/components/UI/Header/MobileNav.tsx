@@ -7,10 +7,12 @@ import {
   faRightFromBracket,
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons'
-import { getUserName } from '../../../helpers/auth'
+import { getRole, getUserName } from '../../../helpers/auth'
 
 const MobileNav = () => {
   const dialogRef = useRef<HTMLDialogElement>(null)
+
+  const isAdmin = getRole() === "admin";
 
   const onModalShow = () => {
     dialogRef.current?.showModal()
@@ -49,9 +51,9 @@ const MobileNav = () => {
         onClick={onBackDropClick}
       >
         <ul className={classes['dia-elements']}>
-          <li>
+          {isAdmin && <li>
             <Link to="/admin">Admin dashboard</Link>
-          </li>
+          </li>}
           <li>
             <Link to="/stats" onClick={onModalClose}>
               Stats

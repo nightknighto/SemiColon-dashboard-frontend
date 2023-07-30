@@ -8,7 +8,7 @@ const ParDetails = ({
   statusChangeHandler,
 }: {
   par: Participant
-  statusChangeHandler: (phone: string, status: StatusEnum) => void
+  statusChangeHandler: (status: StatusEnum) => void
 }) => {
   if (!par) return <div></div>
   return (
@@ -60,35 +60,35 @@ const ParDetails = ({
         </div>
       </div>
       <hr className={classes.line}></hr>
-      <InterviewNotesUI data={par.InterviewerNote} phone={par.phone} />
+      <InterviewNotesUI data={par.InterviewerNote} _id={par._id} />
       <hr className={classes.line}></hr>
       <div className={classes.buttons}>
         <Button
-          onClick={() => statusChangeHandler(par.phone, StatusEnum.FILTERED)}
+          onClick={() => statusChangeHandler(StatusEnum.FILTERED)}
           className={classes.rejectBtn}
         >
           Filter
         </Button>
         <Button
-          onClick={() => statusChangeHandler(par.phone, StatusEnum.EMAILED)}
+          onClick={() => statusChangeHandler(StatusEnum.EMAILED)}
           className={classes.passiveBtn}
         >
           Emailed
         </Button>
         <Button
-          onClick={() => statusChangeHandler(par.phone, StatusEnum.SCHEDULED)}
+          onClick={() => statusChangeHandler(StatusEnum.SCHEDULED)}
           className={classes.passiveBtn}
         >
           Scheduled
         </Button>
         <Button
-          onClick={() => statusChangeHandler(par.phone, StatusEnum.ACCEPTED)}
+          onClick={() => statusChangeHandler(StatusEnum.ACCEPTED)}
           className={classes.acceptBtn}
         >
           Accept
         </Button>
         <Button
-          onClick={() => statusChangeHandler(par.phone, StatusEnum.REJECTED)}
+          onClick={() => statusChangeHandler(StatusEnum.REJECTED)}
           className={classes.rejectBtn}
         >
           Reject

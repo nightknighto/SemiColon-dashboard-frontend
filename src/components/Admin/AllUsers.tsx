@@ -15,7 +15,7 @@ const AllUsers = ({ data, onChoose } : AllUsersProps) => {
           <div>
             {data.map((item) => (
               <UserItem
-                key={item.phone}
+                key={item._id}
                 name={item.username}
                 onChoose={onChoose.bind(null, item._id)}
               />

@@ -39,7 +39,7 @@ const Participants = () => {
     }
   }
 
-  const statusChangeHandler = async (phone: string, status: StatusEnum) => {
+  const statusChangeHandler = async (_id: string, status: StatusEnum) => {
     if (!chosenPar) return
     try {
       const headers = authHeader()
@@ -47,7 +47,7 @@ const Participants = () => {
         await axios.patch(
           'https://semicolon-registration-backend.onrender.com/participants/status',
           {
-            phone,
+            _id,
             status,
           },
           {
@@ -72,7 +72,7 @@ const Participants = () => {
         {chosenPar && (
           <ParDetails
             par={chosenPar}
-            statusChangeHandler={statusChangeHandler}
+            statusChangeHandler={statusChangeHandler.bind(null, chosenPar._id)}
           />
         )}
       </>
