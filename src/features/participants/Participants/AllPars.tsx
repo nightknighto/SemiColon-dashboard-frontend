@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Participant, StatusEnum } from '../../types/Participant'
-import { tracks } from '../../types/tracks'
-import DropDown from '../UI/DropDown/DropDown'
+import { Participant, StatusEnum } from '../../../common/types/Participant'
+import { tracks } from '../../../common/types/tracks'
 import classes from './AllPars.module.css'
 import ParItem from './ParItem'
-import InputBar from '../UI/InputBar/InputBar'
+import InputBar from '../../../common/components/InputBar/InputBar'
+import DropDown from '../../../common/components/DropDown/DropDown'
 
 const AllPars = ({
   data,

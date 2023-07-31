@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import './Login.scss'
-import ReactLogo from '../../assets/Landing_black.png'
+import SemicolonLogo from '../../../common/assets/Landing_black.png'
 import BarLoader from 'react-spinners/BarLoader'
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import classes from './Failed.module.css'
 import axios from 'axios'
-import { authLogin } from '../../helpers/auth'
-import useInput from '../../hooks/use-input'
+import { authLogin } from '../../../common/helpers/auth'
+import useInput from '../../../common/hooks/use-input'
 
 const Login = () => {
   const [clicked, setClicked] = useState(false)
@@ -191,7 +191,7 @@ const Login = () => {
         }
       >
         <div className="test-shine">
-          <img src={ReactLogo} alt="Login" />
+          <img src={SemicolonLogo} alt="Login" />
           {showLoader && (
             <div
               className="showLoader"

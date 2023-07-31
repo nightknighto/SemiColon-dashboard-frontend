@@ -1,10 +1,10 @@
 import { useContext, useEffect } from 'react'
-import Card from '../UI/Card/Card'
 import ChartItem from './ChartItem'
 import classes from './Charts.module.css'
-import DataContext from '../../context/data-context'
-import { tracks } from '../../types/tracks'
-import { Participant } from '../../types/Participant'
+import DataContext from '../../../common/context/data-context'
+import { tracks } from '../../../common/types/tracks'
+import { Participant } from '../../../common/types/Participant'
+import Card from '../../../common/components/Card/Card'
 
 const Charts = () => {
   const { data, fetchData } = useContext(DataContext)

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Card from "../UI/Card/Card";
-import { authHeader, getRole } from "../../helpers/auth";
+import { authHeader, getRole } from "../../../common/helpers/auth";
 import { useNavigate } from "react-router-dom";
 import AllUsers from "./AllUsers";
 import classes from './Admin.module.css'
 import UserDetails from "./UserDetails";
-import { User } from "../../types/User";
+import { User } from "../../../common/types/User";
 import axios from "axios";
+import Card from "../../../common/components/Card/Card";
 
 export type AdminPageMode = "view" | "edit" | "add" 
 

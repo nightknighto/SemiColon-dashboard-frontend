@@ -1,5 +1,5 @@
-import { Participant, StatusEnum } from '../../types/Participant'
-import Button from '../UI/Button/Button'
+import Button from '../../../common/components/Button/Button'
+import { Participant, StatusEnum } from '../../../common/types/Participant'
 import InterviewNotesUI from './InterviewNotesUI'
 import classes from './ParDetails.module.css'
 

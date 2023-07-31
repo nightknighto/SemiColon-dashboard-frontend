@@ -1,4 +1,4 @@
-import { User } from '../../types/User';
+import { User } from '../../../common/types/User';
 import classes from './AllUsers.module.css'
 import UserItem from './UserItem';
 

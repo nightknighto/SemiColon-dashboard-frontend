@@ -1,4 +1,4 @@
-import Card from '../UI/Card/Card'
+import Card from '../../../common/components/Card/Card'
 import classes from './Track.module.css'
 
 const Track = ({

@@ -7,16 +7,16 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
-import Card from '../UI/Card/Card'
 import classes from './ChartItem.module.css'
 import { Chart } from 'chart.js'
 import { useContext, useEffect, useState } from 'react'
 import PieChart from './PieChart'
-import DropDown from '../UI/DropDown/DropDown'
 import { BarChart } from './BarChart'
-import { Participant } from '../../types/Participant'
-import DataContext from '../../context/data-context'
-import { tracks } from '../../types/tracks'
+import { Participant } from '../../../common/types/Participant'
+import DataContext from '../../../common/context/data-context'
+import { tracks } from '../../../common/types/tracks'
+import Card from '../../../common/components/Card/Card'
+import DropDown from '../../../common/components/DropDown/DropDown'
 
 Chart.register([
   CategoryScale,

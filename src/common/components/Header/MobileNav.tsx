@@ -7,7 +7,7 @@ import {
   faRightFromBracket,
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons'
-import { getRole, getUserName } from '../../../helpers/auth'
+import { getRole, getUserName } from '../../../common/helpers/auth'
 
 const MobileNav = () => {
   const dialogRef = useRef<HTMLDialogElement>(null)

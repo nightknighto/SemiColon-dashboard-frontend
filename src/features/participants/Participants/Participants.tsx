@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
-import Card from '../UI/Card/Card'
 import AllPars from './AllPars'
-import DataContext from '../../context/data-context'
+import DataContext from '../../../common/context/data-context'
 import classes from './Participants.module.css'
 import ParDetails from './ParDetails'
-import { Participant, StatusEnum } from '../../types/Participant'
-import { authHeader } from '../../helpers/auth'
+import { Participant, StatusEnum } from '../../../common/types/Participant'
+import { authHeader } from '../../../common/helpers/auth'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Card from '../../../common/components/Card/Card'
 
 const Participants = () => {
   const nav = useNavigate()

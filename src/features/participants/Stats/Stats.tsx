@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react'
-import Card from '../UI/Card/Card'
 import Track from './Track'
-import DataContext from '../../context/data-context'
+import DataContext from '../../../common/context/data-context'
 import { useNavigate } from 'react-router-dom'
-import { authHeader } from '../../helpers/auth'
+import { authHeader } from '../../../common/helpers/auth'
+import Card from '../../../common/components/Card/Card'
 
 const Stats = ({ tracks }: { tracks: string[] }) => {
   const nav = useNavigate()

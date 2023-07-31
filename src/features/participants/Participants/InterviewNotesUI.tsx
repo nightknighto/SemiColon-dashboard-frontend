@@ -2,12 +2,12 @@ import axios from 'axios'
 import {
   InterviewCriteriaEnum,
   InterviewObject,
-} from '../../types/InterviewNotes'
-import Button from '../UI/Button/Button'
+} from '../../../common/types/InterviewNotes'
 import classes from './InterviewNotesUI.module.css'
-import { authHeader } from '../../helpers/auth'
-import DataContext from '../../context/data-context'
+import { authHeader } from '../../../common/helpers/auth'
+import DataContext from '../../../common/context/data-context'
 import { useContext } from 'react'
+import Button from '../../../common/components/Button/Button'
 
 interface InterviewNotesUIProps {
   data?: InterviewObject

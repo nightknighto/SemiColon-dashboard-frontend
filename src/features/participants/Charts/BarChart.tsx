@@ -1,5 +1,5 @@
 import { Bar } from 'react-chartjs-2'
-import { Participant } from '../../types/Participant'
+import { Participant } from '../../../common/types/Participant'
 
 interface BarChartProps {
   chartData: Participant[]

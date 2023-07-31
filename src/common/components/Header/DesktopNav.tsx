@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import classes from './DesktopNav.module.css'
-import { getRole, getUserName, onLogout } from '../../../helpers/auth'
+import { getRole, getUserName, onLogout } from '../../../common/helpers/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCaretDown,
