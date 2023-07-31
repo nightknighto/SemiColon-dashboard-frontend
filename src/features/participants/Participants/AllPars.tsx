@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Participant, StatusEnum } from '../../../common/types/Participant'
+import { Participant, StatusEnum } from '../types/Participant'
 import { tracks } from '../../../common/types/tracks'
 import classes from './AllPars.module.css'
 import ParItem from './ParItem'

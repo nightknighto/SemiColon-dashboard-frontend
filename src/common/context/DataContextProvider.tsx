@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import DataContext from './data-context'
-import { Participant } from '../types/Participant'
+import { Participant } from '../../features/participants/types/Participant'
 import { authHeader } from '../helpers/auth'
 import axios, { AxiosError } from 'axios'
 import { onLogout } from '../helpers/auth'

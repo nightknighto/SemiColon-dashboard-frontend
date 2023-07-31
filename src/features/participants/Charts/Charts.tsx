@@ -3,7 +3,7 @@ import ChartItem from './ChartItem'
 import classes from './Charts.module.css'
 import DataContext from '../../../common/context/data-context'
 import { tracks } from '../../../common/types/tracks'
-import { Participant } from '../../../common/types/Participant'
+import { Participant } from '../types/Participant'
 import Card from '../../../common/components/Card/Card'
 
 const Charts = () => {

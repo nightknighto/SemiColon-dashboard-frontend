@@ -12,9 +12,11 @@ import Charts from '../features/participants/Charts/Charts'
 function App() {
   return (
     <BrowserRouter basename="SemiColon-dashboard-frontend">
-        <DataContextProvider>
-            <Routes>
-            <Route path="/login" element={<Login />} />
+        <Routes>
+            <Route 
+                path="/login" 
+                element={<Login />} 
+            />
             <Route
                 path="/admin"
                 element={
@@ -43,8 +45,7 @@ function App() {
                     </>
                 }
             />
-            </Routes>
-        </DataContextProvider>
+        </Routes>
     </BrowserRouter>
   )
 }

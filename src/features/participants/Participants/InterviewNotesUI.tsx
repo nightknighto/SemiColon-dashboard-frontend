@@ -2,7 +2,7 @@ import axios from 'axios'
 import {
   InterviewCriteriaEnum,
   InterviewObject,
-} from '../../../common/types/InterviewNotes'
+} from '../types/InterviewNotes'
 import classes from './InterviewNotesUI.module.css'
 import { authHeader } from '../../../common/helpers/auth'
 import DataContext from '../../../common/context/data-context'

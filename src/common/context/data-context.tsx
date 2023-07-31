@@ -1,5 +1,5 @@
 import React from 'react'
-import { Participant } from '../types/Participant'
+import { Participant } from '../../features/participants/types/Participant'
 
 interface DataCtxTypes {
   data: Participant[]
