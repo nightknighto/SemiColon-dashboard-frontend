@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { User } from '../../../common/types/User';
+import { User } from '../types/User';
 import classes from './UserDetails.module.css'
 import { AdminPageMode } from './Admin';
 import Button from '../../../common/components/Button/Button';
