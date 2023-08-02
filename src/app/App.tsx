@@ -2,16 +2,25 @@ import Stats from '../features/participants/Stats/Stats'
 
 import Admin from '../features/users/Admin/Admin'
 import Login from '../features/auth/Login/Login'
-import DataContextProvider from '../common/context/DataContextProvider'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import { tracks } from '../common/types/tracks'
 import Header from '../common/components/Header/Header'
 import Participants from '../features/participants/Participants/Participants'
 import Charts from '../features/participants/Charts/Charts'
+import { useAppDispatch } from './hooks'
+import { useEffect } from 'react'
+import { fetchParticipants } from '../features/participants/participantSlice'
 
 function App() {
-  return (
-    <BrowserRouter basename="SemiColon-dashboard-frontend">
+
+    const nav = useNavigate()
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchParticipants(nav))
+    }, [])
+        
+    return (
         <Routes>
             <Route 
                 path="/login" 
@@ -46,8 +55,7 @@ function App() {
                 }
             />
         </Routes>
-    </BrowserRouter>
-  )
+    )
 }
 
 export default App

@@ -5,20 +5,23 @@ import classes from './AllPars.module.css'
 import ParItem from './ParItem'
 import InputBar from '../../../common/components/InputBar/InputBar'
 import DropDown from '../../../common/components/DropDown/DropDown'
+import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { participantChosen, selectAllParticipants, selectChosenParticipantId } from '../participantSlice'
 
-const AllPars = ({
-  data,
-  onChoose,
-  chosenPar,
-}: {
-  data: Participant[]
-  onChoose: (id: string) => void
-  chosenPar?: Participant
-}) => {
+const AllPars = () => {
+  const dispatch = useAppDispatch()
+  const data = useAppSelector(selectAllParticipants)
+  const chosenParId = useAppSelector(selectChosenParticipantId)
+
   const [filteredData, setFilteredData] = useState<Participant[]>(data)
   const [chosenTrack, setChosenTrack] = useState<string>('All')
   const [search, setSearch] = useState<string>('')
   const [parState, setParState] = useState<string>('All')
+
+  
+  const onChoose = (id: string) => {
+    dispatch(participantChosen(id))
+  }
 
   let output
 
@@ -109,7 +112,7 @@ const AllPars = ({
             key={item._id}
             name={item.name}
             onChoose={onChoose.bind(null, item._id)}
-            chosen={chosenPar?._id === item._id}
+            chosen={chosenParId === item._id}
           />
         ))}
       </div>

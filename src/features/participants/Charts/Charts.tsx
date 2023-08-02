@@ -1,17 +1,13 @@
-import { useContext, useEffect } from 'react'
 import ChartItem from './ChartItem'
 import classes from './Charts.module.css'
-import DataContext from '../../../common/context/data-context'
 import { tracks } from '../../../common/types/tracks'
 import { Participant } from '../types/Participant'
 import Card from '../../../common/components/Card/Card'
+import { useAppSelector } from '../../../app/hooks'
+import { selectAllParticipants } from '../participantSlice'
 
 const Charts = () => {
-  const { data, fetchData } = useContext(DataContext)
-
-  useEffect(() => {
-    fetchData()
-  }, [])
+  const participants = useAppSelector(selectAllParticipants)
 
   const datesMappingHandler = (val: Participant) => val.createdAt.split('T')[0]
   const yearMappingHandler = (val: Participant) => val.year
@@ -46,10 +42,10 @@ const Charts = () => {
 
   const tracksNumbers: number[] = []
   let output
-  if (data.length > 0) {
+  if (participants.length > 0) {
     for (const track of tracks) {
       tracksNumbers.push(
-        data.filter((par) => par.firstPreference === track).length
+        participants.filter((par) => par.firstPreference === track).length
       )
     }
 

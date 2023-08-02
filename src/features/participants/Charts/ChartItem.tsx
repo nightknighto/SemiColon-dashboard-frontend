@@ -17,6 +17,8 @@ import DataContext from '../../../common/context/data-context'
 import { tracks } from '../../../common/types/tracks'
 import Card from '../../../common/components/Card/Card'
 import DropDown from '../../../common/components/DropDown/DropDown'
+import { useAppSelector } from '../../../app/hooks'
+import { selectAllParticipants } from '../participantSlice'
 
 Chart.register([
   CategoryScale,
@@ -27,9 +29,6 @@ Chart.register([
   Tooltip,
   Legend,
 ])
-// Chart.register(ArcElement)
-// Chart.register(BarElement)
-// Chart.register(LinearScale)
 
 interface ChartItemProps {
   id: string
@@ -50,7 +49,7 @@ const ChartItem = ({
   barNumbersHandler,
   labelMappingHandler,
 }: ChartItemProps) => {
-  const { data } = useContext(DataContext)
+  const data = useAppSelector(selectAllParticipants)
   const [filteredData, setFilteredData] = useState<Participant[]>([])
   const [barNumbers, setBarNumbers] = useState<number[]>([])
   const [barTitle, setBarTitle] = useState<string>('All')
@@ -60,16 +59,6 @@ const ChartItem = ({
   }, [data])
 
   useEffect(() => {
-    // const dateNums: { createdAt: string; num: number }[] = []
-    // for (const par of filteredData) {
-    //   const createdAt = dateNums.map((val) => val.createdAt)
-    //   const parCreatedAt = par.createdAt.split('T')[0]
-    //   if (createdAt.indexOf(parCreatedAt) !== -1) {
-    //     dateNums[createdAt.indexOf(parCreatedAt)].num += 1
-    //   } else {
-    //     dateNums.push({ createdAt: parCreatedAt, num: 1 })
-    //   }
-    // }
     if (barNumbersHandler) {
       const nums = barNumbersHandler(filteredData)
       setBarNumbers(nums)

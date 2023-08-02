@@ -1,13 +1,11 @@
-import axios from 'axios'
 import {
   InterviewCriteriaEnum,
   InterviewObject,
 } from '../types/InterviewNotes'
 import classes from './InterviewNotesUI.module.css'
-import { authHeader } from '../../../common/helpers/auth'
-import DataContext from '../../../common/context/data-context'
-import { useContext } from 'react'
 import Button from '../../../common/components/Button/Button'
+import { useAppDispatch } from '../../../app/hooks'
+import { saveParticipantInterviewNotes } from '../participantSlice'
 
 interface InterviewNotesUIProps {
   data?: InterviewObject
@@ -18,7 +16,7 @@ export default function InterviewNotesUI({
   data,
   _id,
 }: InterviewNotesUIProps) {
-  const { fetchData } = useContext(DataContext)
+  const dispatch = useAppDispatch()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -50,24 +48,7 @@ export default function InterviewNotesUI({
     }
 
     if (confirm('Are you sure you want to submit the interview notes?')) {
-      try {
-        const hdrs = authHeader()
-        if (!hdrs) return
-        await axios.patch(
-          'https://semicolon-registration-backend.onrender.com/participants/interview/note',
-          {
-            _id,
-            note: interviewData,
-          },
-          {
-            headers: hdrs,
-          }
-        )
-        fetchData()
-        alert('Interview notes saved successfully!')
-      } catch (err: any) {
-        alert(`Error occured: ${err.response.data.data}`)
-      }
+      dispatch(saveParticipantInterviewNotes({ id: _id, interviewData }))
     }
   }
 

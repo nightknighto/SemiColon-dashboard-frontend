@@ -1,13 +1,12 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import AllPars from './AllPars'
-import DataContext from '../../../common/context/data-context'
 import classes from './Participants.module.css'
 import ParDetails from './ParDetails'
-import { Participant, StatusEnum } from '../types/Participant'
 import { authHeader } from '../../../common/helpers/auth'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import Card from '../../../common/components/Card/Card'
+import { useAppSelector } from '../../../app/hooks'
+import { selectAllParticipants } from '../participantSlice'
 
 const Participants = () => {
   const nav = useNavigate()
@@ -18,72 +17,27 @@ const Participants = () => {
     }
   }, [])
 
-  const { data, fetchData } = useContext(DataContext)
-  const [chosenPar, setChosenPar] = useState<Participant>()
+  const participants = useAppSelector(selectAllParticipants)
+  const loading = useAppSelector((state) => state.participants.loading)
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  useEffect(() => {
-    // refresh chosen participant when data changes
-    setChosenPar(data.find((par) => par._id === chosenPar?._id))
-  }, [data])
-
-  const onChoose = (id: string) => {
-    for (const par of data) {
-      if (par._id === id) {
-        setChosenPar(par)
-        return
-      }
-    }
+  if(loading) {
+    return <h2 style={{ marginLeft: 'auto', marginRight: 'auto' }}>Loading...</h2>
   }
 
-  const statusChangeHandler = async (_id: string, status: StatusEnum) => {
-    if (!chosenPar) return
-    try {
-      const headers = authHeader()
-      if (headers) {
-        await axios.patch(
-          'https://semicolon-registration-backend.onrender.com/participants/status',
-          {
-            _id,
-            status,
-          },
-          {
-            headers,
-          }
+  return (
+    <Card className={classes['par-container']}>
+      {
+        participants.length > 0 ? (
+          <>
+            <AllPars />{' '}
+            <ParDetails />
+          </>
+        ) : (
+          <h2 style={{ marginLeft: 'auto', marginRight: 'auto' }}>No data found</h2>
         )
-        fetchData()
-        setChosenPar({ ...chosenPar, acceptanceStatus: status })
-      } else {
-        nav('/login')
       }
-    } catch (err) {
-      alert(`Error occured: ${err}`)
-    }
-  }
-
-  let output
-  if (data.length > 0) {
-    output = data[0] && (
-      <>
-        <AllPars onChoose={onChoose} data={data} chosenPar={chosenPar} />{' '}
-        {chosenPar && (
-          <ParDetails
-            par={chosenPar}
-            statusChangeHandler={statusChangeHandler.bind(null, chosenPar._id)}
-          />
-        )}
-      </>
-    )
-  } else {
-    output = (
-      <h2 style={{ marginLeft: 'auto', marginRight: 'auto' }}>No data found</h2>
-    )
-  }
-
-  return <Card className={classes['par-container']}>{output}</Card>
+    </Card>
+  )
 }
 
 export default Participants
