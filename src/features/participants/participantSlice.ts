@@ -1,11 +1,11 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Participant } from "./types/Participant";
 import axios, { AxiosError } from "axios";
-import { authHeader, onLogout } from "../../common/helpers/auth";
-import { NavigateFunction } from "react-router-dom";
 import { RootState } from "../../app/store";
 import { StatusEnum } from "./types/Participant";
 import { InterviewCriteriaObject, InterviewObject } from "./types/InterviewNotes";
+import { createAppAsyncThunk } from "../../app/hooks";
+import { logoutUser, selectAuthHeader } from "../auth/authSlice";
 
 
 interface ParticipantState {
@@ -20,23 +20,20 @@ const initialState: ParticipantState = {
     loading: false,
 }
 
-export const fetchParticipants = createAsyncThunk("participants/fetchParticipants", async (nav: NavigateFunction) => {
+export const fetchParticipants = createAppAsyncThunk("participants/fetchParticipants", async (_, { getState, dispatch }) => {
     try {
-        const hdrs = authHeader()
-        if (hdrs) {
-          const res = await axios.get(
+        const headers = selectAuthHeader(getState())
+        const res = await axios.get(
             'https://semicolon-registration-backend.onrender.com/participants/getAll',
-            { headers: hdrs }
-          )
-          const participants = res.data
-          return participants.data
-        }
+            { headers }
+        )
+        const participants = res.data
+        return participants.data
       } catch (_err) {
         const err = _err as AxiosError<{ data: string }>
         console.log(err.response)
         if (err.response?.status === 401) {
-            onLogout()
-            nav('/login')
+            dispatch(logoutUser())
         } else {
             alert(err.response?.data?.data ?? err.message)
         }
@@ -45,12 +42,10 @@ export const fetchParticipants = createAsyncThunk("participants/fetchParticipant
       }
 })
 
-export const updateParticipantStatus = createAsyncThunk("participants/updateParticipantStatus", async ({ status, id }: { status: StatusEnum, id: string }) => {
-    
+export const updateParticipantStatus = createAppAsyncThunk("participants/updateParticipantStatus", async ({ status, id }: { status: StatusEnum, id: string }, { getState }) => {
     try {
-        const headers = authHeader()
-        if (headers) {
-            await axios.patch(
+        const headers = selectAuthHeader(getState())
+        await axios.patch(
             'https://semicolon-registration-backend.onrender.com/participants/status',
             {
                 _id: id,
@@ -59,27 +54,25 @@ export const updateParticipantStatus = createAsyncThunk("participants/updatePart
             {
                 headers,
             }
-            )
-        }
+        )
     } catch (err) {
         alert(`Error occured while updating status: ${err}`)
         throw err
     }
 })
 
-export const saveParticipantInterviewNotes = createAsyncThunk("participants/saveParticipantInterviewNotes", async ({ interviewData, id }: { interviewData: InterviewCriteriaObject, id: string }) => {
+export const saveParticipantInterviewNotes = createAppAsyncThunk("participants/saveParticipantInterviewNotes", async ({ interviewData, id }: { interviewData: InterviewCriteriaObject, id: string }, { getState }) => {
     try {
-        const hdrs = authHeader()
-        if (!hdrs) return
+        const headers = selectAuthHeader(getState())
         const req = await axios.patch(
-          'https://semicolon-registration-backend.onrender.com/participants/interview/note',
-          {
-            _id: id,
-            note: interviewData,
-          },
-          {
-            headers: hdrs,
-          }
+            'https://semicolon-registration-backend.onrender.com/participants/interview/note',
+            {
+                _id: id,
+                note: interviewData,
+            },
+            {
+                headers,
+            }
         )
         alert('Interview notes saved successfully!')
         return req.data.data.InterviewerNote as InterviewObject

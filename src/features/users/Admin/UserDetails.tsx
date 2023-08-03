@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { User } from '../types/User';
+import { User, UserRole } from '../types/User';
 import classes from './UserDetails.module.css'
 import Button from '../../../common/components/Button/Button';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
@@ -100,7 +100,7 @@ const UserDetails = ({ user }: UserDetailsProps) => {
               <p>
                 <span className={classes.bold}>Role: </span>
                 {(pageMode ==="view") && role}
-                {pageMode!=="view" && <select value={role} onChange={(e)=>{setRole(e.target.value)}}>
+                {pageMode!=="view" && <select value={role} onChange={(e)=>{setRole(e.target.value as UserRole)}}>
                   <option value="hr">hr</option>
                   <option value="member">member</option>
                 </select>}

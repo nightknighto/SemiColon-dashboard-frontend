@@ -1,18 +1,8 @@
-import { useEffect } from 'react'
 import Track from './Track'
-import { useNavigate } from 'react-router-dom'
-import { authHeader } from '../../../common/helpers/auth'
 import Card from '../../../common/components/Card/Card'
 import { useAppSelector } from '../../../app/hooks'
 
 const Stats = ({ tracks }: { tracks: string[] }) => {
-  const nav = useNavigate()
-  useEffect(() => {
-    const r = authHeader()
-    if (!r) {
-      nav('/login')
-    }
-  }, [])
 
   const participants = useAppSelector(state => state.participants.items)
   const tracksStats = []

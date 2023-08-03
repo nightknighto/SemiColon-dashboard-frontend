@@ -5,11 +5,12 @@ import BarLoader from 'react-spinners/BarLoader'
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import classes from './Failed.module.css'
-import axios from 'axios'
-import { authLogin } from '../../../common/helpers/auth'
 import useInput from '../../../common/hooks/use-input'
+import { useAppDispatch } from '../../../app/hooks'
+import { loginUser } from '../authSlice'
 
 const Login = () => {
+  const dispatch = useAppDispatch()
   const [clicked, setClicked] = useState(false)
   const [showLoader, setShowLoader] = useState(false)
   const navigate = useNavigate()
@@ -44,32 +45,29 @@ const Login = () => {
     }`
   }
 
-  const post_Req = () => {
-    // 404 , 202
+  const post_Req = async () => {
     const body = {
       phone: enteredPhone.trim(),
       password: enteredPass.trim(),
     }
-    axios
-      .post(
-        'https://semicolon-registration-backend.onrender.com/auth/login',
-        body
-      )
-      .then((response) => authLogin(response, navigate))
-      .catch((err) => {
-        const res = err.response.data.data
-        setClicked(false)
-        setTimeout(() => setShowLoader(false), 200)
-        setTimeout(() => {
-          if (res === 'Incorrect password') {
-            passReturned()
-          }
+    
+    try{
+      await dispatch(loginUser(body))
+      navigate('/stats')
+    } catch(err: any){
+      const res = err.response.data.data
+      setClicked(false)
+      setTimeout(() => setShowLoader(false), 200)
+      setTimeout(() => {
+        if (res === 'Incorrect password') {
+          passReturned()
+        }
 
-          if (res === 'Incorrect phone number') {
-            phoneReturned()
-          }
-        }, 100)
-      })
+        if (res === 'Incorrect phone number') {
+          phoneReturned()
+        }
+      }, 100)
+    }
   }
 
   const formIsValid = phoneIsValid && passIsValid

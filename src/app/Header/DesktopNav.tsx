@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import classes from './DesktopNav.module.css'
-import { getRole, getUserName, onLogout } from '../../../common/helpers/auth'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCaretDown,
@@ -8,20 +7,29 @@ import {
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '../hooks'
+import { logoutUser } from '../../features/auth/authSlice'
 
 const DesktopNav = () => {
+  const { username, role } = useAppSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+  const isAdmin = role === 'admin';
+
   const [dropBarShow, setDropBarShow] = useState<boolean>(false)
 
   const onBarToggle = () => {
     setDropBarShow(!dropBarShow)
   }
-  const isAdmin = getRole() === "admin";
+
+  const handleLogout = () => {
+    dispatch(logoutUser())
+  }
 
   return (
     <nav className={classes['main-nav']}>
       <div className={classes['user-d']} onClick={onBarToggle}>
         <FontAwesomeIcon icon={faUserCircle} className={classes['usrCircle']} />
-        {getUserName()}
+        {username}
         <FontAwesomeIcon
           icon={faCaretDown}
           className={`${classes['r-arrow']} ${
@@ -31,7 +39,7 @@ const DesktopNav = () => {
       </div>
       <Link
         to="/login"
-        onClick={onLogout}
+        onClick={handleLogout}
         className={`${classes['logout']} ${
           dropBarShow ? classes['logout-clicked'] : ''
         }`}

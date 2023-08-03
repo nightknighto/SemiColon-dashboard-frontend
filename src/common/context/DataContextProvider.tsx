@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import DataContext from './data-context'
 import { Participant } from '../../features/participants/types/Participant'
-import { authHeader } from '../helpers/auth'
+import { authHeader } from '../../features/auth/utils/authLocalStorage'
 import axios, { AxiosError } from 'axios'
-import { onLogout } from '../helpers/auth'
+import { onLogout } from '../../features/auth/utils/authLocalStorage'
 import { useNavigate } from 'react-router-dom'
 
 const DataContextProvider = ({ children }: { children: React.ReactNode }) => {

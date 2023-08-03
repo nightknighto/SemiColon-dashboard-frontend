@@ -2,23 +2,31 @@ import Stats from '../features/participants/Stats/Stats'
 
 import Admin from '../features/users/Admin/Admin'
 import Login from '../features/auth/Login/Login'
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import { tracks } from '../common/types/tracks'
-import Header from '../common/components/Header/Header'
+import Header from './Header/Header'
 import Participants from '../features/participants/Participants/Participants'
 import Charts from '../features/participants/Charts/Charts'
-import { useAppDispatch } from './hooks'
+import { useAppDispatch, useAppSelector } from './hooks'
 import { useEffect } from 'react'
 import { fetchParticipants } from '../features/participants/participantSlice'
+import { loadSavedLogin, selectAuth } from '../features/auth/authSlice'
 
 function App() {
 
     const nav = useNavigate()
     const dispatch = useAppDispatch()
-
+    const auth = useAppSelector(selectAuth)
+    
     useEffect(() => {
-        dispatch(fetchParticipants(nav))
-    }, [])
+        (async () => {
+            if(!auth.token && !dispatch(loadSavedLogin())) {
+                nav('/login')
+            } else {
+                dispatch(fetchParticipants())
+            }
+        })()
+    }, [auth])
         
     return (
         <Routes>

@@ -1,8 +1,9 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { User } from "./types/User";
-import { authHeader } from "../../common/helpers/auth";
 import { RootState } from "../../app/store";
 import axios from "axios";
+import { createAppAsyncThunk } from "../../app/hooks";
+import { selectAuthHeader } from "../auth/authSlice";
 
 export type AdminPageMode = "view" | "edit" | "add" 
 
@@ -20,15 +21,14 @@ const initialState: UserState = {
     pageMode: "view"
 }
 
-export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
-    const hdrs = authHeader()!
-    const res = await fetch("https://semicolon-registration-backend.onrender.com/user/getAll", {headers: hdrs})
-    const body = await res.json()
-    return body.data
+export const fetchUsers = createAppAsyncThunk("users/fetchUsers", async (_, { getState }) => {
+    const headers = selectAuthHeader(getState())
+    const res = await axios.get("https://semicolon-registration-backend.onrender.com/user/getAll", {headers})
+    return res.data.data
 })
 
-export const createUser = createAsyncThunk("users/createUser", async (newUser: Omit<User, '_id'>) => {
-    const headers = authHeader()!
+export const createUser = createAppAsyncThunk("users/createUser", async (newUser: Omit<User, '_id'>, { getState }) => {
+    const headers = selectAuthHeader(getState())
     const res = await axios.post(
         'https://semicolon-registration-backend.onrender.com/user/',
         {
@@ -42,8 +42,8 @@ export const createUser = createAsyncThunk("users/createUser", async (newUser: O
     return result;
 })
 
-export const updateUser = createAsyncThunk("users/updateUser", async (updatedUser: User) => {
-    const headers = authHeader()!
+export const updateUser = createAppAsyncThunk("users/updateUser", async (updatedUser: User, { getState }) => {
+    const headers = selectAuthHeader(getState())
     const res = await axios.patch(
         'https://semicolon-registration-backend.onrender.com/user/update/'+updatedUser._id,
         {

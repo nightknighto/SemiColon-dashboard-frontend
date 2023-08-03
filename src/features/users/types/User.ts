@@ -3,6 +3,8 @@ export interface User {
     username: string,
     phone: string,
     password: string,
-    role: string,
+    role: UserRole,
     active: boolean
 }
+
+export type UserRole = "admin" | "hr" | "member"
