@@ -10,7 +10,7 @@ import { InterviewCriteriaObject, InterviewObject } from "./types/InterviewNotes
 
 interface ParticipantState {
     items: Participant[],
-    chosenId?: string,
+    selectedId?: string,
     loading: boolean,
     error?: string
 }
@@ -93,8 +93,8 @@ const participantSlice = createSlice({
     name: "participants",
     initialState,
     reducers: {
-        participantChosen(state, action: PayloadAction<string>) {
-            state.chosenId = action.payload
+        participantSelected(state, action: PayloadAction<string>) {
+            state.selectedId = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -124,11 +124,11 @@ const participantSlice = createSlice({
 
 export default participantSlice.reducer
 
-export const { participantChosen } = participantSlice.actions
+export const { participantSelected } = participantSlice.actions
 
 export const selectAllParticipants = (state: RootState) => state.participants.items
 
 export const selectParticipantById = (state: RootState, id: string) => state.participants.items.find(p => p._id === id)
 
-export const selectChosenParticipantId = (state: RootState) => state.participants.chosenId
-export const selectChosenParticipant = (state: RootState) => state.participants.items.find(p => p._id === state.participants.chosenId)
+export const selectChosenParticipantId = (state: RootState) => state.participants.selectedId
+export const selectChosenParticipant = (state: RootState) => state.participants.items.find(p => p._id === state.participants.selectedId)

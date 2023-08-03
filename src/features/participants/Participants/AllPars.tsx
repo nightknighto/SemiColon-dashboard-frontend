@@ -6,7 +6,7 @@ import ParItem from './ParItem'
 import InputBar from '../../../common/components/InputBar/InputBar'
 import DropDown from '../../../common/components/DropDown/DropDown'
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
-import { participantChosen, selectAllParticipants, selectChosenParticipantId } from '../participantSlice'
+import { participantSelected, selectAllParticipants, selectChosenParticipantId } from '../participantSlice'
 
 const AllPars = () => {
   const dispatch = useAppDispatch()
@@ -20,7 +20,7 @@ const AllPars = () => {
 
   
   const onChoose = (id: string) => {
-    dispatch(participantChosen(id))
+    dispatch(participantSelected(id))
   }
 
   let output

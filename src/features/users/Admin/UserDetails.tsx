@@ -1,21 +1,19 @@
 import { useEffect, useState } from 'react';
 import { User } from '../types/User';
 import classes from './UserDetails.module.css'
-import { AdminPageMode } from './Admin';
 import Button from '../../../common/components/Button/Button';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { AdminPageMode, createUser, pageModeChanged, updateUser } from '../usersSlice';
 
 interface UserDetailsProps {
   user: User,
-  updated: boolean,
-  addUser: (newUser: {username: string, phone: string, active: boolean, role: string, password: string}) => void, 
-  updateUser: (user: User)=> void, 
-  mode: string, 
-  setMode: (mode: AdminPageMode)=>void, 
-  loading: boolean, 
-  error: string | null
 }
 
-const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading, error}: UserDetailsProps) => {
+const UserDetails = ({ user }: UserDetailsProps) => {
+
+  const dispatch = useAppDispatch();
+  const pageMode = useAppSelector(state => state.users.pageMode)
+
   const [phone, setPhone] = useState(user.phone);
   const [username, setUsername] = useState(user.username);
   const [role, setRole] = useState(user.role);
@@ -23,6 +21,39 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
   const [password, setPassword] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [newUsername, setNewUsername] = useState("");
+
+  const [updated, setUpdated] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const addUser = async (newUser: Omit<User, '_id'>) => {
+    setLoading(true);
+    setError(null);
+    try{
+      await dispatch(createUser(newUser)).unwrap();
+    } catch(err: any) {
+      setError(err.response?.data.data);
+    } finally {
+      setLoading(false);
+    }
+  }
+    
+  const handleUpdateUser = async (newUser: User) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await dispatch(updateUser(newUser)).unwrap();
+      setUpdated(true);
+      setTimeout(() => {
+        setUpdated(false);
+      }, 1500);
+    } catch (err: any) {
+      setError(err.response?.data.data);
+    } finally {
+      setLoading(false);
+    }
+  }
+
     useEffect(() => {
       setPhone(user.phone);
       setUsername(user.username);
@@ -32,7 +63,11 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
 
     useEffect(() => {
       setRole("hr");
-    }, [mode])
+    }, [pageMode])
+
+    function setPageMode(mode: AdminPageMode) {
+      dispatch(pageModeChanged(mode));
+    }
 
     return (
         <div className={classes.userContainer}>
@@ -40,22 +75,22 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
             <div className={classes.userData}>
               <span className={classes.bold}>
                 Name:{" "}
-                {mode==="view" && username}
-                {mode==="edit" && <input value={username} onChange={(e) => {setUsername(e.target.value)}}></input>}
-                {mode==="add" && <input value={newUsername} onChange={(e) => {setNewUsername(e.target.value)}}></input>}
+                {pageMode==="view" && username}
+                {pageMode==="edit" && <input value={username} onChange={(e) => {setUsername(e.target.value)}}></input>}
+                {pageMode==="add" && <input value={newUsername} onChange={(e) => {setNewUsername(e.target.value)}}></input>}
               </span>
               <p>
                 <span className={classes.bold}>
                     Phone:{" "}
-                    {mode==="view" && phone}
-                    {mode==="edit" && <input value={phone} onChange={(e) => {setPhone(e.target.value)}}></input>}
-                    {mode==="add" && <input value={newPhone} onChange={(e) => {setNewPhone(e.target.value)}}></input>}
+                    {pageMode==="view" && phone}
+                    {pageMode==="edit" && <input value={phone} onChange={(e) => {setPhone(e.target.value)}}></input>}
+                    {pageMode==="add" && <input value={newPhone} onChange={(e) => {setNewPhone(e.target.value)}}></input>}
                 </span>
               </p>
               <p>
                 <span className={classes.bold}>Status: </span>
-                {mode==="view" && (user.active ? "Active" : "Inactive")}
-                {mode!=="view" && 
+                {pageMode==="view" && (user.active ? "Active" : "Inactive")}
+                {pageMode!=="view" && 
                 <select value={active ? "active" : "inactive"} onChange={(e)=>{setActive(e.target.value==="active")}}>
                   <option value="active">Active</option>
                   <option value="inactive">Inactive</option>
@@ -64,13 +99,13 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
               </p>
               <p>
                 <span className={classes.bold}>Role: </span>
-                {(mode ==="view") && role}
-                {mode!=="view" && <select value={role} onChange={(e)=>{setRole(e.target.value)}}>
+                {(pageMode ==="view") && role}
+                {pageMode!=="view" && <select value={role} onChange={(e)=>{setRole(e.target.value)}}>
                   <option value="hr">hr</option>
                   <option value="member">member</option>
                 </select>}
               </p>
-              {mode==="add" && <p>
+              {pageMode==="add" && <p>
                 <span className={classes.bold}>Password: </span>
                 <input value={password} onChange={(e) => {setPassword(e.target.value)}}></input>
                 
@@ -81,38 +116,38 @@ const UserDetails = ({user, updated, addUser, updateUser, mode, setMode, loading
           <hr className={classes.line}></hr>
 
           <div className={classes.buttons}>
-            {mode==="edit" &&
+            {pageMode==="edit" &&
             <>
               <Button
-              onClick={() => updateUser({...user, phone: phone, role: role, username: username, active: active})}
+              onClick={() => handleUpdateUser({...user, phone: phone, role: role, username: username, active: active})}
               className={classes.acceptBtn}
               disabled={loading}
               >
               Update
             </Button>
             <Button
-              onClick={() => {setMode("view")}}
+              onClick={() => {setPageMode("view")}}
               className={classes.rejectBtn}
               >
               Cancel
             </Button> 
             </>
             }
-            {mode==="view" &&
-            <Button onClick={() => {setMode("add")}} className={classes.acceptBtn}>
+            {pageMode==="view" &&
+            <Button onClick={() => {setPageMode("add")}} className={classes.acceptBtn}>
                 Add user
             </Button>}
-            {mode==="view" && role !== "admin" &&
-            <Button onClick={() => {setMode("edit")}} className={classes.passiveBtn} disabled={user._id===""}>
+            {pageMode==="view" && role !== "admin" &&
+            <Button onClick={() => {setPageMode("edit")}} className={classes.passiveBtn} disabled={user._id===""}>
                 Edit
             </Button>
             }
-            {mode==="add" && 
+            {pageMode==="add" && 
             <>
             <Button onClick={() => {addUser({username: newUsername, phone: newPhone, active: active, role: role, password: password})}} className={classes.acceptBtn} disabled={loading}>
                 Add
             </Button>
-            <Button onClick={() => {setMode("view")}} className={classes.rejectBtn}>
+            <Button onClick={() => {setPageMode("view")}} className={classes.rejectBtn}>
                 Cancel
             </Button>
             </>

@@ -1,13 +1,16 @@
-import { User } from '../types/User';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { selectAllUsers, userSelected } from '../usersSlice';
 import classes from './AllUsers.module.css'
 import UserItem from './UserItem';
 
-interface AllUsersProps {
-  data: User[],
-  onChoose: (id: string) => void
-}
+const AllUsers = () => {
 
-const AllUsers = ({ data, onChoose } : AllUsersProps) => {
+  const dispatch = useAppDispatch();
+  const data = useAppSelector(selectAllUsers);
+
+  const onChoose = (id: string) => {
+    dispatch(userSelected(id))
+  }
 
     let output;
     if (data[0]) {
