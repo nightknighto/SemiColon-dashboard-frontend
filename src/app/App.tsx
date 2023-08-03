@@ -19,13 +19,11 @@ function App() {
     const auth = useAppSelector(selectAuth)
     
     useEffect(() => {
-        (async () => {
-            if(!auth.token && !dispatch(loadSavedLogin())) {
-                nav('/login')
-            } else {
-                dispatch(fetchParticipants())
-            }
-        })()
+        if(auth.token) {
+            dispatch(fetchParticipants())
+        } else {
+            if(!dispatch(loadSavedLogin())) nav('/login')
+        }
     }, [auth])
         
     return (
