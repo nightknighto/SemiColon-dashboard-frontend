@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { User } from "./types/User";
 import { RootState } from "../../app/store";
 import axios from "axios";
@@ -7,19 +7,19 @@ import { selectAuthHeader } from "../auth/authSlice";
 
 export type AdminPageMode = "view" | "edit" | "add" 
 
-interface UserState {
-    items: User[],
-    selectedId?: string,
+const usersAdapater = createEntityAdapter<User>({
+    selectId: (user) => user._id,
+})
+
+const initialState = usersAdapater.getInitialState<{
     loading: boolean,
+    selectedId?: string,
     error?: string,
     pageMode: AdminPageMode
-}
-
-const initialState: UserState = {
-    items: [],
+}>({
     loading: false,
     pageMode: "view"
-}
+})
 
 export const fetchUsers = createAppAsyncThunk("users/fetchUsers", async (_, { getState }) => {
     const headers = selectAuthHeader(getState())
@@ -75,7 +75,7 @@ const usersSlice = createSlice({
             state.error = undefined
         })
         .addCase(fetchUsers.fulfilled, (state, action) => {
-            state.items = action.payload
+            usersAdapater.setAll(state, action.payload)
             state.loading = false
         })
         .addCase(fetchUsers.rejected, (state, action) => {
@@ -83,14 +83,16 @@ const usersSlice = createSlice({
             state.error = action.error.message
         })
         .addCase(createUser.fulfilled, (state, action: PayloadAction<User>) => {
-            state.items = [...state.items, action.payload]
+            usersAdapater.addOne(state, action.payload)
             state.selectedId = action.payload._id
             state.pageMode = "view"
         })
         .addCase(updateUser.fulfilled, (state, action) => {
             const updatedUser = action.meta.arg
-            const index = state.items.findIndex(user => user._id === updatedUser._id)
-            state.items[index] = updatedUser
+            usersAdapater.updateOne(state, {
+                id: updatedUser._id,
+                changes: updatedUser
+            })
             state.selectedId = updatedUser._id
             state.pageMode = "view"
         })
@@ -101,6 +103,6 @@ export const { userSelected, pageModeChanged } = usersSlice.actions
 
 export default usersSlice.reducer
 
-export const selectAllUsers = (state: RootState) => state.users.items
-export const selectUserById = (state: RootState, id: string) => state.users.items.find(user => user._id === id)
-export const selectSelectedUser = (state: RootState) => state.users.items.find(user => user._id === state.users.selectedId)
+export const selectSelectedUser = (state: RootState) => state.users.entities[state.users.selectedId ?? ""]
+
+export const { selectAll: selectAllUsers, selectById: selectUserById } = usersAdapater.getSelectors<RootState>(state => state.users)
