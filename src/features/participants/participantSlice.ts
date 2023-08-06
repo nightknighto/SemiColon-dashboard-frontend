@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { Participant } from "./types/Participant";
 import axios, { AxiosError } from "axios";
 import { RootState } from "../../app/store";
@@ -7,18 +7,17 @@ import { InterviewCriteriaObject, InterviewObject } from "./types/InterviewNotes
 import { createAppAsyncThunk } from "../../app/hooks";
 import { logoutUser, selectAuthHeader } from "../auth/authSlice";
 
+const participantAdapater = createEntityAdapter<Participant>({
+    selectId: (participant) => participant._id,
+});
 
-interface ParticipantState {
-    items: Participant[],
-    selectedId?: string,
+const initialState = participantAdapater.getInitialState<{
     loading: boolean,
+    selectedId?: string,
     error?: string
-}
-
-const initialState: ParticipantState = {
-    items: [],
+}>({
     loading: false,
-}
+})
 
 export const fetchParticipants = createAppAsyncThunk("participants/fetchParticipants", async (_, { getState, dispatch }) => {
     try {
@@ -97,7 +96,7 @@ const participantSlice = createSlice({
             state.error = undefined
         })
         .addCase(fetchParticipants.fulfilled, (state, action: PayloadAction<Participant[]>) => {
-            state.items = action.payload
+            participantAdapater.setAll(state, action.payload)
             state.loading = false
         })
         .addCase(fetchParticipants.rejected, (state, action) => {
@@ -105,11 +104,11 @@ const participantSlice = createSlice({
             state.loading = false
         })
         .addCase(updateParticipantStatus.fulfilled, (state, { meta }) => {
-            const item = state.items.find(p => p._id === meta.arg.id)
+            const item = state.entities[meta.arg.id]
             if(item) item.acceptanceStatus = meta.arg.status
         })
         .addCase(saveParticipantInterviewNotes.fulfilled, (state, { meta, payload }) => {
-            const item = state.items.find(p => p._id === meta.arg.id)
+            const item = state.entities[meta.arg.id]
             if(item) item.InterviewerNote = payload
         })
     }
@@ -119,9 +118,7 @@ export default participantSlice.reducer
 
 export const { participantSelected } = participantSlice.actions
 
-export const selectAllParticipants = (state: RootState) => state.participants.items
-
-export const selectParticipantById = (state: RootState, id: string) => state.participants.items.find(p => p._id === id)
-
 export const selectChosenParticipantId = (state: RootState) => state.participants.selectedId
-export const selectChosenParticipant = (state: RootState) => state.participants.items.find(p => p._id === state.participants.selectedId)
+export const selectChosenParticipant = (state: RootState) => state.participants.entities[state.participants.selectedId ?? ""]
+
+export const { selectAll: selectAllParticipants, selectById: selectParticipantById } = participantAdapater.getSelectors<RootState>(state => state.participants)

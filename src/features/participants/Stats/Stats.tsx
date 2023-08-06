@@ -1,10 +1,11 @@
 import Track from './Track'
 import Card from '../../../common/components/Card/Card'
 import { useAppSelector } from '../../../app/hooks'
+import { selectAllParticipants } from '../participantSlice'
 
 const Stats = ({ tracks }: { tracks: string[] }) => {
 
-  const participants = useAppSelector(state => state.participants.items)
+  const participants = useAppSelector(selectAllParticipants)
   const tracksStats = []
 
   let output
