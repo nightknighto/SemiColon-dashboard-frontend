@@ -61,10 +61,6 @@ const UserDetails = ({ user }: UserDetailsProps) => {
       setActive(user.active)
     }, [user])
 
-    useEffect(() => {
-      setRole("hr");
-    }, [pageMode])
-
     function setPageMode(mode: AdminPageMode) {
       dispatch(pageModeChanged(mode));
     }
