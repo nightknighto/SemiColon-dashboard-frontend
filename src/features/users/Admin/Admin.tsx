@@ -8,11 +8,14 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { fetchUsers, selectSelectedUser } from "../usersSlice";
 
 const Admin = () => {
+
     const nav = useNavigate()
     const isAdmin = useAppSelector((state) => state.auth.role === 'admin')
-    if (!isAdmin) {
-      nav("/stats");
-    }
+    useEffect(() => {
+      if (!isAdmin) {
+        nav("/stats");
+      }
+    }, [isAdmin]);
 
     const dispatch = useAppDispatch();
     const selectedUser = useAppSelector(selectSelectedUser);
