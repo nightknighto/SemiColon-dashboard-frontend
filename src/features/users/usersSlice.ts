@@ -15,10 +15,12 @@ const initialState = usersAdapater.getInitialState<{
     loading: boolean,
     selectedId?: string,
     error?: string,
-    pageMode: AdminPageMode
+    pageMode: AdminPageMode,
+    usersFetched: boolean
 }>({
     loading: false,
-    pageMode: "view"
+    pageMode: "view",
+    usersFetched: false
 })
 
 export const fetchUsers = createAppAsyncThunk("users/fetchUsers", async (_, { getState }) => {
@@ -77,6 +79,7 @@ const usersSlice = createSlice({
         .addCase(fetchUsers.fulfilled, (state, action) => {
             usersAdapater.setAll(state, action.payload)
             state.loading = false
+            state.usersFetched = true
         })
         .addCase(fetchUsers.rejected, (state, action) => {
             state.loading = false
@@ -104,5 +107,6 @@ export const { userSelected, pageModeChanged } = usersSlice.actions
 export default usersSlice.reducer
 
 export const selectSelectedUser = (state: RootState) => state.users.entities[state.users.selectedId ?? ""]
+export const selectReadyToFetchUsersBool = (state: RootState) => !state.users.usersFetched && !state.users.loading
 
 export const { selectAll: selectAllUsers, selectById: selectUserById } = usersAdapater.getSelectors<RootState>(state => state.users)

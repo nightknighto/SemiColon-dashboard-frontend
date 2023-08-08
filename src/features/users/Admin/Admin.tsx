@@ -5,7 +5,7 @@ import classes from './Admin.module.css'
 import UserDetails from "./UserDetails";
 import Card from "../../../common/components/Card/Card";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { fetchUsers, selectSelectedUser } from "../usersSlice";
+import { fetchUsers, selectReadyToFetchUsersBool, selectSelectedUser } from "../usersSlice";
 
 const Admin = () => {
 
@@ -19,9 +19,10 @@ const Admin = () => {
 
     const dispatch = useAppDispatch();
     const selectedUser = useAppSelector(selectSelectedUser);
+    const readyToFetch = useAppSelector(selectReadyToFetchUsersBool)
 
     useEffect(() => {
-      dispatch(fetchUsers())
+      if(readyToFetch) dispatch(fetchUsers())
     }, []);
 
     return (
