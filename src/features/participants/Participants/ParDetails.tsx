@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import Button from '../../../common/components/Button/Button'
 import { selectChosenParticipant, updateParticipantStatus } from '../participantSlice'
-import { Participant, StatusEnum } from '../types/Participant'
+import { StatusEnum } from '../types/Participant'
 import InterviewNotesUI from './InterviewNotesUI'
 import classes from './ParDetails.module.css'
 
