@@ -1,17 +1,19 @@
 import { useAppDispatch, useAppSelector } from '../../../app/hooks'
 import Button from '../../../common/components/Button/Button'
-import { selectChosenParticipant, updateParticipantStatus } from '../participantSlice'
+import {
+  selectChosenParticipant,
+  updateParticipantStatus,
+} from '../participantSlice'
 import { StatusEnum } from '../types/Participant'
 import InterviewNotesUI from './InterviewNotesUI'
 import classes from './ParDetails.module.css'
 
 const ParDetails = () => {
-  
   const dispatch = useAppDispatch()
   const par = useAppSelector(selectChosenParticipant)
-  
+
   if (!par) return <div></div>
-  
+
   const statusChangeHandler = async (status: StatusEnum) => {
     dispatch(updateParticipantStatus({ id: par._id, status }))
   }

@@ -1,7 +1,4 @@
-import {
-  InterviewCriteriaEnum,
-  InterviewObject,
-} from '../types/InterviewNotes'
+import { InterviewCriteriaEnum, InterviewObject } from '../types/InterviewNotes'
 import classes from './InterviewNotesUI.module.css'
 import Button from '../../../common/components/Button/Button'
 import { useAppDispatch } from '../../../app/hooks'
@@ -12,10 +9,7 @@ interface InterviewNotesUIProps {
   _id: string
 }
 
-export default function InterviewNotesUI({
-  data,
-  _id,
-}: InterviewNotesUIProps) {
+export default function InterviewNotesUI({ data, _id }: InterviewNotesUIProps) {
   const dispatch = useAppDispatch()
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {

@@ -50,11 +50,11 @@ const Login = () => {
       phone: enteredPhone.trim(),
       password: enteredPass.trim(),
     }
-    
-    try{
+
+    try {
       await dispatch(loginUser(body))
       navigate('/stats')
-    } catch(err: any){
+    } catch (err: any) {
       const res = err.response.data.data
       setClicked(false)
       setTimeout(() => setShowLoader(false), 200)

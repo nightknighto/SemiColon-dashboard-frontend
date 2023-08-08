@@ -11,9 +11,9 @@ import { useAppDispatch, useAppSelector } from '../hooks'
 import { logoutUser } from '../../features/auth/authSlice'
 
 const DesktopNav = () => {
-  const { username, role } = useAppSelector(state => state.auth)
+  const { username, role } = useAppSelector((state) => state.auth)
   const dispatch = useAppDispatch()
-  const isAdmin = role === 'admin';
+  const isAdmin = role === 'admin'
 
   const [dropBarShow, setDropBarShow] = useState<boolean>(false)
 
@@ -48,9 +48,11 @@ const DesktopNav = () => {
         <FontAwesomeIcon icon={faRightFromBracket} color="red" />
       </Link>
       <ul>
-        {isAdmin && <li>
-          <Link to="/admin">Admin dashboard</Link>
-        </li>}
+        {isAdmin && (
+          <li>
+            <Link to="/admin">Admin dashboard</Link>
+          </li>
+        )}
         <li>
           <Link to="/stats">Stats</Link>
         </li>

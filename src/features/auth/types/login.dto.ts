@@ -1,4 +1,4 @@
-import { UserRole } from "../../users/types/User"
+import { UserRole } from '../../users/types/User'
 
 export interface LoginDTO {
   status: number

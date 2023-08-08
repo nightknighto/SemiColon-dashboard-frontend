@@ -10,10 +10,10 @@ import {
 import { useAppSelector } from '../hooks'
 
 const MobileNav = () => {
-  const { role, username } = useAppSelector(state => state.auth)
+  const { role, username } = useAppSelector((state) => state.auth)
   const dialogRef = useRef<HTMLDialogElement>(null)
 
-  const isAdmin = role === "admin";
+  const isAdmin = role === 'admin'
 
   const onModalShow = () => {
     dialogRef.current?.showModal()
@@ -52,9 +52,11 @@ const MobileNav = () => {
         onClick={onBackDropClick}
       >
         <ul className={classes['dia-elements']}>
-          {isAdmin && <li>
-            <Link to="/admin">Admin dashboard</Link>
-          </li>}
+          {isAdmin && (
+            <li>
+              <Link to="/admin">Admin dashboard</Link>
+            </li>
+          )}
           <li>
             <Link to="/stats" onClick={onModalClose}>
               Stats

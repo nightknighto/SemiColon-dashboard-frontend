@@ -4,7 +4,6 @@ import { useAppSelector } from '../../../app/hooks'
 import { selectAllParticipants } from '../participantSlice'
 
 const Stats = ({ tracks }: { tracks: string[] }) => {
-
   const participants = useAppSelector(selectAllParticipants)
   const tracksStats = []
 
@@ -12,7 +11,9 @@ const Stats = ({ tracks }: { tracks: string[] }) => {
   let total = 0
   if (participants.length > 0) {
     for (const track of tracks) {
-      const numPars = participants.filter((par) => par.firstPreference === track).length
+      const numPars = participants.filter(
+        (par) => par.firstPreference === track
+      ).length
       tracksStats.push({
         name: track,
         numParticipants: numPars,

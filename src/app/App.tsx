@@ -13,55 +13,51 @@ import { fetchParticipants } from '../features/participants/participantSlice'
 import { loadSavedLogin, selectAuth } from '../features/auth/authSlice'
 
 function App() {
+  const nav = useNavigate()
+  const dispatch = useAppDispatch()
+  const auth = useAppSelector(selectAuth)
 
-    const nav = useNavigate()
-    const dispatch = useAppDispatch()
-    const auth = useAppSelector(selectAuth)
-    
-    useEffect(() => {
-        if(auth.token) {
-            dispatch(fetchParticipants())
-        } else {
-            if(!dispatch(loadSavedLogin())) nav('/login')
+  useEffect(() => {
+    if (auth.token) {
+      dispatch(fetchParticipants())
+    } else {
+      if (!dispatch(loadSavedLogin())) nav('/login')
+    }
+  }, [auth])
+
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/admin"
+        element={
+          <>
+            <Header />
+            <Admin />
+          </>
         }
-    }, [auth])
-        
-    return (
-        <Routes>
-            <Route 
-                path="/login" 
-                element={<Login />} 
-            />
-            <Route
-                path="/admin"
-                element={
-                    <>
-                        <Header />
-                        <Admin />
-                    </>
-                }
-            />
-            <Route
-                path="/participants"
-                element={
-                    <>
-                        <Header />
-                        <Participants />
-                    </>
-                }
-            />
-            <Route
-                path="*"
-                element={
-                    <>
-                        <Header />
-                        <Charts />
-                        <Stats tracks={tracks} />
-                    </>
-                }
-            />
-        </Routes>
-    )
+      />
+      <Route
+        path="/participants"
+        element={
+          <>
+            <Header />
+            <Participants />
+          </>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <>
+            <Header />
+            <Charts />
+            <Stats tracks={tracks} />
+          </>
+        }
+      />
+    </Routes>
+  )
 }
 
 export default App
