@@ -3,7 +3,7 @@ import classes from './Charts.module.css'
 import { tracks } from '../../../common/types/tracks'
 import { Participant } from '../types/Participant'
 import Card from '../../../common/components/Card/Card'
-import { useAppSelector } from '../../../app/hooks'
+import { useAppSelector } from '../../../app/typings'
 import { selectAllParticipants } from '../participantSlice'
 
 const Charts = () => {

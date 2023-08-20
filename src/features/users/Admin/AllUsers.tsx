@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../app/typings'
 import { selectAllUsers, userSelected } from '../usersSlice'
 import classes from './AllUsers.module.css'
 import UserItem from './UserItem'

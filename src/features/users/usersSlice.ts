@@ -5,8 +5,8 @@ import {
 } from '@reduxjs/toolkit'
 import { User } from './types/User'
 import { RootState } from '../../app/store'
-import axios from 'axios'
-import { createAppAsyncThunk } from '../../app/hooks'
+import axios, { AxiosResponse } from 'axios'
+import { createAppAsyncThunk, responseBody } from '../../app/typings'
 import { selectAuthHeader } from '../auth/authSlice'
 
 export type AdminPageMode = 'view' | 'edit' | 'add'
@@ -29,49 +29,73 @@ const initialState = usersAdapater.getInitialState<{
 
 export const fetchUsers = createAppAsyncThunk(
   'users/fetchUsers',
-  async (_, { getState }) => {
+  async (_, { getState, rejectWithValue }) => {
     const headers = selectAuthHeader(getState())
-    const res = await axios.get(
-      'https://semicolon-registration-backend.onrender.com/user/getAll',
-      { headers }
-    )
-    return res.data.data
+    try {
+      const res = await axios.get(
+        'https://semicolon-registration-backend.onrender.com/user/getAll',
+        { headers }
+      )
+      return res.data.data
+    } catch (_err: any) {
+      const err = _err.response as AxiosResponse<responseBody>
+      return rejectWithValue({
+        status: err.status,
+        body: err.data,
+      });
+    }
   }
 )
 
 export const createUser = createAppAsyncThunk(
   'users/createUser',
-  async (newUser: Omit<User, '_id'>, { getState }) => {
+  async (newUser: Omit<User, '_id'>, { getState, rejectWithValue }) => {
     const headers = selectAuthHeader(getState())
-    const res = await axios.post(
-      'https://semicolon-registration-backend.onrender.com/user/',
-      {
-        ...newUser,
-      },
-      {
-        headers,
-      }
-    )
-    const result = res.data.data
-    return result
+    try {
+      const res = await axios.post(
+        'https://semicolon-registration-backend.onrender.com/user/',
+        {
+          ...newUser,
+        },
+        {
+          headers,
+        }
+      )
+      const result = res.data.data
+      return result
+    } catch (_err: any) {
+      const err = _err.response as AxiosResponse<responseBody>
+      return rejectWithValue({
+        status: err.status,
+        body: err.data,
+      });
+    }
   }
 )
 
 export const updateUser = createAppAsyncThunk(
   'users/updateUser',
-  async (updatedUser: User, { getState }) => {
+  async (updatedUser: User, { getState, rejectWithValue }) => {
     const headers = selectAuthHeader(getState())
-    const res = await axios.patch(
-      'https://semicolon-registration-backend.onrender.com/user/update/' +
-        updatedUser._id,
-      {
-        ...updatedUser,
-      },
-      {
-        headers,
-      }
-    )
-    return res.data.data
+    try {
+      const res = await axios.patch(
+        'https://semicolon-registration-backend.onrender.com/user/update/' +
+          updatedUser._id,
+        {
+          ...updatedUser,
+        },
+        {
+          headers,
+        }
+      )
+      return res.data.data
+    } catch (_err: any) {
+      const err = _err.response as AxiosResponse<responseBody>
+      return rejectWithValue({
+        status: err.status,
+        body: err.data,
+      });
+    }
   }
 )
 

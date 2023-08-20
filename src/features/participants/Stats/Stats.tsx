@@ -1,6 +1,6 @@
 import Track from './Track'
 import Card from '../../../common/components/Card/Card'
-import { useAppSelector } from '../../../app/hooks'
+import { useAppSelector } from '../../../app/typings'
 import { selectAllParticipants } from '../participantSlice'
 
 const Stats = ({ tracks }: { tracks: string[] }) => {

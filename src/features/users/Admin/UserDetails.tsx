@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { User, UserRole } from '../types/User'
 import classes from './UserDetails.module.css'
 import Button from '../../../common/components/Button/Button'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../app/typings'
 import {
   AdminPageMode,
   createUser,

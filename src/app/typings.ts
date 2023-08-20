@@ -7,7 +7,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 export const createAppAsyncThunk = createAsyncThunk.withTypes<{
   state: RootState
   dispatch: AppDispatch
-  rejectValue: string
+  rejectValue: asyncRejectWithValuePayload
 }>()
 
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -16,3 +16,15 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   any
 >
+
+export type responseBody = {
+  data: string,
+  status: string,
+}
+
+export type asyncRejectWithValuePayload = {
+  status: number,
+  body: responseBody,
+  /** Text that will be displayed in the alert message before the actual error. Ex: "Error occured while updating user: "*/
+  preErrorText?: string
+}

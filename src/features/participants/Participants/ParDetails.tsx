@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../app/typings'
 import Button from '../../../common/components/Button/Button'
 import {
   selectChosenParticipant,
