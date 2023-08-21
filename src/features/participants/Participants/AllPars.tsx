@@ -5,7 +5,7 @@ import classes from './AllPars.module.css'
 import ParItem from './ParItem'
 import InputBar from '../../../common/components/InputBar/InputBar'
 import DropDown from '../../../common/components/DropDown/DropDown'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../app/typings'
 import {
   participantSelected,
   selectAllParticipants,

@@ -2,7 +2,7 @@ import AllPars from './AllPars'
 import classes from './Participants.module.css'
 import ParDetails from './ParDetails'
 import Card from '../../../common/components/Card/Card'
-import { useAppSelector } from '../../../app/hooks'
+import { useAppSelector } from '../../../app/typings'
 import { selectAllParticipants } from '../participantSlice'
 
 const Participants = () => {

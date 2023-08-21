@@ -1,7 +1,7 @@
 import { InterviewCriteriaEnum, InterviewObject } from '../types/InterviewNotes'
 import classes from './InterviewNotesUI.module.css'
 import Button from '../../../common/components/Button/Button'
-import { useAppDispatch } from '../../../app/hooks'
+import { useAppDispatch } from '../../../app/typings'
 import { saveParticipantInterviewNotes } from '../participantSlice'
 
 interface InterviewNotesUIProps {

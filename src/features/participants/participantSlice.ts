@@ -4,15 +4,17 @@ import {
   createSlice,
 } from '@reduxjs/toolkit'
 import { Participant } from './types/Participant'
-import axios, { AxiosError } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { RootState } from '../../app/store'
 import { StatusEnum } from './types/Participant'
 import {
   InterviewCriteriaObject,
   InterviewObject,
 } from './types/InterviewNotes'
-import { createAppAsyncThunk } from '../../app/hooks'
-import { logoutUser, selectAuthHeader } from '../auth/authSlice'
+import { createAppAsyncThunk, responseBody } from '../../app/typings'
+import { selectAuthHeader } from '../auth/authSlice'
+import dummyParticipants from '../previewMode/dummy-participants-data'
+import delay from '../../libs/delay'
 
 const participantAdapater = createEntityAdapter<Participant>({
   selectId: (participant) => participant._id,
@@ -28,7 +30,13 @@ const initialState = participantAdapater.getInitialState<{
 
 export const fetchParticipants = createAppAsyncThunk(
   'participants/fetchParticipants',
-  async (_, { getState, dispatch }) => {
+  async (_, { getState, rejectWithValue }) => {
+
+    if(getState().auth.previewMode) {
+      await delay(2000)
+      return dummyParticipants;
+    }
+
     try {
       const headers = selectAuthHeader(getState())
       const res = await axios.get(
@@ -37,23 +45,24 @@ export const fetchParticipants = createAppAsyncThunk(
       )
       const participants = res.data
       return participants.data
-    } catch (_err) {
-      const err = _err as AxiosError<{ data: string }>
-      console.log(err.response)
-      if (err.response?.status === 401) {
-        dispatch(logoutUser())
-      } else {
-        alert(err.response?.data?.data ?? err.message)
-      }
-      if (err.response?.data?.data) err.message = err.response?.data?.data
-      throw err
+    } catch (_err: any) {
+      const err = _err.response as AxiosResponse<responseBody>
+      return rejectWithValue({
+        status: err.status,
+        body: err.data,
+      });
     }
   }
 )
 
 export const updateParticipantStatus = createAppAsyncThunk(
   'participants/updateParticipantStatus',
-  async ({ status, id }: { status: StatusEnum; id: string }, { getState }) => {
+  async ({ status, id }: { status: StatusEnum; id: string }, { getState, rejectWithValue }) => {
+    
+    if(getState().auth.previewMode) {
+      return;
+    }
+    
     try {
       const headers = selectAuthHeader(getState())
       await axios.patch(
@@ -66,9 +75,13 @@ export const updateParticipantStatus = createAppAsyncThunk(
           headers,
         }
       )
-    } catch (err) {
-      alert(`Error occured while updating status: ${err}`)
-      throw err
+    } catch (_err: any) {
+      const err = _err.response as AxiosResponse<responseBody>
+      return rejectWithValue({
+        status: err.status,
+        body: err.data,
+        preErrorText: 'Error occured while updating status: '
+      });
     }
   }
 )
@@ -80,8 +93,14 @@ export const saveParticipantInterviewNotes = createAppAsyncThunk(
       interviewData,
       id,
     }: { interviewData: InterviewCriteriaObject; id: string },
-    { getState }
+    { getState, rejectWithValue }
   ) => {
+
+    if(getState().auth.previewMode) {
+      alert('Interview notes not supported in preview mode');
+      throw new Error('Interview notes not supported in preview mode');
+    }
+
     try {
       const headers = selectAuthHeader(getState())
       const req = await axios.patch(
@@ -96,9 +115,14 @@ export const saveParticipantInterviewNotes = createAppAsyncThunk(
       )
       alert('Interview notes saved successfully!')
       return req.data.data.InterviewerNote as InterviewObject
-    } catch (err: any) {
-      alert(`Error occured: ${err.response.data.data}`)
-      throw err
+    
+    } catch (_err: any) {
+      const err = _err.response as AxiosResponse<responseBody>
+      return rejectWithValue({
+        status: err.status,
+        body: err.data,
+        preErrorText: 'Error occured while saving notes: '
+      });
     }
   }
 )

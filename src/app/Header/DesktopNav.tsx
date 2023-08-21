@@ -7,7 +7,7 @@ import {
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
-import { useAppDispatch, useAppSelector } from '../hooks'
+import { useAppDispatch, useAppSelector } from '../typings'
 import { logoutUser } from '../../features/auth/authSlice'
 
 const DesktopNav = () => {

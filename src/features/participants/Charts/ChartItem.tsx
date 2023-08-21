@@ -16,7 +16,7 @@ import { Participant } from '../types/Participant'
 import { tracks } from '../../../common/types/tracks'
 import Card from '../../../common/components/Card/Card'
 import DropDown from '../../../common/components/DropDown/DropDown'
-import { useAppSelector } from '../../../app/hooks'
+import { useAppSelector } from '../../../app/typings'
 import { selectAllParticipants } from '../participantSlice'
 
 Chart.register([

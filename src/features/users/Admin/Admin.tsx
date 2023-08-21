@@ -4,7 +4,7 @@ import AllUsers from './AllUsers'
 import classes from './Admin.module.css'
 import UserDetails from './UserDetails'
 import Card from '../../../common/components/Card/Card'
-import { useAppDispatch, useAppSelector } from '../../../app/hooks'
+import { useAppDispatch, useAppSelector } from '../../../app/typings'
 import {
   fetchUsers,
   selectReadyToFetchUsersBool,

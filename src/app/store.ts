@@ -2,11 +2,13 @@ import {
   AsyncThunk,
   AsyncThunkPayloadCreator,
   Dispatch,
+  combineReducers,
   configureStore,
 } from '@reduxjs/toolkit'
 import participantsReducer from '../features/participants/participantSlice'
 import userReducer from '../features/users/usersSlice'
 import authReducer from '../features/auth/authSlice'
+import asyncErrorHandling from './middlewares/async-error-handling'
 
 declare module '@reduxjs/toolkit' {
   type AsyncThunkConfig = {
@@ -32,15 +34,20 @@ declare module '@reduxjs/toolkit' {
   ): AsyncThunk<Returned, ThunkArg, ThunkApiConfig>
 }
 
+// reason for not putting it directly inside configureStore:
+// avoid type circular dependency when using a custom middleware
+const rootReducer = combineReducers({
+  participants: participantsReducer,
+  users: userReducer,
+  auth: authReducer,
+})
+
 const store = configureStore({
-  reducer: {
-    participants: participantsReducer,
-    users: userReducer,
-    auth: authReducer,
-  },
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(asyncErrorHandling),
 })
 
 export default store
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof rootReducer>
 export type AppDispatch = typeof store.dispatch

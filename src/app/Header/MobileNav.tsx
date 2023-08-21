@@ -7,7 +7,7 @@ import {
   faRightFromBracket,
   faUserCircle,
 } from '@fortawesome/free-solid-svg-icons'
-import { useAppSelector } from '../hooks'
+import { useAppSelector } from '../typings'
 
 const MobileNav = () => {
   const { role, username } = useAppSelector((state) => state.auth)

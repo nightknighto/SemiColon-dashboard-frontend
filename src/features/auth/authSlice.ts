@@ -1,21 +1,23 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { UserRole } from '../users/types/User'
 import { RootState } from '../../app/store'
 import { LoginDTO } from './types/login.dto'
 import axios from 'axios'
 import authLocalStorage from './utils/authLocalStorage'
-import { AppThunk } from '../../app/hooks'
+import { AppThunk } from '../../app/typings'
 
 export interface AuthState {
   token: string
   username: string
   role: UserRole
+  previewMode: boolean
 }
 
 const initialState: AuthState = {
   token: '',
   username: '',
   role: 'member',
+  previewMode: false,
 }
 
 export const loginUser =
@@ -48,12 +50,19 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser(state, action) {
-      const { token, username, role } = action.payload
+    setUser(state, action: PayloadAction<Optional<AuthState, 'previewMode'>>) {
+      const { token, username, role, previewMode = false } = action.payload
       state.token = token
       state.username = username
       state.role = role
+      state.previewMode = previewMode
     },
+    activatePreviewMode(state) {
+      state.previewMode = true
+      state.token = 'Preview Mode'
+      state.username = 'Preview Mode'
+      state.role = 'admin'
+    }
   },
 })
 
@@ -63,3 +72,5 @@ export const selectAuth = (state: RootState) => state.auth
 export const selectAuthHeader = (state: RootState) => ({
   Authorization: `Bearer ${state.auth.token}`,
 })
+
+export const { activatePreviewMode } = authSlice.actions

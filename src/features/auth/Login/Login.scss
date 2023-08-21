@@ -229,10 +229,9 @@ p{
       
 
       &.btn-primary {
-        margin-top: 40px;
         background-color: #0077ff;
         color: #ffffff;
-        border: none;
+        border: 1px solid #0077ff;
         margin-right: 16px;
         margin-bottom:10px;
 
@@ -248,19 +247,20 @@ p{
         animation-timing-function: ease-in-out;
         animation-fill-mode: forwards;
       }
-       
-        &:hover {
-          background-color: #005dff;
-        }
-        
-      
-
-      
 
         &:hover {
           background-color: #f3f3f3;
-          border-color: #0077ff;
           color: #0077ff;
+        }
+      }
+      
+      &.btn-info {
+        background-color: #08c3cd;
+        border: 1px solid #08c3cd ;
+
+        &:hover {
+          background-color: #f3f3f3;
+          color: #08c3cd;
         }
       }
     }
