@@ -8,6 +8,7 @@ import { RootState } from '../../app/store'
 import axios, { AxiosResponse } from 'axios'
 import { createAppAsyncThunk, responseBody } from '../../app/typings'
 import { selectAuthHeader } from '../auth/authSlice'
+import dummyUsers from '../previewMode/dummy-users-data'
 
 export type AdminPageMode = 'view' | 'edit' | 'add'
 
@@ -30,6 +31,11 @@ const initialState = usersAdapater.getInitialState<{
 export const fetchUsers = createAppAsyncThunk(
   'users/fetchUsers',
   async (_, { getState, rejectWithValue }) => {
+
+    if(getState().auth.previewMode) {
+      return dummyUsers;
+    }
+
     const headers = selectAuthHeader(getState())
     try {
       const res = await axios.get(
@@ -50,6 +56,14 @@ export const fetchUsers = createAppAsyncThunk(
 export const createUser = createAppAsyncThunk(
   'users/createUser',
   async (newUser: Omit<User, '_id'>, { getState, rejectWithValue }) => {
+    
+    if(getState().auth.previewMode) {
+      return {
+        ...newUser,
+        _id: crypto.randomUUID(),
+      };
+    }
+
     const headers = selectAuthHeader(getState())
     try {
       const res = await axios.post(
@@ -76,6 +90,11 @@ export const createUser = createAppAsyncThunk(
 export const updateUser = createAppAsyncThunk(
   'users/updateUser',
   async (updatedUser: User, { getState, rejectWithValue }) => {
+    
+    if(getState().auth.previewMode) {
+      return updatedUser;
+    }
+
     const headers = selectAuthHeader(getState())
     try {
       const res = await axios.patch(

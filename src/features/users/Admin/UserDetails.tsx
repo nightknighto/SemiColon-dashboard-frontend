@@ -30,7 +30,7 @@ const UserDetails = ({ user }: UserDetailsProps) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
 
-  const addUser = async (newUser: Omit<User, '_id'>) => {
+  const addUser = async (newUser: Omit<User, '_id'> & { password: string }) => {
     setLoading(true)
     setError(null)
     try {

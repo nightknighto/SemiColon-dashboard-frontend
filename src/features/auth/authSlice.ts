@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { UserRole } from '../users/types/User'
 import { RootState } from '../../app/store'
 import { LoginDTO } from './types/login.dto'
@@ -50,11 +50,12 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser(state, action) {
-      const { token, username, role } = action.payload
+    setUser(state, action: PayloadAction<Optional<AuthState, 'previewMode'>>) {
+      const { token, username, role, previewMode = false } = action.payload
       state.token = token
       state.username = username
       state.role = role
+      state.previewMode = previewMode
     },
     activatePreviewMode(state) {
       state.previewMode = true

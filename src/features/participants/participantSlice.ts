@@ -13,6 +13,8 @@ import {
 } from './types/InterviewNotes'
 import { createAppAsyncThunk, responseBody } from '../../app/typings'
 import { selectAuthHeader } from '../auth/authSlice'
+import dummyParticipants from '../previewMode/dummy-participants-data'
+import delay from '../../libs/delay'
 
 const participantAdapater = createEntityAdapter<Participant>({
   selectId: (participant) => participant._id,
@@ -29,6 +31,12 @@ const initialState = participantAdapater.getInitialState<{
 export const fetchParticipants = createAppAsyncThunk(
   'participants/fetchParticipants',
   async (_, { getState, rejectWithValue }) => {
+
+    if(getState().auth.previewMode) {
+      await delay(2000)
+      return dummyParticipants;
+    }
+
     try {
       const headers = selectAuthHeader(getState())
       const res = await axios.get(
@@ -50,6 +58,11 @@ export const fetchParticipants = createAppAsyncThunk(
 export const updateParticipantStatus = createAppAsyncThunk(
   'participants/updateParticipantStatus',
   async ({ status, id }: { status: StatusEnum; id: string }, { getState, rejectWithValue }) => {
+    
+    if(getState().auth.previewMode) {
+      return;
+    }
+    
     try {
       const headers = selectAuthHeader(getState())
       await axios.patch(
@@ -82,6 +95,12 @@ export const saveParticipantInterviewNotes = createAppAsyncThunk(
     }: { interviewData: InterviewCriteriaObject; id: string },
     { getState, rejectWithValue }
   ) => {
+
+    if(getState().auth.previewMode) {
+      alert('Interview notes not supported in preview mode');
+      throw new Error('Interview notes not supported in preview mode');
+    }
+
     try {
       const headers = selectAuthHeader(getState())
       const req = await axios.patch(
