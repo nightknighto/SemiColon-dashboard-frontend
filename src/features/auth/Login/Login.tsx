@@ -6,8 +6,8 @@ import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 import classes from './Failed.module.css'
 import useInput from '../../../common/hooks/use-input'
-import { useAppDispatch } from '../../../app/hooks'
-import { loginUser } from '../authSlice'
+import { useAppDispatch } from '../../../app/typings'
+import { activatePreviewMode, loginUser } from '../authSlice'
 
 const Login = () => {
   const dispatch = useAppDispatch()
@@ -45,7 +45,7 @@ const Login = () => {
     }`
   }
 
-  const post_Req = async () => {
+  const handleLoginRequest = async () => {
     const body = {
       phone: enteredPhone.trim(),
       password: enteredPass.trim(),
@@ -72,7 +72,7 @@ const Login = () => {
 
   const formIsValid = phoneIsValid && passIsValid
 
-  const handleClick = (event: React.SyntheticEvent) => {
+  const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault()
     if (!formIsValid) {
       return
@@ -83,8 +83,17 @@ const Login = () => {
       setShowLoader(true)
     }, 700)
     setTimeout(() => {
-      post_Req()
+      handleLoginRequest()
     }, 100)
+  }
+
+  const handlePreviewClick = async () => {
+    setClicked(true)
+    setShowLoader(true)
+    dispatch(activatePreviewMode())
+    setTimeout(() => {
+      navigate('/stats')
+    }, 4000)
   }
 
   return (
@@ -93,7 +102,7 @@ const Login = () => {
         <h2 className={`header ${clicked ? 'headerAction' : ''}`}>
           Hi, welcome back!
         </h2>
-        <form onSubmit={handleClick}>
+        <form onSubmit={handleSubmit}>
           <div className={`form-group ${clicked ? 'formClosure' : ''}`}>
             <label htmlFor="phone">Phone Number</label>
             <div className={phoneStyles}>
@@ -152,6 +161,7 @@ const Login = () => {
               <div className="or-divider-line"></div>
             </div>
           </div>
+          <button className='btn btn-info' type='button' onClick={handlePreviewClick}>Preview Mode</button>
         </form>
       </div>
       <div
