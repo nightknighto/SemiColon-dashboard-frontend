@@ -28,6 +28,16 @@ p{
     
     // max-width: 0;
     // z-index : -1;
+    
+
+  &.formClosure{
+    * {
+      animation-name: formClosure;
+      animation-duration: 3s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+  }
 
     &.disappear{
       animation-name: closure;
@@ -57,14 +67,7 @@ p{
       display: flex;
       flex-direction: column;
       margin-bottom: 15px;
-    
-      // index z 
-      &.formClosure{
-        animation-name: formClosure;
-        animation-duration: 3s;
-        animation-timing-function: ease-in-out;
-        animation-fill-mode: forwards;
-      }
+      
       label {
         font-weight: 900;
         font-size: 20px;
@@ -294,7 +297,6 @@ p{
     margin-left: 12px;
     padding: 0;
     text-align: center;
-    margin-left:100px;
     overflow:hidden;
 
     .test-shine {
@@ -328,6 +330,16 @@ p{
     animation-duration: 2s;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
+  }
+
+  .showLoader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+    margin-top: 20px;
+    margin-left: 150px;
   }
   
   // @keyframes zoomIn {
@@ -421,9 +433,11 @@ p{
   }
 }  
 
-
-
-
+@media (max-width:512px) {
+  .login .showLoader {
+    margin-left: 0
+  }
+}
 
 @media (max-width:750px) {
   .login {
@@ -476,14 +490,6 @@ p{
       margin-bottom: 30px;
       z-index: 9999; /* Increase z-index value to make it appear above */
       position: relative; /* Add position property */
-    }
-
-    .showLoader {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-right: 50px;
     }
   }
 
@@ -568,14 +574,6 @@ p{
       margin-bottom: 30px;
       z-index: 9999; 
       position: relative; 
-    }
-
-    .showLoader {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-right: 50px;
     }
   }
 

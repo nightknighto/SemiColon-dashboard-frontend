@@ -33,18 +33,6 @@ const Login = () => {
     returnWrong: passReturned,
   } = useInput((value) => value.trim().length > 0)
 
-  let phoneStyles = `phone-input`
-  if (phoneHasError) {
-    phoneStyles = `phone-input ${classes['failed-input']}`
-  }
-
-  let passStyles = `form-group ${clicked ? 'formClosure' : ''}`
-  if (passHasError) {
-    passStyles = `form-group ${clicked ? 'formClosure' : ''} ${
-      classes['failed-input']
-    }`
-  }
-
   const handleLoginRequest = async () => {
     const body = {
       phone: enteredPhone.trim(),
@@ -98,14 +86,14 @@ const Login = () => {
 
   return (
     <div className="login" style={{ overflow: 'hidden' }}>
-      <div className={`login-left ${clicked ? 'disappear' : ''}`}>
-        <h2 className={`header ${clicked ? 'headerAction' : ''}`}>
+      <div className={`login-left ${clicked && 'disappear formClosure'}`}>
+        <h2 className={`header ${clicked && 'headerAction'}`}>
           Hi, welcome back!
         </h2>
         <form onSubmit={handleSubmit}>
-          <div className={`form-group ${clicked ? 'formClosure' : ''}`}>
+          <div className={`form-group`}>
             <label htmlFor="phone">Phone Number</label>
-            <div className={phoneStyles}>
+            <div className={`phone-input ${phoneHasError && classes['failed-input']}`}>
               <select name="country-code">
                 <option value="+1">+20 (EG)</option>
                 <option value="+44">+44 (UK)</option>
@@ -122,7 +110,7 @@ const Login = () => {
             </div>
           </div>
           {phoneHasError && <p>Phone is incorrect</p>}
-          <div className={passStyles}>
+          <div className={`form-group ${passHasError && classes['failed-input']}`}>
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -135,7 +123,7 @@ const Login = () => {
           </div>
           {passHasError && <p>Password is incorrect</p>}
           <div style={{ justifyContent: 'space-between' }}>
-            <div className={`form-group ${clicked ? 'formClosure' : ''}`}>
+            <div className={`form-group`}>
               <div className="remember-me">
                 <input type="checkbox" id="remember-me" name="remember-me" />
                 <label htmlFor="remember-me">Remember Me</label>
@@ -147,14 +135,14 @@ const Login = () => {
           </div>
 
           <button
-            className={`btn btn-primary ${clicked ? 'formClosure' : ''}`}
+            className={`btn btn-primary`}
             style={{
               marginTop: '10px',
             }}
           >
             Sign In
           </button>
-          <div className={`form-group ${clicked ? 'formClosure' : ''}`}>
+          <div className={`form-group`}>
             <div className="or-divider">
               <div className="or-divider-line"></div>
               <div className="or-divider-text">Debug your soul</div>
@@ -165,52 +153,18 @@ const Login = () => {
         </form>
       </div>
       <div
-        className={`login-right ${clicked ? 'zoomIn' : ''}`}
+        className={`login-right ${clicked && 'zoomIn'}`}
         style={
-          clicked
-            ? {
-                flex: '0.3',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '50%',
-                height: '100%',
-                minWidth: '60%',
-                backgroundColor: '#0f0f14',
-                marginLeft: '12px',
-
-                padding: '0',
-
-                textAlign: 'center',
-                animation: 'centerImg 1s ease-in-out forwards',
-              }
-            : {
-                flex: '0.3',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '50%',
-                height: '100%',
-                backgroundColor: '#0f0f14',
-                marginLeft: '12px',
-                padding: '0',
-                textAlign: 'center',
-              }
+          clicked ? {
+            minWidth: '60%',
+            animation: 'centerImg 1s ease-in-out forwards',
+          } : {}
         }
       >
         <div className="test-shine">
           <img src={SemicolonLogo} alt="Login" />
           {showLoader && (
-            <div
-              className="showLoader"
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: '20px',
-                marginLeft: '150px',
-              }}
-            >
+            <div className="showLoader">
               <BarLoader color="#e4a539" height={3} width={300} />
             </div>
           )}
