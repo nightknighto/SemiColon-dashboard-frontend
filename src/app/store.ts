@@ -44,7 +44,8 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(asyncErrorHandling),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(asyncErrorHandling),
 })
 
 export default store

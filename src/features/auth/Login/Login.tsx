@@ -93,7 +93,11 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className={`form-group`}>
             <label htmlFor="phone">Phone Number</label>
-            <div className={`phone-input ${phoneHasError && classes['failed-input']}`}>
+            <div
+              className={`phone-input ${
+                phoneHasError && classes['failed-input']
+              }`}
+            >
               <select name="country-code">
                 <option value="+1">+20 (EG)</option>
                 <option value="+44">+44 (UK)</option>
@@ -110,7 +114,9 @@ const Login = () => {
             </div>
           </div>
           {phoneHasError && <p>Phone is incorrect</p>}
-          <div className={`form-group ${passHasError && classes['failed-input']}`}>
+          <div
+            className={`form-group ${passHasError && classes['failed-input']}`}
+          >
             <label htmlFor="password">Password</label>
             <input
               type="password"
@@ -149,16 +155,24 @@ const Login = () => {
               <div className="or-divider-line"></div>
             </div>
           </div>
-          <button className='btn btn-info' type='button' onClick={handlePreviewClick}>Preview Mode</button>
+          <button
+            className="btn btn-info"
+            type="button"
+            onClick={handlePreviewClick}
+          >
+            Preview Mode
+          </button>
         </form>
       </div>
       <div
         className={`login-right ${clicked && 'zoomIn'}`}
         style={
-          clicked ? {
-            minWidth: '60%',
-            animation: 'centerImg 1s ease-in-out forwards',
-          } : {}
+          clicked
+            ? {
+                minWidth: '60%',
+                animation: 'centerImg 1s ease-in-out forwards',
+              }
+            : {}
         }
       >
         <div className="test-shine">

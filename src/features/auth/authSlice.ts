@@ -62,7 +62,7 @@ const authSlice = createSlice({
       state.token = 'Preview Mode'
       state.username = 'Preview Mode'
       state.role = 'admin'
-    }
+    },
   },
 })
 

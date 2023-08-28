@@ -18,13 +18,13 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 >
 
 export type responseBody = {
-  data: string,
-  status: string,
+  data: string
+  status: string
 }
 
 export type asyncRejectWithValuePayload = {
-  status: number,
-  body: responseBody,
+  status: number
+  body: responseBody
   /** Text that will be displayed in the alert message before the actual error. Ex: "Error occured while updating user: "*/
   preErrorText?: string
 }

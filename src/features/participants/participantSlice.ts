@@ -31,10 +31,9 @@ const initialState = participantAdapater.getInitialState<{
 export const fetchParticipants = createAppAsyncThunk(
   'participants/fetchParticipants',
   async (_, { getState, rejectWithValue }) => {
-
-    if(getState().auth.previewMode) {
+    if (getState().auth.previewMode) {
       await delay(2000)
-      return dummyParticipants;
+      return dummyParticipants
     }
 
     try {
@@ -50,19 +49,21 @@ export const fetchParticipants = createAppAsyncThunk(
       return rejectWithValue({
         status: err.status,
         body: err.data,
-      });
+      })
     }
   }
 )
 
 export const updateParticipantStatus = createAppAsyncThunk(
   'participants/updateParticipantStatus',
-  async ({ status, id }: { status: StatusEnum; id: string }, { getState, rejectWithValue }) => {
-    
-    if(getState().auth.previewMode) {
-      return;
+  async (
+    { status, id }: { status: StatusEnum; id: string },
+    { getState, rejectWithValue }
+  ) => {
+    if (getState().auth.previewMode) {
+      return
     }
-    
+
     try {
       const headers = selectAuthHeader(getState())
       await axios.patch(
@@ -80,8 +81,8 @@ export const updateParticipantStatus = createAppAsyncThunk(
       return rejectWithValue({
         status: err.status,
         body: err.data,
-        preErrorText: 'Error occured while updating status: '
-      });
+        preErrorText: 'Error occured while updating status: ',
+      })
     }
   }
 )
@@ -95,10 +96,9 @@ export const saveParticipantInterviewNotes = createAppAsyncThunk(
     }: { interviewData: InterviewCriteriaObject; id: string },
     { getState, rejectWithValue }
   ) => {
-
-    if(getState().auth.previewMode) {
-      alert('Interview notes not supported in preview mode');
-      throw new Error('Interview notes not supported in preview mode');
+    if (getState().auth.previewMode) {
+      alert('Interview notes not supported in preview mode')
+      throw new Error('Interview notes not supported in preview mode')
     }
 
     try {
@@ -115,14 +115,13 @@ export const saveParticipantInterviewNotes = createAppAsyncThunk(
       )
       alert('Interview notes saved successfully!')
       return req.data.data.InterviewerNote as InterviewObject
-    
     } catch (_err: any) {
       const err = _err.response as AxiosResponse<responseBody>
       return rejectWithValue({
         status: err.status,
         body: err.data,
-        preErrorText: 'Error occured while saving notes: '
-      });
+        preErrorText: 'Error occured while saving notes: ',
+      })
     }
   }
 )

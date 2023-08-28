@@ -31,9 +31,8 @@ const initialState = usersAdapater.getInitialState<{
 export const fetchUsers = createAppAsyncThunk(
   'users/fetchUsers',
   async (_, { getState, rejectWithValue }) => {
-
-    if(getState().auth.previewMode) {
-      return dummyUsers;
+    if (getState().auth.previewMode) {
+      return dummyUsers
     }
 
     const headers = selectAuthHeader(getState())
@@ -48,7 +47,7 @@ export const fetchUsers = createAppAsyncThunk(
       return rejectWithValue({
         status: err.status,
         body: err.data,
-      });
+      })
     }
   }
 )
@@ -56,12 +55,11 @@ export const fetchUsers = createAppAsyncThunk(
 export const createUser = createAppAsyncThunk(
   'users/createUser',
   async (newUser: Omit<User, '_id'>, { getState, rejectWithValue }) => {
-    
-    if(getState().auth.previewMode) {
+    if (getState().auth.previewMode) {
       return {
         ...newUser,
         _id: crypto.randomUUID(),
-      };
+      }
     }
 
     const headers = selectAuthHeader(getState())
@@ -82,7 +80,7 @@ export const createUser = createAppAsyncThunk(
       return rejectWithValue({
         status: err.status,
         body: err.data,
-      });
+      })
     }
   }
 )
@@ -90,9 +88,8 @@ export const createUser = createAppAsyncThunk(
 export const updateUser = createAppAsyncThunk(
   'users/updateUser',
   async (updatedUser: User, { getState, rejectWithValue }) => {
-    
-    if(getState().auth.previewMode) {
-      return updatedUser;
+    if (getState().auth.previewMode) {
+      return updatedUser
     }
 
     const headers = selectAuthHeader(getState())
@@ -113,7 +110,7 @@ export const updateUser = createAppAsyncThunk(
       return rejectWithValue({
         status: err.status,
         body: err.data,
-      });
+      })
     }
   }
 )
