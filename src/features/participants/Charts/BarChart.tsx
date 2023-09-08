@@ -5,6 +5,7 @@ interface BarChartProps {
   chartData: Participant[]
   id?: string
   nums: number[]
+  subtitle: string
   title: string
   labelMappingHandler: (val: Participant) => string
 }
@@ -13,12 +14,13 @@ export const BarChart = ({
   chartData,
   id,
   nums,
-  title,
+  subtitle,
   labelMappingHandler,
+  title,
 }: BarChartProps) => {
   return (
     <div className="chart-container">
-      <h2 style={{ textAlign: 'center' }}>Bar Chart</h2>
+      <h2 style={{ textAlign: 'center' }}>{title}</h2>
       <Bar
         data={{
           labels: chartData
@@ -37,6 +39,7 @@ export const BarChart = ({
               ],
               borderColor: 'black',
               borderWidth: 2,
+              
             },
           ],
         }}
@@ -45,7 +48,7 @@ export const BarChart = ({
           plugins: {
             title: {
               display: true,
-              text: title,
+              text: subtitle,
             },
             legend: {
               position: 'top' as const,

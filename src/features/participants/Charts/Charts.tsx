@@ -56,17 +56,19 @@ const Charts = () => {
           type="PIE"
           pieNums={tracksNumbers}
           pieLabels={tracks}
-          pieTitle="First Preference"
+          title="Tracks"
         />
         <ChartItem
           id="second"
           type="BAR"
+          title="Registration Dates"
           labelMappingHandler={datesMappingHandler}
           barNumbersHandler={datesNumbersHandler}
         />
         <ChartItem
           id="second"
           type="BAR"
+          title="Academic Year"
           labelMappingHandler={yearMappingHandler}
           barNumbersHandler={yearNumbersHandler}
         />

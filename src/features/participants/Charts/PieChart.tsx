@@ -12,7 +12,7 @@ const PieChart = ({
 }) => {
   return (
     <div className="chart-container">
-      <h2 style={{ textAlign: 'center' }}>Pie Chart</h2>
+      <h2 style={{ textAlign: 'center' }}>{title}</h2>
       <Pie
         data={{
           labels: labels,
@@ -40,10 +40,6 @@ const PieChart = ({
         }}
         options={{
           plugins: {
-            title: {
-              display: true,
-              text: title,
-            },
           },
         }}
         id={id}
