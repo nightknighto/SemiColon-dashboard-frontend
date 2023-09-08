@@ -1,13 +1,15 @@
 import ChartItem from './ChartItem'
 import classes from './Charts.module.css'
 import { tracks } from '../../../common/types/tracks'
-import { Participant } from '../types/Participant'
+import { Participant, StatusEnum } from '../types/Participant'
 import Card from '../../../common/components/Card/Card'
 import { useAppSelector } from '../../../app/typings'
 import { selectAllParticipants } from '../participantSlice'
 
 const Charts = () => {
   const participants = useAppSelector(selectAllParticipants)
+
+  if(participants.length <= 0) return <h2>No data found.</h2>
 
   const datesMappingHandler = (val: Participant) => val.createdAt.split('T')[0]
   const yearMappingHandler = (val: Participant) => val.year
@@ -41,42 +43,51 @@ const Charts = () => {
   }
 
   const tracksNumbers: number[] = []
-  let output
-  if (participants.length > 0) {
-    for (const track of tracks) {
-      tracksNumbers.push(
-        participants.filter((par) => par.firstPreference === track).length
-      )
-    }
-
-    output = (
-      <>
-        <ChartItem
-          id="first"
-          type="PIE"
-          pieNums={tracksNumbers}
-          pieLabels={tracks}
-          pieTitle="First Preference"
-        />
-        <ChartItem
-          id="second"
-          type="BAR"
-          labelMappingHandler={datesMappingHandler}
-          barNumbersHandler={datesNumbersHandler}
-        />
-        <ChartItem
-          id="second"
-          type="BAR"
-          labelMappingHandler={yearMappingHandler}
-          barNumbersHandler={yearNumbersHandler}
-        />
-      </>
+  for (const track of tracks) {
+    tracksNumbers.push(
+      participants.filter((par) => par.firstPreference === track).length
     )
-  } else {
-    output = <h2>No data found.</h2>
   }
 
-  return <Card className={classes.charts}>{output}</Card>
+  const statusNumbers: number[] = [];
+  for(const status of Object.values(StatusEnum)) {
+    statusNumbers.push(
+      participants.filter((par) => par.acceptanceStatus === status).length
+    )
+  }
+
+  return (
+    <Card className={classes.charts}>
+      <ChartItem
+        id="first"
+        type="PIE"
+        pieNums={tracksNumbers.slice(1)} //slice(1) to remove the first entry of tracks, which is "All"
+        pieLabels={tracks.slice(1)}
+        title="Tracks"
+      />
+      <ChartItem
+        id="first"
+        type="PIE"
+        pieNums={statusNumbers}
+        pieLabels={Object.values(StatusEnum)}
+        title="Participants Status"
+      />
+      <ChartItem
+        id="second"
+        type="BAR"
+        title="Registration Dates"
+        labelMappingHandler={datesMappingHandler}
+        barNumbersHandler={datesNumbersHandler}
+      />
+      <ChartItem
+        id="second"
+        type="BAR"
+        title="Academic Year"
+        labelMappingHandler={yearMappingHandler}
+        barNumbersHandler={yearNumbersHandler}
+      />
+    </Card>
+  )
 }
 
 export default Charts

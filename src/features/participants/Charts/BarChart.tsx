@@ -1,29 +1,26 @@
 import { Bar } from 'react-chartjs-2'
-import { Participant } from '../types/Participant'
 
 interface BarChartProps {
-  chartData: Participant[]
+  labels: string[]
   id?: string
   nums: number[]
+  subtitle: string
   title: string
-  labelMappingHandler: (val: Participant) => string
 }
 
 export const BarChart = ({
-  chartData,
+  labels,
   id,
   nums,
+  subtitle,
   title,
-  labelMappingHandler,
 }: BarChartProps) => {
   return (
     <div className="chart-container">
-      <h2 style={{ textAlign: 'center' }}>Bar Chart</h2>
+      <h2 style={{ textAlign: 'center' }}>{title}</h2>
       <Bar
         data={{
-          labels: chartData
-            .map(labelMappingHandler)
-            .filter((value, index, array) => array.indexOf(value) === index),
+          labels: labels,
           datasets: [
             {
               label: 'Participants Applied',
@@ -37,6 +34,7 @@ export const BarChart = ({
               ],
               borderColor: 'black',
               borderWidth: 2,
+              
             },
           ],
         }}
@@ -45,7 +43,7 @@ export const BarChart = ({
           plugins: {
             title: {
               display: true,
-              text: title,
+              text: subtitle,
             },
             legend: {
               position: 'top' as const,

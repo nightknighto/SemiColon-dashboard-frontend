@@ -34,7 +34,7 @@ interface ChartItemProps {
   type: 'PIE' | 'BAR'
   pieNums?: number[]
   pieLabels?: string[]
-  pieTitle?: string
+  title: string
   barNumbersHandler?: (filteredData: Participant[]) => number[]
   labelMappingHandler?: (data: Participant) => string
 }
@@ -44,14 +44,14 @@ const ChartItem = ({
   type,
   pieNums = [],
   pieLabels = [],
-  pieTitle,
+  title,
   barNumbersHandler,
   labelMappingHandler,
 }: ChartItemProps) => {
   const data = useAppSelector(selectAllParticipants)
   const [filteredData, setFilteredData] = useState<Participant[]>([])
   const [barNumbers, setBarNumbers] = useState<number[]>([])
-  const [barTitle, setBarTitle] = useState<string>('All')
+  const [barSubtitle, setBarSubtitle] = useState<string>('All')
 
   useEffect(() => {
     setFilteredData(data)
@@ -70,30 +70,27 @@ const ChartItem = ({
       return
     }
     setFilteredData(data.filter((user) => user.firstPreference === chosenTrack))
-    setBarTitle(chosenTrack)
+    setBarSubtitle(chosenTrack)
   }
 
-  let bar = <></>
-  if (type === 'BAR' && labelMappingHandler) {
-    bar = filteredData[0] && (
-      <BarChart
-        id={id}
-        chartData={filteredData}
-        nums={barNumbers}
-        title={barTitle}
-        labelMappingHandler={labelMappingHandler}
-      />
-    )
-  }
+  const barLabels = labelMappingHandler ? 
+    filteredData.map(labelMappingHandler).filter((value, index, array) => array.indexOf(value) === index)
+    : []
 
   return (
     <Card className={classes['chart-item']}>
       {type === 'PIE' && (
-        <PieChart id={id} nums={pieNums} labels={pieLabels} title={pieTitle} />
+        <PieChart id={id} nums={pieNums} labels={pieLabels} title={title} />
       )}
-      {type === 'BAR' && (
+      {type === 'BAR' && labelMappingHandler && (
         <>
-          {bar}
+          <BarChart
+            id={id}
+            labels={barLabels}
+            nums={barNumbers}
+            title={title}
+            subtitle={barSubtitle}
+          />
           <DropDown onChange={onChoiceChangeHandler} choices={tracks} />
         </>
       )}
