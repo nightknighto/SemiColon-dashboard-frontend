@@ -97,8 +97,8 @@ export const saveParticipantInterviewNotes = createAppAsyncThunk(
     { getState, rejectWithValue }
   ) => {
     if (getState().auth.previewMode) {
-      alert('Interview notes not supported in preview mode')
-      throw new Error('Interview notes not supported in preview mode')
+      alert('Interview notes not supported in demo mode')
+      throw new Error('Interview notes not supported in demo mode')
     }
 
     try {

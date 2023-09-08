@@ -59,8 +59,8 @@ const authSlice = createSlice({
     },
     activatePreviewMode(state) {
       state.previewMode = true
-      state.token = 'Preview Mode'
-      state.username = 'Preview Mode'
+      state.token = 'Demo Mode'
+      state.username = 'Demo Mode'
       state.role = 'admin'
     },
   },
