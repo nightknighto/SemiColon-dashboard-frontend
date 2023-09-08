@@ -9,7 +9,7 @@ import { selectAllParticipants } from '../participantSlice'
 const Charts = () => {
   const participants = useAppSelector(selectAllParticipants)
 
-  if(participants.length <= 0) return <h2>No data found.</h2>
+  if (participants.length <= 0) return <h2>No data found.</h2>
 
   const datesMappingHandler = (val: Participant) => val.createdAt.split('T')[0]
   const yearMappingHandler = (val: Participant) => val.year
@@ -49,8 +49,8 @@ const Charts = () => {
     )
   }
 
-  const statusNumbers: number[] = [];
-  for(const status of Object.values(StatusEnum)) {
+  const statusNumbers: number[] = []
+  for (const status of Object.values(StatusEnum)) {
     statusNumbers.push(
       participants.filter((par) => par.acceptanceStatus === status).length
     )

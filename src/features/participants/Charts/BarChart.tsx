@@ -34,7 +34,6 @@ export const BarChart = ({
               ],
               borderColor: 'black',
               borderWidth: 2,
-              
             },
           ],
         }}

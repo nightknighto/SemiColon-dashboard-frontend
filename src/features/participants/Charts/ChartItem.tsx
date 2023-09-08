@@ -73,8 +73,10 @@ const ChartItem = ({
     setBarSubtitle(chosenTrack)
   }
 
-  const barLabels = labelMappingHandler ? 
-    filteredData.map(labelMappingHandler).filter((value, index, array) => array.indexOf(value) === index)
+  const barLabels = labelMappingHandler
+    ? filteredData
+        .map(labelMappingHandler)
+        .filter((value, index, array) => array.indexOf(value) === index)
     : []
 
   return (
