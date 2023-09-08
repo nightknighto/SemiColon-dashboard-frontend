@@ -73,27 +73,20 @@ const ChartItem = ({
     setBarTitle(chosenTrack)
   }
 
-  let bar = <></>
-  if (type === 'BAR' && labelMappingHandler) {
-    bar = filteredData[0] && (
-      <BarChart
-        id={id}
-        chartData={filteredData}
-        nums={barNumbers}
-        title={barTitle}
-        labelMappingHandler={labelMappingHandler}
-      />
-    )
-  }
-
   return (
     <Card className={classes['chart-item']}>
       {type === 'PIE' && (
         <PieChart id={id} nums={pieNums} labels={pieLabels} title={pieTitle} />
       )}
-      {type === 'BAR' && (
+      {type === 'BAR' && labelMappingHandler && filteredData[0] && (
         <>
-          {bar}
+          <BarChart
+            id={id}
+            chartData={filteredData}
+            nums={barNumbers}
+            title={barTitle}
+            labelMappingHandler={labelMappingHandler}
+          />
           <DropDown onChange={onChoiceChangeHandler} choices={tracks} />
         </>
       )}
