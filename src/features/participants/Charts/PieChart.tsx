@@ -10,6 +10,8 @@ const PieChart = ({
   labels: string[]
   title?: string
 }) => {
+  labels = labels.filter((_, i) => nums[i] > 0);
+  nums = nums.filter(n => n > 0);
   return (
     <div className="chart-container">
       <h2 style={{ textAlign: 'center' }}>{title}</h2>

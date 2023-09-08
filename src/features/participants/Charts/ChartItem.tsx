@@ -73,6 +73,10 @@ const ChartItem = ({
     setBarSubtitle(chosenTrack)
   }
 
+  const barLabels = labelMappingHandler ? 
+    filteredData.map(labelMappingHandler).filter((value, index, array) => array.indexOf(value) === index)
+    : []
+
   return (
     <Card className={classes['chart-item']}>
       {type === 'PIE' && (
@@ -82,11 +86,10 @@ const ChartItem = ({
         <>
           <BarChart
             id={id}
-            chartData={filteredData}
+            labels={barLabels}
             nums={barNumbers}
             title={title}
             subtitle={barSubtitle}
-            labelMappingHandler={labelMappingHandler}
           />
           <DropDown onChange={onChoiceChangeHandler} choices={tracks} />
         </>
