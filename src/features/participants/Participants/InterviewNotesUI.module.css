@@ -1,0 +1,78 @@
+.summary {
+    background-color: #dfc951;
+    font-size: larger;
+    padding: 4px 0;
+}
+
+.details {
+    max-width: 90%;
+    margin: auto;
+}
+
+.redText {
+    color: #df1733;
+}
+
+.tableWrapper {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.table {
+    width: 100%;
+}
+
+.table, .table th, .table td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    z-index: 1;
+}
+
+.table th, .table td {
+    padding: 0 10px;
+}
+
+.table th {
+    background-color: #dfc951;
+}
+
+.table th:nth-child(2) {
+    width: 10%;
+}
+
+.table td:nth-child(1) {
+    background-color: pink;
+    font-weight: bold;
+}
+
+.table td:nth-child(2) {
+    background-color: greenyellow;
+    
+}
+
+.table td textarea {
+    width: 100%;
+}
+
+.table td input {
+    width: 70px;
+}
+
+.table td input:invalid {
+    border: 1px solid red;
+}
+
+.submitBtn {
+    width: 90%;
+    margin-top: 8px;
+}
+
+@media (max-width: 700px) {
+    .table td {
+        display: block;
+    }
+
+    .table thead {
+        display: none;
+    }
+}
