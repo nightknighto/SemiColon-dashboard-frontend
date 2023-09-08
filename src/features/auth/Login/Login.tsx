@@ -160,7 +160,7 @@ const Login = () => {
             type="button"
             onClick={handlePreviewClick}
           >
-            Preview Mode
+            Demo Mode
           </button>
         </form>
       </div>
