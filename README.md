@@ -34,7 +34,7 @@ The system is built with React.js, Node.js, Express, and MongoDB (MERN stack) wi
 
 ## Deployment
 
-- Registration site: https://asusemicolon.tech/
+- Registration site: https://deadreyo.github.io/SemiColon-registration-frontend/
 - Dashboard: https://deadreyo.github.io/SemiColon-dashboard-frontend/
 - Backend: https://semicolon-registration-backend.onrender.com/ (might take 2 mins to wake up)
 
