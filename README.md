@@ -1,9 +1,6 @@
 ![Logo](./public/Landing.jpeg)
-# SemiColon-dashboard-frontend
 
-The dashboard of SemiColon's Registration System.
-
-## SemiColon Registration System
+# SemiColon Registration System
 SemiColon's Resgitration system is a full-stack system, consisting of 3 projects: [Registration Website](https://github.com/Deadreyo/SemiColon-registration-frontend), the Dashboard (this), and the [Backend](https://github.com/Deadreyo/SemiColon-backend).
 
 The system is built with React.js, Node.js, Express, and MongoDB (MERN stack) with the addition of TypeScript & Redux. The system is made for recruitment tracking and management, designed to streamline the events' registration process for SemiColon; student organization at Ain Shams University. The application provides a centralized platform for HR & directors to manage registrations & recruitment and track their progress through the registration pipeline, helping them through reviewing the candidate's data, keeping track of their status, interviewing and saving the interview notes, automatically emailing candidates & more.
