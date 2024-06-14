@@ -85,8 +85,7 @@ Start the server
 
 ## Authors
 
-- [@bobo122b](https://github.com/bobo122b)
 - [@Deadreyo](https://github.com/Deadreyo)
+- [@bobo122b](https://github.com/bobo122b)
 - [@Chady00](https://github.com/Chady00)
-- [@Ahmed-Khaled24](https://github.com/Ahmed-Khaled24)
-- [@Ofahmy143](https://github.com/Ofahmy143)
+- [@MahmoudHamdy02](https://github.com/MahmoudHamdy02)
