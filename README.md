@@ -3,20 +3,20 @@
 # SemiColon Registration System
 SemiColon's Resgitration system is a full-stack system, consisting of 3 projects: [Registration Website](https://github.com/Deadreyo/SemiColon-registration-frontend), the Dashboard (this), and the [Backend](https://github.com/Deadreyo/SemiColon-backend).
 
-The system is built with React.js, Node.js, Express, and MongoDB (MERN stack) with the addition of TypeScript & Redux. The system is made for recruitment tracking and management, designed to streamline the events' registration process for SemiColon; student organization at Ain Shams University. The application provides a centralized platform for HR & directors to manage registrations & recruitment and track their progress through the registration pipeline, helping them through reviewing the candidate's data, keeping track of their status, interviewing and saving the interview notes, automatically emailing candidates & more.
+The system is built with React.js, Node.js, Express, and MongoDB (MERN stack) with the addition of TypeScript & Redux. The system is made for recruitment tracking and management, designed to streamline the events' registration process for SemiColon; a student organization at Ain Shams University. The application provides a centralized platform for HR & directors to manage registrations & recruitment and track their progress through the registration pipeline, helping them through reviewing the candidate's data, keeping track of their status, interviewing and saving the interview notes, automatically emailing candidates & more.
 
 ## SemiColon Registration System Features
 
 - Authentication, Authorization & user accounts
   - The system uses user accounts with different privilege levels for authorization.
-  - There are multiple account levels: Viewers, Moderators & Adminstrators, with different levels of control.
-  - Adminstrators are able to create accounts through the dashboard, edit them and deactivate them.
+  - There are multiple account levels: Viewers, Moderators & Administrators, with different levels of control.
+  - Administrators are able to create accounts through the dashboard, edit them and deactivate them.
   - Uses JWT.
 - Logs & action logging for user actions.
   - The system tracks & saves all actions done by all user accounts, ex: editing a candidate status.
 - Saving & tracking candidates & registrations.
   - Registrations' data is saved into the database
-  - Able to declare & keep track of the candidate's status through the dashboard; the status could be Pending, Scheduled for interivew, Accepted, Rejected, etc.
+  - Able to declare & keep track of the candidate's status through the dashboard; the status could be Pending, Scheduled for interview, Accepted, Rejected, etc.
   - Able to save interview notes about the candidate with multiple predefined criterium & ability to see the interviewer and date of the interview.
   - Filter candidates by track or status.
   - Search for a candidate using name or phone number.
@@ -26,7 +26,7 @@ The system is built with React.js, Node.js, Express, and MongoDB (MERN stack) wi
   - Rate limiting: especially on critical endpoints such as registration (preventing spam registrations) & login.
   - User account Authentication & Authorization.
   - User action logs.
-- Automatic mass emails sending.
+- Automatic mass email sending.
   - Admins can choose a specific track & status to automatically send an email to all candidates' having that track & status. Ex: sending acceptal emails to all accepted candidates of a specific track.
 - Demo Mode
   - The dashboard project was converted into using Redux to get central state management.
