@@ -39,7 +39,7 @@ export const fetchParticipants = createAppAsyncThunk(
     try {
       const headers = selectAuthHeader(getState())
       const res = await axios.get(
-        'https://semicolon-registration-backend.onrender.com/participants/getAll',
+        import.meta.env.VITE_API_URL + '/participants/getAll',
         { headers }
       )
       const participants = res.data
@@ -67,7 +67,7 @@ export const updateParticipantStatus = createAppAsyncThunk(
     try {
       const headers = selectAuthHeader(getState())
       await axios.patch(
-        'https://semicolon-registration-backend.onrender.com/participants/status',
+        import.meta.env.VITE_API_URL + '/participants/status',
         {
           _id: id,
           status,
@@ -104,7 +104,7 @@ export const saveParticipantInterviewNotes = createAppAsyncThunk(
     try {
       const headers = selectAuthHeader(getState())
       const req = await axios.patch(
-        'https://semicolon-registration-backend.onrender.com/participants/interview/note',
+        import.meta.env.VITE_API_URL + '/participants/interview/note',
         {
           _id: id,
           note: interviewData,

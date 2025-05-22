@@ -22,18 +22,18 @@ const initialState: AuthState = {
 
 export const loginUser =
   (loginData: { phone: string; password: string }): AppThunk<Promise<void>> =>
-  async (dispatch) => {
-    const res = await axios.post<LoginDTO>(
-      'https://semicolon-registration-backend.onrender.com/auth/login',
-      {
-        ...loginData,
-      }
-    )
-    const body = res.data.data
-    authLocalStorage.login(body)
-    console.log(body)
-    dispatch(authSlice.actions.setUser(body))
-  }
+    async (dispatch) => {
+      const res = await axios.post<LoginDTO>(
+        import.meta.env.VITE_API_URL + '/auth/login',
+        {
+          ...loginData,
+        }
+      )
+      const body = res.data.data
+      authLocalStorage.login(body)
+      console.log(body)
+      dispatch(authSlice.actions.setUser(body))
+    }
 
 export const logoutUser = (): AppThunk => (dispatch) => {
   authLocalStorage.logout()

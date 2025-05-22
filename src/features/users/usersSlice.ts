@@ -38,7 +38,7 @@ export const fetchUsers = createAppAsyncThunk(
     const headers = selectAuthHeader(getState())
     try {
       const res = await axios.get(
-        'https://semicolon-registration-backend.onrender.com/user/getAll',
+        import.meta.env.VITE_API_URL + '/user/getAll',
         { headers }
       )
       return res.data.data
@@ -65,7 +65,7 @@ export const createUser = createAppAsyncThunk(
     const headers = selectAuthHeader(getState())
     try {
       const res = await axios.post(
-        'https://semicolon-registration-backend.onrender.com/user/',
+        import.meta.env.VITE_API_URL + '/user/',
         {
           ...newUser,
         },
@@ -95,8 +95,8 @@ export const updateUser = createAppAsyncThunk(
     const headers = selectAuthHeader(getState())
     try {
       const res = await axios.patch(
-        'https://semicolon-registration-backend.onrender.com/user/update/' +
-          updatedUser._id,
+        import.meta.env.VITE_API_URL + '/user/update/' +
+        updatedUser._id,
         {
           ...updatedUser,
         },
