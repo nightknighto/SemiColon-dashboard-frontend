@@ -12,7 +12,6 @@ import {
   InterviewObject,
 } from './types/InterviewNotes'
 import { createAppAsyncThunk, responseBody } from '../../app/typings'
-import { selectAuthHeader } from '../auth/authSlice'
 import dummyParticipants from '../previewMode/dummy-participants-data'
 import delay from '../../libs/delay'
 
@@ -37,10 +36,9 @@ export const fetchParticipants = createAppAsyncThunk(
     }
 
     try {
-      const headers = selectAuthHeader(getState())
       const res = await axios.get(
         import.meta.env.VITE_API_URL + '/participants/getAll',
-        { headers }
+        { withCredentials: true }
       )
       const participants = res.data
       return participants.data
@@ -65,7 +63,6 @@ export const updateParticipantStatus = createAppAsyncThunk(
     }
 
     try {
-      const headers = selectAuthHeader(getState())
       await axios.patch(
         import.meta.env.VITE_API_URL + '/participants/status',
         {
@@ -73,7 +70,7 @@ export const updateParticipantStatus = createAppAsyncThunk(
           status,
         },
         {
-          headers,
+          withCredentials: true,
         }
       )
     } catch (_err: any) {
@@ -102,7 +99,6 @@ export const saveParticipantInterviewNotes = createAppAsyncThunk(
     }
 
     try {
-      const headers = selectAuthHeader(getState())
       const req = await axios.patch(
         import.meta.env.VITE_API_URL + '/participants/interview/note',
         {
@@ -110,7 +106,7 @@ export const saveParticipantInterviewNotes = createAppAsyncThunk(
           note: interviewData,
         },
         {
-          headers,
+          withCredentials: true,
         }
       )
       alert('Interview notes saved successfully!')

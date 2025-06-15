@@ -18,7 +18,7 @@ function App() {
   const auth = useAppSelector(selectAuth)
 
   useEffect(() => {
-    if (auth.token || auth.previewMode) {
+    if (auth.username || auth.previewMode) {
       dispatch(fetchParticipants())
     } else {
       if (!dispatch(loadSavedLogin())) nav('/login')
