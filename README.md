@@ -1,7 +1,7 @@
 ![Logo](./public/Landing.jpeg)
 
 # SemiColon Registration System
-SemiColon's Resgitration system is a full-stack system, consisting of 3 projects: [Registration Website](https://github.com/Deadreyo/SemiColon-registration-frontend), the Dashboard (this), and the [Backend](https://github.com/Deadreyo/SemiColon-backend).
+SemiColon's Resgitration system is a full-stack system, consisting of 3 projects: [Registration Website](https://github.com/nightknighto/SemiColon-registration-frontend), the Dashboard (this), and the [Backend](https://github.com/nightknighto/SemiColon-backend).
 
 The system is built with React.js, Node.js, Express, and MongoDB (MERN stack) with the addition of TypeScript & Redux. The system is made for recruitment tracking and management, designed to streamline the events' registration process for SemiColon; a student organization at Ain Shams University. The application provides a centralized platform for HR & directors to manage registrations & recruitment and track their progress through the registration pipeline, helping them through reviewing the candidate's data, keeping track of their status, interviewing and saving the interview notes, automatically emailing candidates & more.
 
@@ -34,8 +34,8 @@ The system is built with React.js, Node.js, Express, and MongoDB (MERN stack) wi
 
 ## Deployment
 
-- Registration site: https://deadreyo.github.io/SemiColon-registration-frontend/
-- Dashboard: https://deadreyo.github.io/SemiColon-dashboard-frontend/
+- Registration site: https://nightknighto.github.io/SemiColon-registration-frontend/
+- Dashboard: https://nightknighto.github.io/SemiColon-dashboard-frontend/
 - Backend: https://semicolon-registration-backend.onrender.com/ (might take 2 mins to wake up)
 
 ### Demo Mode
@@ -62,7 +62,7 @@ Admin Dashboard, to view existing user accounts with the ability to create new a
 Clone the project
 
 ```bash
-  git clone https://github.com/Deadreyo/SemiColon-dashboard-frontend.git
+  git clone https://github.com/nightknighto/SemiColon-dashboard-frontend.git
 ```
 
 Go to the project directory
@@ -85,7 +85,7 @@ Start the server
 
 ## Authors
 
-- [@Deadreyo](https://github.com/Deadreyo)
+- [@nightknighto](https://github.com/nightknighto)
 - [@bobo122b](https://github.com/bobo122b)
 - [@Chady00](https://github.com/Chady00)
 - [@MahmoudHamdy02](https://github.com/MahmoudHamdy02)
