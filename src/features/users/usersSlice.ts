@@ -7,6 +7,7 @@ import { User } from './types/User'
 import { RootState } from '../../app/store'
 import axios, { AxiosResponse } from 'axios'
 import { createAppAsyncThunk, responseBody } from '../../app/typings'
+import { selectAuthHeader } from '../auth/authSlice'
 import dummyUsers from '../previewMode/dummy-users-data'
 
 export type AdminPageMode = 'view' | 'edit' | 'add'
@@ -34,10 +35,11 @@ export const fetchUsers = createAppAsyncThunk(
       return dummyUsers
     }
 
+    const headers = selectAuthHeader(getState())
     try {
       const res = await axios.get(
         import.meta.env.VITE_API_URL + '/user/getAll',
-        { withCredentials: true }
+        { headers }
       )
       return res.data.data
     } catch (_err: any) {
@@ -60,6 +62,7 @@ export const createUser = createAppAsyncThunk(
       }
     }
 
+    const headers = selectAuthHeader(getState())
     try {
       const res = await axios.post(
         import.meta.env.VITE_API_URL + '/user/',
@@ -67,7 +70,7 @@ export const createUser = createAppAsyncThunk(
           ...newUser,
         },
         {
-          withCredentials: true,
+          headers,
         }
       )
       const result = res.data.data
@@ -89,6 +92,7 @@ export const updateUser = createAppAsyncThunk(
       return updatedUser
     }
 
+    const headers = selectAuthHeader(getState())
     try {
       const res = await axios.patch(
         import.meta.env.VITE_API_URL + '/user/update/' +
@@ -97,7 +101,7 @@ export const updateUser = createAppAsyncThunk(
           ...updatedUser,
         },
         {
-          withCredentials: true,
+          headers,
         }
       )
       return res.data.data

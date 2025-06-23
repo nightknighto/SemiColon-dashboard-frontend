@@ -7,12 +7,14 @@ import authLocalStorage from './utils/authLocalStorage'
 import { AppThunk } from '../../app/typings'
 
 export interface AuthState {
+  token: string
   username: string
   role: UserRole
   previewMode: boolean
 }
 
 const initialState: AuthState = {
+  token: '',
   username: '',
   role: 'member',
   previewMode: false,
@@ -25,8 +27,6 @@ export const loginUser =
         import.meta.env.VITE_API_URL + '/auth/login',
         {
           ...loginData,
-        }, {
-          withCredentials: true,
         }
       )
       const body = res.data.data
@@ -35,11 +35,7 @@ export const loginUser =
       dispatch(authSlice.actions.setUser(body))
     }
 
-export const logoutUser = (): AppThunk => async (dispatch) => {
-  await axios.get(
-    import.meta.env.VITE_API_URL + '/auth/logout',
-    { withCredentials: true }
-  )
+export const logoutUser = (): AppThunk => (dispatch) => {
   authLocalStorage.logout()
   dispatch(authSlice.actions.setUser(initialState))
 }
@@ -55,13 +51,15 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, action: PayloadAction<Optional<AuthState, 'previewMode'>>) {
-      const { username, role, previewMode = false } = action.payload
+      const { token, username, role, previewMode = false } = action.payload
+      state.token = token
       state.username = username
       state.role = role
       state.previewMode = previewMode
     },
     activatePreviewMode(state) {
       state.previewMode = true
+      state.token = 'Demo Mode'
       state.username = 'Demo Mode'
       state.role = 'admin'
     },
@@ -71,5 +69,8 @@ const authSlice = createSlice({
 export default authSlice.reducer
 
 export const selectAuth = (state: RootState) => state.auth
+export const selectAuthHeader = (state: RootState) => ({
+  Authorization: `Bearer ${state.auth.token}`,
+})
 
 export const { activatePreviewMode } = authSlice.actions
